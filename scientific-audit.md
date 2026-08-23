@@ -24,11 +24,11 @@ Do chưa truy cập được tệp BÀI HỌC gốc, Ngày 1 dùng ví dụ tư�
 | Warm-up | `days.json:warmupScript` và Bước 1 | SpeechSynthesis, hiện/ẩn transcript |
 | Grammar | `days.json:grammarContent` và Bước 2 | am/is/are, not, ví dụ khẳng định/phủ định |
 | Dictation | `days.json:listeningItems` và Bước 3 | nghe câu, điền từ, so khớp tức thì |
-| Shadowing | `days.json:shadowingSentences` và Bước 4 | SpeechRecognition, phản hồi đúng/gần đúng/fallback |
+| Shadowing | `days.json:shadowingSentences` và Bước 4 | SpeechRecognition chỉ so khớp transcript; MediaRecorder ghi âm thật, nghe lại, chọn bản tốt nhất và fallback quyền micro |
 | Writing | `days.json:writingPrompts` và Bước 5 | heuristic kiểm tra am/is/are, phản hồi tại chỗ |
 | Test | `days.json:quiz` và Bước 6 | trắc nghiệm, chấm điểm, hiển thị đáp án |
-| SRS | `days.json:srsCards` và Bước 6 | lật thẻ, Nhớ/Chưa nhớ, interval/easeFactor |
-| Lưu tiến trình | `localStorage` | completed, quizScore, cardStates |
+| SRS | `days.json:srsCards` và Bước 6 + `/on-tap` | lật thẻ, Nhớ/Chưa nhớ, interval/easeFactor/lastReviewedAt, lọc thẻ đến hạn và xếp theo độ trễ |
+| Lưu tiến trình | `localStorage` | completed, quizScore, cardStates có lastReviewedAt; roadmap progress giữ completedDays, lastCompletedAt, streak |
 
 ## QA kỹ thuật
 
@@ -46,3 +46,16 @@ Do chưa truy cập được tệp BÀI HỌC gốc, Ngày 1 dùng ví dụ tư�
 ## Giới hạn và bước tiếp theo
 
 Bản hiện tại chưa đồng bộ điểm hoặc tiến trình lên Google Sheets; dữ liệu chỉ nằm trên thiết bị học. Bốn mươi bảy ngày còn lại chưa có nội dung học đầy đủ, trong đó Ngày 2–33 có tiêu đề khung và Ngày 34–48 chờ đọc từ Sheet. Khi người dùng cung cấp quyền truy cập các tệp con, cần thay dữ liệu tương đương bằng nội dung gốc và chạy lại audit trước khi gọi đó là bản đã xác minh.
+
+
+## Vá lỗi Ôn tập
+
+Review hiện đọc state SRS theo đúng khóa localStorage riêng của từng ngày (`english48-day{N}-progress`). Mỗi state có `interval`, `easeFactor` và `lastReviewedAt`; thẻ chỉ được đưa vào khay khi ngày đến hạn không lớn hơn hôm nay. Các thẻ đến hạn được sắp xếp theo mức độ trễ giảm dần. Nút `Nhớ` và `Chưa nhớ` dùng cùng công thức `rateSRS()` với trang Ngày 1, sau đó ghi lại state vào đúng khóa của ngày tương ứng. Nếu chưa có thẻ đến hạn, giao diện hiển thị ngày quay lại gần nhất thay vì trạng thái trống chung.
+
+## Ghi âm thật — Mức 1
+
+Bước Shadowing giữ nguyên SpeechRecognition làm lớp phản hồi phụ để hiển thị “Máy nghe được”, nhưng đã tách rõ khỏi việc chấm phát âm. MediaRecorder xin quyền microphone, ghi blob âm thanh tạm trong React state, cho phép ghi lại nhiều lần, nghe giọng mẫu bằng SpeechSynthesis, nghe giọng học sinh bằng audio element và chọn bản tốt nhất trong phiên học. Khi bị từ chối quyền hoặc trình duyệt không hỗ trợ, giao diện hiển thị fallback cụ thể. File ghi âm không được ghi vào localStorage hoặc backend.
+
+## Giới hạn đã ghi nhận
+
+Waveform trực quan bằng Web Audio API và chấm phát âm thật qua API bên thứ ba chưa triển khai. Nếu thực hiện chấm phát âm về sau, cần route server-side riêng để bảo vệ API key; không đưa khóa dịch vụ vào frontend.

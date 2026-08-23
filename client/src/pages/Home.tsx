@@ -30,6 +30,7 @@ import {
 import { Button } from "@/components/ui/button";
 import daysData from "../data/days.json";
 import { markDayComplete } from "../lib/progress";
+import { initialSRSState, rateSRS, todayKey, type SRSCardState } from "../lib/srs";
 
 type DayContent = {
   day: number;
@@ -49,7 +50,7 @@ type DayContent = {
 type ProgressState = {
   completed: boolean[];
   quizScore: number | null;
-  cardStates: { interval: number; easeFactor: number }[];
+  cardStates: SRSCardState[];
 };
 
 const day = (daysData.days.find((entry) => entry.status === "ready") ?? daysData.days[0]) as DayContent;
@@ -70,7 +71,7 @@ function loadProgress(): ProgressState {
   const fallback: ProgressState = {
     completed: [false, false, false, false, false, false],
     quizScore: null,
-    cardStates: (day.srsCards ?? []).map(() => ({ interval: 1, easeFactor: 2.5 })),
+    cardStates: (day.srsCards ?? []).map(initialSRSState),
   };
 
   if (typeof window === "undefined") return fallback;
@@ -85,6 +86,7 @@ function loadProgress(): ProgressState {
         ? fallback.cardStates.map((fallbackCard, index) => ({
             interval: Number(parsed.cardStates?.[index]?.interval) || fallbackCard.interval,
             easeFactor: Number(parsed.cardStates?.[index]?.easeFactor) || fallbackCard.easeFactor,
+            lastReviewedAt: typeof parsed.cardStates?.[index]?.lastReviewedAt === "string" ? parsed.cardStates[index]?.lastReviewedAt ?? null : null,
           }))
         : fallback.cardStates,
     };
@@ -107,6 +109,9 @@ export default function Home() {
   const [shadowIndex, setShadowIndex] = useState(0);
   const [shadowTranscript, setShadowTranscript] = useState("");
   const [shadowFeedback, setShadowFeedback] = useState<"idle" | "recording" | "close" | "correct" | "unsupported" | "error">("idle");
+  const [audioRecording, setAudioRecording] = useState<"idle" | "recording" | "ready" | "denied" | "unsupported" | "error">("idle");
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [bestAudioUrl, setBestAudioUrl] = useState<string | null>(null);
   const [writingAnswers, setWritingAnswers] = useState<Record<number, string>>({});
   const [writingFeedback, setWritingFeedback] = useState<Record<number, "ready" | "good" | "revise"> >({});
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -114,6 +119,9 @@ export default function Home() {
   const [notice, setNotice] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
 
   const completedCount = completed.filter(Boolean).length;
   const progressPercent = Math.round((completedCount / stepLabels.length) * 100);
@@ -125,7 +133,13 @@ export default function Home() {
   }, [completed, quizScore, cardStates]);
 
   useEffect(() => {
-    return () => recognitionRef.current?.abort?.();
+    return () => {
+      recognitionRef.current?.abort?.();
+      recorderRef.current?.stop?.();
+      mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+      if (audioUrl) URL.revokeObjectURL(audioUrl);
+      if (bestAudioUrl) URL.revokeObjectURL(bestAudioUrl);
+    };
   }, []);
 
   function announce(message: string) {
@@ -153,6 +167,7 @@ export default function Home() {
       announce(`Bước ${index + 1} đã XONG. Bước tiếp theo đã mở.`);
     } else {
       markDayComplete(day.day);
+      setCardStates((current) => current.map((state) => state.lastReviewedAt ? state : { ...state, lastReviewedAt: todayKey() }));
       announce("Ngày 1 đã XONG. Hãy quay lại ôn các thẻ có khoảng cách ngắn.");
     }
   }
@@ -172,6 +187,45 @@ export default function Home() {
     setListenFeedback((current) => ({ ...current, [index]: actual === expected ? "correct" : "try-again" }));
   }
 
+  async function startAudioRecording() {
+    if (audioRecording === "recording") {
+      recorderRef.current?.stop();
+      return;
+    }
+    if (!("MediaRecorder" in window) || !navigator.mediaDevices?.getUserMedia) {
+      setAudioRecording("unsupported");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaStreamRef.current = stream;
+      audioChunksRef.current = [];
+      const preferredType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus") ? "audio/webm;codecs=opus" : "";
+      const recorder = preferredType ? new MediaRecorder(stream, { mimeType: preferredType }) : new MediaRecorder(stream);
+      recorderRef.current = recorder;
+      recorder.ondataavailable = (event) => { if (event.data.size > 0) audioChunksRef.current.push(event.data); };
+      recorder.onstop = () => {
+        const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType || "audio/webm" });
+        if (audioUrl && audioUrl !== bestAudioUrl) URL.revokeObjectURL(audioUrl);
+        setAudioUrl(URL.createObjectURL(blob));
+        mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
+        setAudioRecording("ready");
+      };
+      recorder.onerror = () => setAudioRecording("error");
+      recorder.start();
+      setAudioRecording("recording");
+    } catch {
+      setAudioRecording("denied");
+    }
+  }
+  function keepBestRecording() {
+    if (!audioUrl) return;
+    if (bestAudioUrl) URL.revokeObjectURL(bestAudioUrl);
+    setBestAudioUrl(audioUrl);
+    setAudioRecording("ready");
+    announce("Đã giữ bản ghi này là bản tốt nhất cho câu hiện tại.");
+  }
   function startShadowing() {
     const Recognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!Recognition) {
@@ -217,9 +271,7 @@ export default function Home() {
   function rateCard(remembered: boolean) {
     setCardStates((current) => current.map((state, index) => {
       if (index !== cardIndex) return state;
-      return remembered
-        ? { interval: Math.max(1, Math.round(state.interval * state.easeFactor)), easeFactor: Math.min(2.8, state.easeFactor + 0.1) }
-        : { interval: 1, easeFactor: Math.max(1.8, state.easeFactor - 0.2) };
+      return rateSRS(state, remembered);
     }));
     setCardFlipped(false);
     setCardIndex((current) => ((current + 1) % Math.max(day.srsCards?.length ?? 1, 1)));
@@ -296,20 +348,24 @@ export default function Home() {
       return (
         <div className="step-content">
           <div className="section-kicker">04 / SHADOWING</div>
-          <div className="content-heading-row"><div><h3>Nghe mẫu. Nói lại. So khớp.</h3><p>Mic sẽ nhận câu bạn nói và phản hồi theo mức độ gần đúng. Chrome/Edge cho kết quả ổn định nhất.</p></div><span className="task-count">Câu {shadowIndex + 1}/3</span></div>
+          <div className="content-heading-row"><div><h3>Nghe mẫu. Nói lại. So khớp.</h3><p>SpeechRecognition chỉ giúp máy so khớp văn bản nhận được; MediaRecorder lưu lại âm thanh thật để bạn tự nghe và chọn bản tốt nhất.</p></div><span className="task-count">Câu {shadowIndex + 1}/3</span></div>
           <div className="shadow-card">
             <div className="shadow-card-label">CÂU MẪU / SHADOWING</div>
             <div className="shadow-sentence">{currentSentence}</div>
-            <div className="shadow-controls"><button className="primary-action" onClick={() => speak(currentSentence)}><Volume2 size={18} /> Nghe mẫu</button><button className={`record-action ${shadowFeedback === "recording" ? "is-recording" : ""}`} onClick={startShadowing}><Mic size={18} /> {shadowFeedback === "recording" ? "Đang nghe…" : "Bấm để nói"}</button></div>
+            <div className="shadow-controls"><button className="primary-action" onClick={() => speak(currentSentence)}><Volume2 size={18} /> Nghe giọng mẫu</button><button className={`record-action ${shadowFeedback === "recording" ? "is-recording" : ""}`} onClick={startShadowing}><Mic size={18} /> {shadowFeedback === "recording" ? "Đang nghe…" : "So khớp câu nói"}</button><button className={`record-action ${audioRecording === "recording" ? "is-recording" : ""}`} onClick={startAudioRecording}><Mic size={18} /> {audioRecording === "recording" ? "Dừng ghi âm" : "Ghi âm thật"}</button></div>
             <div className={`shadow-result result-${shadowFeedback}`} aria-live="polite">
               {shadowFeedback === "idle" && "Bạn đã sẵn sàng nói lại câu này chưa?"}
               {shadowFeedback === "recording" && "Đang nhận giọng nói — nói trọn câu nhé."}
-              {shadowFeedback === "correct" && <><Check size={17} /> Gần khớp — âm thanh đang đi đúng hướng.</>}
-              {shadowFeedback === "close" && <><Waves size={17} /> Gần đúng. Hãy nghe lại và nhấn trọng âm rõ hơn.</>}
+              {shadowFeedback === "correct" && <><Check size={17} /> Câu bạn nói khớp với câu mẫu.</>}
+              {shadowFeedback === "close" && <><Waves size={17} /> Chưa khớp hoàn toàn. Nghe lại câu mẫu rồi thử lại.</>}
               {shadowFeedback === "unsupported" && "Trình duyệt chưa hỗ trợ SpeechRecognition. Hãy dùng Chrome/Edge và bật quyền micro."}
-              {shadowFeedback === "error" && "Chưa nhận được âm thanh. Kiểm tra micro rồi thử lại."}
+              {shadowFeedback === "error" && "Chưa nhận được câu nói. Kiểm tra micro rồi thử lại."}
+              {audioRecording === "denied" && "Micro bị từ chối. Hãy cho phép quyền micro trong cài đặt trình duyệt rồi thử lại."}
+              {audioRecording === "unsupported" && "Trình duyệt chưa hỗ trợ MediaRecorder hoặc không cấp được micro."}
+              {audioRecording === "error" && "Ghi âm chưa thành công. Kiểm tra micro rồi thử lại."}
             </div>
-            {shadowTranscript && <div className="transcript-line"><span>Bạn nói:</span> “{shadowTranscript}”</div>}
+            {shadowTranscript && <div className="transcript-line"><span>Máy nghe được:</span> “{shadowTranscript}”</div>}
+            {audioUrl && <div className="recording-review"><span className="tiny-label">BẢN GHI TẠM / CÂU {shadowIndex + 1}</span><div className="recording-actions"><audio controls src={audioUrl} aria-label="Nghe lại giọng bạn" /><button className="text-action" onClick={() => speak(currentSentence)}>Nghe giọng mẫu</button><button className="text-action" onClick={keepBestRecording}>Giữ bản tốt nhất</button></div>{bestAudioUrl === audioUrl && <small>Đã giữ bản này cho câu hiện tại.</small>}</div>}
           </div>
           <div className="sentence-switcher"><button className="circle-button" aria-label="Câu trước" onClick={() => { setShadowIndex((current) => (current + 2) % 3); setShadowFeedback("idle"); setShadowTranscript(""); }}><ChevronLeft size={18} /></button><div className="dot-row">{(day.shadowingSentences ?? []).map((sentence, index) => <button aria-label={`Chọn câu ${index + 1}`} className={index === shadowIndex ? "active" : ""} key={sentence} onClick={() => { setShadowIndex(index); setShadowFeedback("idle"); setShadowTranscript(""); }} />)}</div><button className="circle-button" aria-label="Câu tiếp" onClick={() => { setShadowIndex((current) => (current + 1) % 3); setShadowFeedback("idle"); setShadowTranscript(""); }}><ChevronRight size={18} /></button></div>
           <CompleteButton index={3} done={completed[3]} onComplete={completeStep} />

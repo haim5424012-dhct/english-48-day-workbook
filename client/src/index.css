@@ -628,3 +628,24 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
   .overview-margin-note { display: none; }
   .review-main::after { display: none; }
 }
+
+/* Shadowing audio capture — a tactile paper record, temporary by design. */
+.recording-review { margin-top: 18px; padding: 14px; background: #f7fbfa; border: 1px dashed #9edbc5; }
+.recording-review .tiny-label { display: block; margin-bottom: 10px; color: var(--mint-ink); }
+.recording-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.recording-actions audio { width: min(100%, 280px); height: 34px; }
+.recording-review small { display: block; margin-top: 10px; color: var(--mint-ink); font-size: 11px; }
+@media (max-width: 640px) {
+  .recording-actions { align-items: stretch; flex-direction: column; }
+  .recording-actions audio { width: 100%; }
+  .recording-actions .text-action { align-self: flex-start; }
+}
+
+.review-loop { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin: 0 0 25px; color: #8799a8; font: 700 11px "Space Grotesk", sans-serif; letter-spacing: .05em; text-transform: uppercase; }
+.review-loop i { color: #b8c8d4; font-style: normal; }
+.review-loop span { padding: 5px 7px; border-bottom: 1px solid #cbd6de; }
+.review-loop .is-active { color: var(--coral-deep); border-color: var(--coral); }
+.review-empty-loop { display: flex; flex-wrap: wrap; gap: 7px; margin: 22px 0 28px; }
+.review-empty-loop span { padding: 6px 8px; color: var(--ink-soft); background: #f0f5f6; border-bottom: 2px solid #b8c8d4; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.review-empty-loop span:first-child { color: var(--coral-deep); border-color: var(--coral); }
+.review-empty-loop span:last-child { color: var(--mint-ink); border-color: var(--mint-ink); }
