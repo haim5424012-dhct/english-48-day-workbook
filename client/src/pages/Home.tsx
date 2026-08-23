@@ -112,7 +112,7 @@ export default function Home() {
   const [shadowFeedback, setShadowFeedback] = useState<"idle" | "recording" | "close" | "correct" | "unsupported" | "error">("idle");
   const [audioRecording, setAudioRecording] = useState<"idle" | "recording" | "ready" | "denied" | "unsupported" | "error">("idle");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
-  const [bestAudioUrl, setBestAudioUrl] = useState<string | null>(null);
+  const [bestAudioUrls, setBestAudioUrls] = useState<(string | null)[]>(() => Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => null));
   const [writingAnswers, setWritingAnswers] = useState<Record<number, string>>({});
   const [writingFeedback, setWritingFeedback] = useState<Record<number, "ready" | "good" | "revise"> >({});
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -123,8 +123,16 @@ export default function Home() {
   const recorderRef = useRef<MediaRecorder | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const audioUrlRef = useRef<string | null>(null);
+  const bestAudioUrlsRef = useRef<(string | null)[]>([]);
+  const discardRecordingRef = useRef(false);
 
   const completedCount = completed.filter(Boolean).length;
+
+  useEffect(() => {
+    audioUrlRef.current = audioUrl;
+    bestAudioUrlsRef.current = bestAudioUrls;
+  }, [audioUrl, bestAudioUrls]);
   const progressPercent = Math.round((completedCount / stepLabels.length) * 100);
   const currentSentence = day.shadowingSentences?.[shadowIndex] ?? "I am happy today.";
   const currentCard = day.srsCards?.[cardIndex];
@@ -138,8 +146,8 @@ export default function Home() {
       recognitionRef.current?.abort?.();
       recorderRef.current?.stop?.();
       mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
-      if (audioUrl) URL.revokeObjectURL(audioUrl);
-      if (bestAudioUrl) URL.revokeObjectURL(bestAudioUrl);
+      const urls = new Set([audioUrlRef.current, ...bestAudioUrlsRef.current].filter((url): url is string => Boolean(url)));
+      urls.forEach((url) => URL.revokeObjectURL(url));
     };
   }, []);
 
@@ -199,6 +207,7 @@ export default function Home() {
     }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      discardRecordingRef.current = false;
       mediaStreamRef.current = stream;
       audioChunksRef.current = [];
       const preferredType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus") ? "audio/webm;codecs=opus" : "";
@@ -206,11 +215,19 @@ export default function Home() {
       recorderRef.current = recorder;
       recorder.ondataavailable = (event) => { if (event.data.size > 0) audioChunksRef.current.push(event.data); };
       recorder.onstop = () => {
+        const wasDiscarded = discardRecordingRef.current;
+        discardRecordingRef.current = false;
         const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType || "audio/webm" });
-        if (audioUrl && audioUrl !== bestAudioUrl) URL.revokeObjectURL(audioUrl);
-        setAudioUrl(URL.createObjectURL(blob));
         mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
         mediaStreamRef.current = null;
+        if (wasDiscarded) {
+          audioChunksRef.current = [];
+          setAudioUrl(null);
+          setAudioRecording("idle");
+          return;
+        }
+        if (audioUrl && audioUrl !== bestAudioUrls[shadowIndex]) URL.revokeObjectURL(audioUrl);
+        setAudioUrl(URL.createObjectURL(blob));
         setAudioRecording("ready");
       };
       recorder.onerror = () => setAudioRecording("error");
@@ -222,10 +239,26 @@ export default function Home() {
   }
   function keepBestRecording() {
     if (!audioUrl) return;
-    if (bestAudioUrl) URL.revokeObjectURL(bestAudioUrl);
-    setBestAudioUrl(audioUrl);
+    const currentBest = bestAudioUrls[shadowIndex];
+    if (currentBest && currentBest !== audioUrl) URL.revokeObjectURL(currentBest);
+    setBestAudioUrls((current) => current.map((url, index) => index === shadowIndex ? audioUrl : url));
     setAudioRecording("ready");
     announce("Đã giữ bản ghi này là bản tốt nhất cho câu hiện tại.");
+  }
+
+  function changeShadowSentence(nextIndex: number) {
+    discardRecordingRef.current = true;
+    if (recorderRef.current?.state === "recording") recorderRef.current.stop();
+    mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+    mediaStreamRef.current = null;
+    recorderRef.current = null;
+    const currentBest = bestAudioUrls[shadowIndex];
+    if (audioUrl && audioUrl !== currentBest) URL.revokeObjectURL(audioUrl);
+    setAudioUrl(null);
+    setAudioRecording("idle");
+    setShadowFeedback("idle");
+    setShadowTranscript("");
+    setShadowIndex(nextIndex);
   }
   function startShadowing() {
     const Recognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -364,9 +397,9 @@ export default function Home() {
               {audioRecording === "error" && "Ghi âm chưa thành công. Kiểm tra micro rồi thử lại."}
             </div>
             {shadowTranscript && <div className="transcript-line"><span>Máy nghe được:</span> “{shadowTranscript}”</div>}
-            {audioUrl && <div className="recording-review"><span className="tiny-label">BẢN GHI TẠM / CÂU {shadowIndex + 1}</span><div className="recording-actions"><audio controls src={audioUrl} aria-label="Nghe lại giọng bạn" /><button className="text-action" onClick={() => speak(currentSentence)}>Nghe giọng mẫu</button><button className="text-action" onClick={keepBestRecording}>Giữ bản tốt nhất</button></div>{bestAudioUrl === audioUrl && <small>Đã giữ bản này cho câu hiện tại.</small>}</div>}
+            {audioUrl && <div className="recording-review"><span className="tiny-label">BẢN GHI TẠM / CÂU {shadowIndex + 1}</span><div className="recording-actions"><audio controls src={audioUrl} aria-label="Nghe lại giọng bạn" /><button className="text-action" onClick={() => speak(currentSentence)}>Nghe giọng mẫu</button><button className="text-action" onClick={keepBestRecording}>Giữ bản tốt nhất</button></div>{bestAudioUrls[shadowIndex] === audioUrl && <small>Đã giữ bản này cho câu hiện tại.</small>}</div>}
           </div>
-          <div className="sentence-switcher"><button className="circle-button" aria-label="Câu trước" onClick={() => { setShadowIndex((current) => (current + 2) % 3); setShadowFeedback("idle"); setShadowTranscript(""); }}><ChevronLeft size={18} /></button><div className="dot-row">{(day.shadowingSentences ?? []).map((sentence, index) => <button aria-label={`Chọn câu ${index + 1}`} className={index === shadowIndex ? "active" : ""} key={sentence} onClick={() => { setShadowIndex(index); setShadowFeedback("idle"); setShadowTranscript(""); }} />)}</div><button className="circle-button" aria-label="Câu tiếp" onClick={() => { setShadowIndex((current) => (current + 1) % 3); setShadowFeedback("idle"); setShadowTranscript(""); }}><ChevronRight size={18} /></button></div>
+          <div className="sentence-switcher"><button className="circle-button" aria-label="Câu trước" onClick={() => changeShadowSentence((shadowIndex + Math.max((day.shadowingSentences?.length ?? 1) - 1, 0)) % Math.max(day.shadowingSentences?.length ?? 1, 1))}><ChevronLeft size={18} /></button><div className="dot-row">{(day.shadowingSentences ?? []).map((sentence, index) => <button aria-label={`Chọn câu ${index + 1}`} className={index === shadowIndex ? "active" : ""} key={sentence} onClick={() => changeShadowSentence(index)} />)}</div><button className="circle-button" aria-label="Câu tiếp" onClick={() => changeShadowSentence((shadowIndex + 1) % Math.max(day.shadowingSentences?.length ?? 1, 1))}><ChevronRight size={18} /></button></div>
           <CompleteButton index={3} done={completed[3]} onComplete={completeStep} />
         </div>
       );

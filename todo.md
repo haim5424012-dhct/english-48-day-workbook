@@ -1,5 +1,16 @@
 # TODO — Trang lộ trình 48 ngày
 
+## Vá ghi âm Shadowing — bản mới
+
+- [ ] Kiểm kê state `audioUrl`, `bestAudioUrl` và các handler đổi câu.
+- [x] Xoá/revoke bản ghi hiện tại khi chuyển câu.
+- [x] Lưu bản tốt nhất theo từng câu, không ghi đè giữa các câu.
+- [x] Chạy `pnpm check` và `pnpm build`.
+- [ ] Kiểm thử luồng ghi âm thành công nếu môi trường cấp được micro.
+- [x] Cập nhật `browser-qa-notes.md` và lưu checkpoint.
+
+
+
 ## Nạp nội dung thật từ Google Sheet
 
 - [ ] Mở Sheet bằng trình duyệt thật và kiểm tra toàn bộ tên tab.
