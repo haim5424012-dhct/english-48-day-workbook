@@ -12,7 +12,11 @@
       "warmupScript": "I am a student.\nHe is a teacher.\nThey are happy.",
       "grammarContent": "<p><strong>To be ở hiện tại</strong></p><p><strong>Thể khẳng định:</strong> I am; You / We / They are; She / He / It is.</p><p><strong>Ví dụ:</strong> I am a student. (Tôi là học sinh.); He is a teacher. (Anh ấy là giáo viên.); They are happy. (Họ rất vui.)</p><p><strong>Cách sử dụng:</strong> To be + danh từ, mang nghĩa “là”; To be + tính từ, để mô tả tính chất, đặc điểm; To be + cụm trạng ngữ, để chỉ nơi chốn, thời gian.</p><p><strong>Thể phủ định:</strong> I am not; You / We / They are not; She / He / It is not.</p><p><strong>Ví dụ:</strong> I am not a student. (Tôi không phải học sinh.); He is not a teacher. (Anh ấy không phải giáo viên.); They are not happy. (Họ không vui.)</p><p><strong>Dạng viết tắt:</strong> I’m, She’s, He’s, It’s, You’re, We’re, They’re; I’m not; She’s not / isn’t; He’s not / isn’t; It’s not / isn’t.</p>",
       "listeningItems": [],
-      "shadowingSentences": [],
+      "shadowingSentences": [
+        "I am happy today.",
+        "He isn't ready yet.",
+        "We are from Vietnam."
+      ],
       "writingPrompts": [],
       "quiz": [],
       "srsCards": [

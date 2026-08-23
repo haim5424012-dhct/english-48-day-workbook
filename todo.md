@@ -60,3 +60,11 @@
 - [x] Thêm nút Ôn tập và trạng thái phản hồi khi trạm bị khóa.
 - [x] Kiểm thử điều hướng, refresh không mất tiến trình, desktop/mobile và hồi quy Ngày 1.
 - [x] Cập nhật README/audit, lưu checkpoint và bàn giao.
+
+
+## Xác minh tính nguyên vẹn dữ liệu Ngày 1
+
+- [x] Đối chiếu object `day: 1` trong `data/days.json` và `client/src/data/days.json`, đặc biệt `shadowingSentences`.
+- [x] Kiểm tra đồng thời `grammarContent`, `listeningItems`, `writingPrompts`, `quiz` và `srsCards` của Ngày 1.
+- [x] Nếu thiếu dữ liệu, truy nguyên qua lịch sử Git và khôi phục đúng bản gốc; nếu nguyên vẹn, ghi nhận rõ nhầm lẫn báo cáo.
+- [x] Chạy `pnpm check` và `pnpm build`, sau đó báo cáo và dừng phạm vi công việc.
