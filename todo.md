@@ -1,5 +1,18 @@
 # TODO — Trang lộ trình 48 ngày
 
+## Nạp nội dung thật Ngày 6–10
+
+- [x] Kiểm kê bốn nguồn FILE ĐỀ/BÀI HỌC/FILE ĐỀ online/ĐÁP ÁN cho Ngày 6–10.
+- [x] Mở và trích xuất PDF lý thuyết thật theo từng ngày.
+- [x] Kiểm tra dạng bài thi; ghi câu hỏi/đáp án không phải trắc nghiệm vào sourceNote.
+- [x] Đánh dấu `pending-source` và lý do nếu nguồn bị chặn hoặc thiếu.
+- [x] Không tải, nhúng hoặc liên kết audio/video/YouTube gốc trong website.
+- [x] Đồng bộ root/client days.json và rebuild days-index.
+- [x] Chạy `pnpm check` và `pnpm build`.
+- [x] Lập báo cáo đợt Ngày 6–10 và dừng chờ xác nhận trước Ngày 11–15.
+
+
+
 ## Vá ghi âm Shadowing — bản mới
 
 - [ ] Kiểm kê state `audioUrl`, `bestAudioUrl` và các handler đổi câu.

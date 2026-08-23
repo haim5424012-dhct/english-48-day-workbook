@@ -16,3 +16,6 @@ Kiểm tra preview `/ngay/02.html` sau đồng bộ: route đã chọn đúng ti
 
 
 QA sau vá Home: screenshot `/ngay/01.html` vẫn giữ giao diện Editorial Lab Notebook và nhãn DAY 01 / FOUNDATION. Screenshot `/ngay/02.html` hiển thị đúng DAY 02 / NEXT, tiêu đề Ngày 2 và trạng thái `SOURCE STATUS` cho bước nghe; các phần không có nguồn không còn hiển thị đoạn hội thoại/nghe mẫu hardcoded. Build và TypeScript đều đạt.
+
+
+QA batch 2: preview `/ngay/06.html` hiển thị đúng `DAY 06 / NEXT`, tiêu đề “Thể phủ định của động từ thường ở hiện tại” và `SOURCE STATUS` cho phần nghe, không tự nhúng video YouTube hay tạo đoạn nghe thay thế. Giao diện giữ nguyên; phần lý thuyết được cập nhật trong dữ liệu nhưng bước Học chưa mở trong trạng thái trình duyệt hiện tại.
