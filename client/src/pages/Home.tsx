@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import daysData from "../data/days.json";
+import { markDayComplete } from "../lib/progress";
 
 type DayContent = {
   day: number;
@@ -151,6 +152,7 @@ export default function Home() {
       setActiveStep(index + 1);
       announce(`Bước ${index + 1} đã XONG. Bước tiếp theo đã mở.`);
     } else {
+      markDayComplete(day.day);
       announce("Ngày 1 đã XONG. Hãy quay lại ôn các thẻ có khoảng cách ngắn.");
     }
   }

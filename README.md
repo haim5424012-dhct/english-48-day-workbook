@@ -79,3 +79,11 @@ Ví dụ schema tối thiểu:
 Nút phát âm cần trình duyệt cho phép SpeechSynthesis. Shadowing cần Chrome hoặc Edge và quyền microphone; nếu không hỗ trợ, website hiển thị thông báo fallback rõ ràng. Điểm số và trạng thái hoàn thành chỉ được lưu cục bộ trên thiết bị hiện tại, chưa đồng bộ lên Google Sheets hay tài khoản đám mây.
 
 Website không tự nhận là nội dung giảng dạy gốc của giáo viên khi chưa xác minh được tệp nguồn. Khi có link BÀI HỌC/FILE ĐỀ/ĐÁP ÁN mở được, hãy thay phần dữ liệu tương đương trong `days.json` và cập nhật `scientific-audit.md`.
+
+## Trang lộ trình 48 ngày
+
+Trang chủ `/` và `/lo-trinh` hiện là bản đồ toàn khóa. Dữ liệu hiển thị nhẹ nằm ở `data/days-index.json`, gồm đúng 48 trạm và 10 giai đoạn: nền tảng TO BE; động từ thường và hiện tại; quá khứ; hiện tại hoàn thành và tương lai; ngữ âm; nghe số/tên và động từ khuyết thiếu; liên từ; câu điều kiện; nghe chuyên đề; và chặng 34–48 `Sắp cập nhật`.
+
+Mỗi trạm có một trong ba trạng thái: `completed` khi ngày đó nằm trong `completedDays`; `ready` khi ngày 1 hoặc ngày trước đó đã hoàn thành; và `locked` cho các trạm chưa đủ điều kiện. Trạm khóa không điều hướng mà hiển thị thông báo cần hoàn thành ngày liền trước. Trạm Ngày 1 mở `/ngay/01.html`; trang `/on-tap` gom flashcard SRS của những ngày đã được ghi nhận hoàn thành.
+
+Trang Ngày 1 gọi `markDayComplete(1)` sau khi đủ sáu bước, ghi schema `{ completedDays, lastCompletedAt, streak }` vào `localStorage` với khóa `english48-roadmap-progress`. Vì vậy khi quay lại `/`, roadmap tự cập nhật số ngày, streak và trạm tiếp theo; dữ liệu vẫn chỉ lưu trên thiết bị hiện tại.

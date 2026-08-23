@@ -489,3 +489,142 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground; }
 }
+
+/* Roadmap and review pages — same Editorial Lab Notebook system. */
+.brand-button { padding: 0; background: transparent; border: 0; text-align: left; }
+.roadmap-page { background: var(--paper); }
+.roadmap-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, 0.56fr); gap: clamp(35px, 10vw, 150px); align-items: end; padding: 105px clamp(20px, 11vw, 170px) 55px; background: var(--paper); }
+.roadmap-hero-copy h1 { margin: 22px 0 24px; color: var(--ink); font: 700 clamp(48px, 6.3vw, 86px)/0.97 "Space Grotesk", sans-serif; letter-spacing: -0.08em; }
+.roadmap-hero-copy p { max-width: 500px; margin: 0; color: var(--ink-soft); font-size: 18px; }
+.roadmap-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 19px; margin-top: 31px; }
+.roadmap-stat-card { position: relative; padding: 27px; color: #f7fafc; background: var(--ink); box-shadow: 9px 10px 0 var(--mint); }
+.roadmap-stat-card::after { content: "FIELD NOTE / 01"; position: absolute; right: 14px; bottom: -22px; color: var(--ink-soft); font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .15em; transform: rotate(90deg); transform-origin: right top; }
+.roadmap-stat-top, .roadmap-stat-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.roadmap-stat-top .tiny-label { color: var(--yellow); }
+.roadmap-stat-top svg { color: var(--coral); }
+.roadmap-stat-number { margin-top: 44px; color: #fff; font: 700 78px/.8 "Space Grotesk", sans-serif; letter-spacing: -.1em; }
+.roadmap-stat-number span { color: #99aebe; font-size: 22px; letter-spacing: -.04em; }
+.roadmap-stat-card p { margin: 14px 0 26px; color: #b9c8d5; font-size: 13px; }
+.roadmap-progress-line { height: 6px; background: #33445f; }
+.roadmap-progress-line span { display: block; height: 100%; background: var(--coral); transition: width 240ms ease-out; }
+.roadmap-stat-foot { margin-top: 12px; color: #b9c8d5; font-size: 11px; }
+.roadmap-stat-foot strong { color: var(--yellow); }
+.top-review-link { display: inline-flex; align-items: center; gap: 6px; color: var(--coral-deep); font-size: 12px; font-weight: 700; }
+.roadmap-overview { display: grid; grid-template-columns: 1fr minmax(90px, .35fr) 1fr; gap: 24px; align-items: center; padding: 22px clamp(20px, 11vw, 170px); color: var(--ink); background: #eaf0f5; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.roadmap-overview > div { display: flex; flex-direction: column; gap: 4px; }
+.roadmap-overview > div:last-child { text-align: right; align-items: flex-end; color: var(--ink-soft); font-size: 13px; }
+.overview-rule { height: 1px; background: #b8c8d4; }
+.route-section { padding: 105px clamp(20px, 11vw, 170px) 125px; background: #fff; }
+.route-intro { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(260px, .7fr); justify-content: space-between; gap: 60px; max-width: 1075px; margin: 0 auto 67px; }
+.route-intro h2 { margin: 17px 0 0; color: var(--ink); font: 700 clamp(39px, 5vw, 62px)/.99 "Space Grotesk", sans-serif; letter-spacing: -.08em; }
+.route-intro h2 em { color: var(--coral); }
+.route-intro p { align-self: end; max-width: 390px; margin: 0; color: var(--ink-soft); font-size: 16px; }
+.stage-list { max-width: 1075px; margin: auto; }
+.stage-block { position: relative; display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 20px; padding-bottom: 55px; }
+.stage-block:not(:last-child)::before { content: ""; position: absolute; left: 25px; top: 45px; bottom: 0; border-left: 1px dashed #b8c8d4; }
+.stage-marker { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 11px; }
+.stage-marker span { display: grid; place-items: center; width: 51px; height: 51px; color: var(--ink); background: #eaf0f5; border: 1px solid #b8c8d4; border-radius: 50%; font: 700 14px "Space Grotesk", sans-serif; }
+.stage-marker i { display: block; width: 7px; height: 7px; background: #b8c8d4; border-radius: 50%; }
+.stage-block.is-current .stage-marker span { color: #fff; background: var(--coral); border-color: var(--coral); box-shadow: 0 0 0 7px rgba(240,90,79,.13); }
+.stage-block.is-current .stage-marker i { background: var(--coral); }
+.stage-content { min-width: 0; }
+.stage-heading { display: flex; justify-content: space-between; gap: 25px; align-items: flex-start; margin-bottom: 19px; }
+.stage-range { color: var(--coral-deep); font: 700 10px "Space Grotesk", sans-serif; letter-spacing: .14em; }
+.stage-heading h3 { margin: 7px 0 5px; color: var(--ink); font: 700 clamp(22px, 2.7vw, 31px)/1.1 "Space Grotesk", sans-serif; letter-spacing: -.055em; }
+.stage-heading p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.stage-count { flex: 0 0 auto; padding-top: 3px; color: var(--coral); font: 700 24px "Space Grotesk", sans-serif; letter-spacing: -.08em; }
+.stage-count span { color: #9aabb8; font-size: 14px; }
+.day-node-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.day-node { position: relative; min-height: 150px; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 15px; color: var(--ink); background: #f6f8fb; border: 1px solid var(--line); border-top: 3px solid #b8c8d4; text-align: left; transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; }
+.day-node:hover { transform: translateY(-3px); }
+.day-node.ready { background: #fffaf8; border-color: var(--coral); border-top-color: var(--coral); }
+.day-node.completed { background: #f0faf6; border-color: #9edbc5; border-top-color: var(--mint-ink); }
+.day-node.locked { color: #96a6b3; background: #eef2f5; }
+.day-node.pending-source { opacity: .7; }
+.node-meta { color: #8c9daa; font: 700 8px "Space Grotesk", sans-serif; letter-spacing: .14em; }
+.node-day { color: var(--coral); font: 700 26px/.9 "Space Grotesk", sans-serif; letter-spacing: -.08em; }
+.day-node.locked .node-day { color: #9aabb8; }
+.node-title { min-height: 34px; font: 600 13px/1.2 "Space Grotesk", sans-serif; }
+.node-status { display: inline-flex; align-items: center; gap: 4px; margin-top: auto; color: #8c9daa; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .08em; }
+.day-node.completed .node-status { color: var(--mint-ink); }
+.day-node.ready .node-status { color: var(--coral-deep); }
+.node-lock { position: absolute; right: 13px; top: 17px; color: #9aabb8; }
+.node-stamp { position: absolute; right: 10px; top: 14px; padding: 4px; color: var(--mint-ink); border: 1px solid var(--mint-ink); font: 700 8px "Space Grotesk", sans-serif; letter-spacing: .1em; transform: rotate(-7deg); }
+.roadmap-review-band { display: grid; grid-template-columns: .95fr 1fr auto; gap: 45px; align-items: end; padding: 85px clamp(20px, 11vw, 170px); background: var(--ink); color: #fff; }
+.roadmap-review-band h2 { margin: 18px 0 0; font: 700 clamp(33px, 4vw, 51px)/1.02 "Space Grotesk", sans-serif; letter-spacing: -.07em; }
+.roadmap-review-band h2 em { color: var(--yellow); }
+.roadmap-review-band p { max-width: 380px; margin: 0; color: #b9c8d5; font-size: 15px; }
+.roadmap-review-band .primary-action { white-space: nowrap; }
+.roadmap-toast { max-width: 360px; }
+.review-page { min-height: 100vh; background: var(--paper); }
+.review-main { min-height: 680px; max-width: 1060px; margin: auto; padding: 110px 20px 130px; }
+.review-main h1 { margin: 20px 0; color: var(--ink); font: 700 clamp(46px, 6vw, 78px)/.96 "Space Grotesk", sans-serif; letter-spacing: -.08em; }
+.review-main h1 em { color: var(--coral); }
+.review-lede { max-width: 500px; margin: 0 0 42px; color: var(--ink-soft); font-size: 17px; }
+.review-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.review-card { min-height: 190px; display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--yellow); border-top: 4px solid var(--ink); }
+.review-card:nth-child(3n + 2) { background: var(--mint); border-top-color: var(--mint-ink); }
+.review-card:nth-child(3n + 3) { background: #fff5f3; border-top-color: var(--coral); }
+.review-card-top { display: flex; justify-content: space-between; color: var(--ink-soft); font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .14em; }
+.review-card strong { margin-top: 12px; font: 700 25px/1.05 "Space Grotesk", sans-serif; letter-spacing: -.05em; }
+.review-card p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.review-card small { margin-top: auto; color: var(--ink-soft); font-size: 11px; }
+.review-empty { max-width: 520px; padding: 35px; background: #fff; border-left: 5px solid var(--coral); box-shadow: 7px 8px 0 var(--mint); }
+.review-empty svg { color: var(--coral); }
+.review-empty h2 { margin: 20px 0 7px; font: 700 30px "Space Grotesk", sans-serif; letter-spacing: -.05em; }
+.review-empty p { margin: 0 0 24px; color: var(--ink-soft); }
+
+@media (max-width: 900px) {
+  .roadmap-hero { grid-template-columns: 1fr; }
+  .roadmap-stat-card { max-width: 430px; justify-self: end; width: 90%; }
+  .roadmap-review-band { grid-template-columns: 1fr 1fr; }
+  .roadmap-review-band .primary-action { grid-column: 1 / -1; justify-self: start; }
+  .day-node-grid { grid-template-columns: repeat(3, 1fr); }
+  .review-card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .roadmap-topbar .topnav { display: none; }
+  .top-review-link { display: none; }
+  .roadmap-hero { padding: 68px 18px 40px; }
+  .roadmap-hero-copy h1 { font-size: 50px; }
+  .roadmap-hero-copy p { font-size: 16px; }
+  .roadmap-stat-card { width: 96%; }
+  .roadmap-overview { grid-template-columns: 1fr; gap: 14px; }
+  .roadmap-overview > div:last-child { text-align: left; align-items: flex-start; }
+  .overview-rule { width: 100%; }
+  .route-section { padding: 70px 15px 80px; }
+  .route-intro { grid-template-columns: 1fr; gap: 17px; margin-bottom: 43px; }
+  .route-intro h2 { font-size: 46px; }
+  .route-intro p { font-size: 14px; }
+  .stage-block { grid-template-columns: 39px minmax(0, 1fr); gap: 11px; padding-bottom: 39px; }
+  .stage-block:not(:last-child)::before { left: 18px; }
+  .stage-marker span { width: 37px; height: 37px; font-size: 11px; }
+  .stage-heading { gap: 10px; }
+  .stage-heading h3 { font-size: 21px; }
+  .stage-heading p { font-size: 12px; }
+  .stage-count { font-size: 19px; }
+  .day-node-grid { grid-template-columns: repeat(2, 1fr); gap: 7px; }
+  .day-node { min-height: 145px; padding: 12px; }
+  .node-title { font-size: 12px; }
+  .roadmap-review-band { grid-template-columns: 1fr; gap: 25px; padding: 67px 20px 75px; }
+  .review-main { padding: 75px 18px 90px; }
+  .review-main h1 { font-size: 50px; }
+  .review-card-grid { grid-template-columns: 1fr; }
+}
+
+.roadmap-loop { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 25px; color: #8799a8; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+.roadmap-loop i { color: #b8c8d4; font-style: normal; }
+.roadmap-loop span { padding: 5px 6px; border-bottom: 1px solid #cbd6de; }
+.roadmap-loop span.is-current { color: var(--coral-deep); border-color: var(--coral); }
+.overview-margin-note { position: absolute; right: 18px; top: -10px; padding: 4px 7px; color: var(--ink); background: var(--yellow); font: 700 8px "Space Grotesk", sans-serif; letter-spacing: .12em; transform: rotate(2deg); }
+.roadmap-overview { position: relative; }
+.review-main { position: relative; }
+.review-main::after { content: "MEMORY LOOP / INPUT → RETURN"; position: absolute; top: 111px; right: 20px; color: #9aabb8; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .14em; transform: rotate(90deg); transform-origin: right top; }
+.review-empty { position: relative; overflow: hidden; }
+.review-empty::after { content: "01 02 03 04 05 06"; position: absolute; right: 17px; bottom: 18px; color: #c4d2dd; font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .18em; }
+.review-empty::before { content: "FLASHCARD TRAY / WAITING"; display: block; margin-bottom: 23px; color: var(--coral-deep); font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .14em; }
+@media (max-width: 640px) {
+  .roadmap-loop { max-width: 330px; line-height: 1.4; }
+  .overview-margin-note { display: none; }
+  .review-main::after { display: none; }
+}
