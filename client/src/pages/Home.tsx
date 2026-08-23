@@ -53,8 +53,9 @@ type ProgressState = {
   cardStates: SRSCardState[];
 };
 
-const day = (daysData.days.find((entry) => entry.status === "ready") ?? daysData.days[0]) as DayContent;
-const storageKey = "english48-day1-progress";
+const requestedDay = typeof window !== "undefined" ? Number(window.location.pathname.match(/ngay\/(\d+)/)?.[1] ?? 1) : 1;
+const day = (daysData.days.find((entry) => entry.day === requestedDay) ?? daysData.days[0]) as DayContent;
+const storageKey = `english48-day${day.day}-progress`;
 const stepLabels = ["Khởi động", "Học", "Nghe chủ động", "Nói", "Viết", "Kiểm tra + Ôn tập"];
 const stepSkills = ["Nghe thụ động", "Đọc + ngữ pháp", "Nghe + Viết", "Nói", "Viết", "Tổng hợp"];
 const stepIcons = [Headphones, BookOpen, Waves, Mic, Pencil, RotateCcw];
@@ -280,6 +281,7 @@ export default function Home() {
 
   function renderStepContent() {
     if (activeStep === 0) {
+      if (!day.warmupScript?.trim()) return <div className="step-content"><div className="section-kicker">01 / SOURCE STATUS</div><div className="source-gap"><h3>Chưa có phần nghe trong nguồn đã trích xuất.</h3><p>BÀI HỌC của ngày này là video YouTube chưa có transcript được xác minh. Không tự tạo đoạn nghe thay thế.</p></div><CompleteButton index={0} done={completed[0]} onComplete={completeStep} /></div>;
       return (
         <div className="step-content step-content-warmup">
           <div className="section-kicker">01 / LISTEN FIRST</div>
@@ -310,20 +312,16 @@ export default function Home() {
       return (
         <div className="step-content">
           <div className="section-kicker">02 / BUILD THE RULE</div>
-          <div className="content-heading-row"><div><h3>To be là chiếc cầu nối của câu.</h3><p>Nhìn chủ ngữ trước. Chọn đúng <strong>am / is / are</strong> sau đó mới quyết định có thêm <strong>not</strong> hay không.</p></div><span className="page-number">p. 01</span></div>
+          <div className="content-heading-row"><div><h3>{day.title}</h3><p>Đọc phần lý thuyết được trích từ tài liệu nguồn.</p></div><span className="page-number">p. 01</span></div>
           <div className="grammar-panel" dangerouslySetInnerHTML={{ __html: day.grammarContent ?? "" }} />
-          <div className="example-grid">
-            <ExampleCard label="KHẲNG ĐỊNH" tone="coral" sentence="She is a teacher." note="She + is + danh từ" />
-            <ExampleCard label="PHỦ ĐỊNH" tone="mint" sentence="They aren't ready." note="They + are not + tính từ" />
-            <ExampleCard label="NHỚ NHANH" tone="yellow" sentence="I am at home." note="I luôn đi với am" />
-          </div>
-          <div className="micro-check"><CircleHelp size={17} /><span>Thử tự hỏi: “Lan là học sinh.” → <strong>Lan is a student.</strong></span></div>
+          
           <CompleteButton index={1} done={completed[1]} onComplete={completeStep} />
         </div>
       );
     }
 
     if (activeStep === 2) {
+      if (!(day.listeningItems?.length)) return <div className="step-content"><div className="section-kicker">03 / SOURCE STATUS</div><div className="source-gap"><h3>Chưa có phần nghe–chép chính tả trong nguồn.</h3><p>Tài liệu gốc đã đọc không cung cấp bài tập listening theo schema hiện có; phần này được để trống để bảo toàn dữ liệu.</p></div><CompleteButton index={2} done={completed[2]} onComplete={completeStep} /></div>;
       return (
         <div className="step-content">
           <div className="section-kicker">03 / ACTIVE LISTENING</div>
@@ -345,6 +343,7 @@ export default function Home() {
     }
 
     if (activeStep === 3) {
+      if (!(day.shadowingSentences?.length)) return <div className="step-content"><div className="section-kicker">04 / SOURCE STATUS</div><div className="source-gap"><h3>Chưa có câu Shadowing trong nguồn.</h3><p>Video BÀI HỌC chưa có transcript được xác minh nên không tự đặt câu nói thay thế.</p></div><CompleteButton index={3} done={completed[3]} onComplete={completeStep} /></div>;
       return (
         <div className="step-content">
           <div className="section-kicker">04 / SHADOWING</div>
@@ -374,6 +373,7 @@ export default function Home() {
     }
 
     if (activeStep === 4) {
+      if (!(day.writingPrompts?.length)) return <div className="step-content"><div className="section-kicker">05 / SOURCE STATUS</div><div className="source-gap"><h3>Chưa có prompt viết trong nguồn.</h3><p>Tài liệu gốc không có phần writing theo schema hiện có; không tự bổ sung prompt tương đương.</p></div><CompleteButton index={4} done={completed[4]} onComplete={completeStep} /></div>;
       return (
         <div className="step-content">
           <div className="section-kicker">05 / MAKE IT YOURS</div>
@@ -392,10 +392,10 @@ export default function Home() {
       <div className="step-content">
         <div className="section-kicker">06 / TEST + SPACE IT OUT</div>
         <div className="content-heading-row"><div><h3>Kiểm tra để nhớ lâu hơn.</h3><p>Làm quiz trước, sau đó lật thẻ và tự đánh dấu mức độ nhớ. Kết quả được lưu trên thiết bị này.</p></div><span className="page-number">{quizScore === null ? "not scored" : `${quizScore}/${day.quiz?.length ?? 0}`}</span></div>
-        <div className="quiz-block">
+        {day.quiz?.length ? <div className="quiz-block">
           {(day.quiz ?? []).map((question, index) => <div className="quiz-question" key={question.question}><div className="quiz-number">0{index + 1}</div><div className="quiz-main"><strong>{question.question}</strong><div className="option-row">{question.options.map((option, optionIndex) => <button className={quizAnswers[index] === optionIndex ? "selected" : ""} key={option} onClick={() => { setQuizAnswers((current) => ({ ...current, [index]: optionIndex })); setQuizSubmitted(false); }}>{String.fromCharCode(65 + optionIndex)}. {option}</button>)}</div>{quizSubmitted && <span className={quizAnswers[index] === question.correctIndex ? "quiz-feedback good" : "quiz-feedback revise"}>{quizAnswers[index] === question.correctIndex ? "Đúng" : `Đáp án: ${question.options[question.correctIndex]}`}</span>}</div></div>)}
           <button className="primary-action quiz-submit" onClick={submitQuiz}>Chấm bài kiểm tra <ArrowRight size={17} /></button>
-        </div>
+        </div> : <div className="source-gap"><h3>Chưa có quiz tương thích trong nguồn đã trích xuất.</h3><p>Đáp án gốc đang ở dạng bài điền/viết hoặc chưa có link tương ứng; không tự chuyển thành câu hỏi trắc nghiệm.</p></div>}
         <div className="flashcard-block"><div className="flashcard-heading"><div><div className="section-kicker">SRS / FLASHCARD {cardIndex + 1}/{day.srsCards?.length ?? 0}</div><h4>Một thẻ, một lần nhớ có chủ đích.</h4></div><span className="interval-label">Ôn sau {cardStates[cardIndex]?.interval ?? 1} ngày</span></div>{currentCard && <button className={`flashcard ${cardFlipped ? "is-flipped" : ""}`} onClick={() => setCardFlipped((flipped) => !flipped)} aria-label="Lật flashcard"><span className="flashcard-face flashcard-front"><span className="tiny-label">MẶT TRƯỚC</span><strong>{currentCard.front}</strong><span className="flip-hint">Chạm để lật thẻ</span></span><span className="flashcard-face flashcard-back"><span className="tiny-label">MẶT SAU</span><strong>{currentCard.back}</strong><span className="flip-hint">Chạm để xem mặt trước</span></span></button>}{cardFlipped && <div className="flashcard-actions"><button className="remember-action" onClick={() => rateCard(false)}>Chưa nhớ</button><button className="primary-action" onClick={() => rateCard(true)}><Check size={16} /> Nhớ</button></div>}</div>
         <CompleteButton index={5} done={completed[5]} onComplete={completeStep} />
       </div>
@@ -413,15 +413,15 @@ export default function Home() {
       <main id="top">
         <section className="hero-section">
           <div className="hero-grid">
-            <div className="hero-copy"><div className="eyebrow"><span className="eyebrow-dot" /> DAY 01 / FOUNDATION</div><h1>48 ngày để<br /><em>xây lại</em> nền tảng.</h1><p className="hero-lede">Một workbook tương tác giúp bạn học lại tiếng Anh bằng tai, bằng miệng, bằng tay — từng bước nhỏ nhưng có thể nhìn thấy.</p><div className="hero-actions"><a className="primary-action hero-cta" href="#lesson">Bắt đầu Ngày 1 <ArrowRight size={18} /></a><a className="secondary-action" href="#principles">Xem cách học <CircleHelp size={16} /></a></div><div className="hero-footnote"><span>01</span><span>THỂ KHẲNG ĐỊNH & PHỦ ĐỊNH</span><span className="footnote-rule" /><span>15–20 phút</span></div></div>
+            <div className="hero-copy"><div className="eyebrow"><span className="eyebrow-dot" /> DAY {String(day.day).padStart(2, "0")} / {day.level}</div><h1>48 ngày để<br /><em>xây lại</em> nền tảng.</h1><p className="hero-lede">Một workbook tương tác giúp bạn học lại tiếng Anh bằng tai, bằng miệng, bằng tay — từng bước nhỏ nhưng có thể nhìn thấy.</p><div className="hero-actions"><a className="primary-action hero-cta" href="#lesson">Bắt đầu bài học <ArrowRight size={18} /></a><a className="secondary-action" href="#principles">Xem cách học <CircleHelp size={16} /></a></div><div className="hero-footnote"><span>{String(day.day).padStart(2, "0")}</span><span>{day.title}</span><span className="footnote-rule" /><span>15–20 phút</span></div></div>
             <div className="hero-visual"><img src="/manus-storage/english-workbook-hero_ff29b05e.png" alt="Bàn học với workbook tiếng Anh và các nhãn nghe, nói, đọc, viết" /><div className="visual-note note-top"><span>HEAR IT</span><Volume2 size={16} /></div><div className="visual-note note-bottom"><span>MAKE A MARK</span><Check size={15} /></div></div>
           </div>
-          <div className="hero-progress"><div className="progress-copy"><span className="tiny-label">TIẾN TRÌNH NGÀY 01</span><strong>{completedCount} / 6 bước đã XONG</strong><span className="progress-sequence">01 NGHE · 02 HỌC · 03 NGHE · 04 NÓI · 05 VIẾT · 06 ÔN</span></div><div className="progress-track"><span style={{ width: `${Math.max(progressPercent, 4)}%` }} /></div><span className="progress-value">{progressPercent}%</span></div>
+          <div className="hero-progress"><div className="progress-copy"><span className="tiny-label">TIẾN TRÌNH NGÀY {String(day.day).padStart(2, "0")}</span><strong>{completedCount} / 6 bước đã XONG</strong><span className="progress-sequence">01 NGHE · 02 HỌC · 03 NGHE · 04 NÓI · 05 VIẾT · 06 ÔN</span></div><div className="progress-track"><span style={{ width: `${Math.max(progressPercent, 4)}%` }} /></div><span className="progress-value">{progressPercent}%</span></div>
         </section>
 
         <section className="study-shell" id="lesson">
-          <aside className="step-rail" aria-label="Các bước trong Ngày 1"><div className="rail-title"><span className="tiny-label">TODAY'S SEQUENCE</span><strong>06 bước<br />một mạch.</strong></div><div className="rail-steps">{stepLabels.map((label, index) => { const Icon = stepIcons[index]; const locked = index > 0 && !completed[index - 1]; return <button className={`rail-step ${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""} ${locked ? "locked" : ""}`} key={label} onClick={() => activateStep(index)} aria-current={activeStep === index ? "step" : undefined}><span className="rail-step-number">{completed[index] ? <Check size={14} /> : locked ? <Lock size={13} /> : `0${index + 1}`}</span><span className="rail-step-copy"><strong>{label}</strong><small>{stepSkills[index]}</small></span>{completed[index] && <span className="done-stamp">XONG</span>}</button>; })}</div><div className="rail-note"><Pencil size={16} /><span>Input trước.<br />Output sau.</span></div></aside>
-          <div className="study-canvas" id="lesson-canvas"><div className="canvas-header"><div><div className="eyebrow"><span className="eyebrow-dot" /> BÀI HỌC TƯƠNG TÁC</div><h2>{day.title}</h2><p>Hôm nay bạn không học thuộc một công thức. Bạn sẽ nghe nó, nhìn nó, nói nó và tự viết một câu của mình.</p></div><div className="canvas-meta"><span className="day-label">DAY<br /><strong>01</strong></span><span className="source-code">CORE<br />GRAMMAR</span></div></div><div className="perforation" /><div className="mobile-step-strip">{stepLabels.map((label, index) => <button className={`${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""}`} key={label} onClick={() => activateStep(index)}>{completed[index] ? <Check size={14} /> : `0${index + 1}`}<span>{label}</span></button>)}</div><div className="step-panel">{renderStepContent()}</div><div className="source-strip"><span className="source-dot" /><span>{day.sourceNote}</span><a href={daysData.sourceUrl} target="_blank" rel="noreferrer">Mở nguồn gốc <ArrowRight size={14} /></a></div></div>
+          <aside className="step-rail" aria-label={`Các bước trong Ngày ${day.day}`}><div className="rail-title"><span className="tiny-label">TODAY'S SEQUENCE</span><strong>06 bước<br />một mạch.</strong></div><div className="rail-steps">{stepLabels.map((label, index) => { const Icon = stepIcons[index]; const locked = index > 0 && !completed[index - 1]; return <button className={`rail-step ${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""} ${locked ? "locked" : ""}`} key={label} onClick={() => activateStep(index)} aria-current={activeStep === index ? "step" : undefined}><span className="rail-step-number">{completed[index] ? <Check size={14} /> : locked ? <Lock size={13} /> : `0${index + 1}`}</span><span className="rail-step-copy"><strong>{label}</strong><small>{stepSkills[index]}</small></span>{completed[index] && <span className="done-stamp">XONG</span>}</button>; })}</div><div className="rail-note"><Pencil size={16} /><span>Input trước.<br />Output sau.</span></div></aside>
+          <div className="study-canvas" id="lesson-canvas"><div className="canvas-header"><div><div className="eyebrow"><span className="eyebrow-dot" /> BÀI HỌC TƯƠNG TÁC</div><h2>{day.title}</h2><p>Hôm nay bạn không học thuộc một công thức. Bạn sẽ nghe nó, nhìn nó, nói nó và tự viết một câu của mình.</p></div><div className="canvas-meta"><span className="day-label">DAY<br /><strong>{String(day.day).padStart(2, "0")}</strong></span><span className="source-code">CORE<br />GRAMMAR</span></div></div><div className="perforation" /><div className="mobile-step-strip">{stepLabels.map((label, index) => <button className={`${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""}`} key={label} onClick={() => activateStep(index)}>{completed[index] ? <Check size={14} /> : `0${index + 1}`}<span>{label}</span></button>)}</div><div className="step-panel">{renderStepContent()}</div><div className="source-strip"><span className="source-dot" /><span>{day.sourceNote}</span><a href={daysData.sourceUrl} target="_blank" rel="noreferrer">Mở nguồn gốc <ArrowRight size={14} /></a></div></div>
         </section>
 
         <section className="principles-section" id="principles"><div className="principles-intro"><div className="section-kicker">WHY THIS WORKS</div><h2>Học như một quyển vở,<br /><em>nhớ như một thói quen.</em></h2><p>Không lướt qua lý thuyết. Mỗi ngày đặt bạn vào một chuỗi hành động có chủ đích — nghe trước, tạo đầu ra sau, rồi quay lại đúng lúc để trí nhớ được củng cố.</p><div className="method-annotation"><span>METHOD / 06</span><i>input → output → return</i></div></div><div className="principles-list"><Principle number="01" title="Input → Output" copy="Tai và mắt nhận mẫu trước khi miệng và tay tạo câu mới." /><Principle number="02" title="Feedback now" copy="Mỗi ô trả lời có phản hồi ngay, để lỗi trở thành thông tin." /><Principle number="03" title="Return later" copy="Flashcard dùng khoảng cách tăng dần, không để kiến thức rơi mất." /></div></section>

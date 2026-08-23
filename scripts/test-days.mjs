@@ -28,8 +28,15 @@ for (const key of requiredDayOneKeys) {
   if (!dayOne?.[key]) throw new Error(`Day 1 is missing required key: ${key}`);
 }
 
-if (dayOne.listeningItems.length < 3 || dayOne.shadowingSentences.length < 3 || dayOne.quiz.length < 3 || dayOne.srsCards.length < 3) {
-  throw new Error("Day 1 needs at least 3 listening items, shadowing sentences, quiz questions and SRS cards");
+if (!Array.isArray(dayOne.listeningItems) || !Array.isArray(dayOne.shadowingSentences) || !Array.isArray(dayOne.writingPrompts) || !Array.isArray(dayOne.quiz) || dayOne.srsCards.length < 3) {
+  throw new Error("Day 1 must keep all learning arrays in schema and have at least 3 SRS cards");
+}
+
+for (const [index, day] of days.entries()) {
+  const needsSourceNote = day.day <= 5 || day.status === "pending-source";
+  if (needsSourceNote && (!day.sourceNote || typeof day.sourceNote !== "string")) {
+    throw new Error(`Day ${index + 1} must include a traceable sourceNote`);
+  }
 }
 
 console.log(`Content check passed: ${days.length} day objects; Day 1 has all required learning blocks.`);

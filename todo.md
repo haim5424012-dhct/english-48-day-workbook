@@ -1,5 +1,20 @@
 # TODO — Trang lộ trình 48 ngày
 
+## Nạp nội dung thật từ Google Sheet
+
+- [ ] Mở Sheet bằng trình duyệt thật và kiểm tra toàn bộ tên tab.
+- [ ] Xác nhận có hoặc không có nguồn Ngày 34–48; không tự bịa nếu không có.
+- [x] Kiểm kê bốn link nguồn cho Ngày 1–5: FILE ĐỀ, BÀI HỌC, FILE ĐỀ online, ĐÁP ÁN.
+- [x] Trích xuất nội dung thật theo schema hiện có, ưu tiên nguyên văn câu hỏi và đáp án.
+- [x] Đánh dấu `pending-source` và ghi rõ lỗi cho từng nguồn bị chặn.
+- [x] Chạy `pnpm check` và `pnpm build` sau đợt 1–5.
+- [x] Sửa tối thiểu Home để đọc số ngày từ URL `/ngay/NN.html`, giữ nguyên giao diện hiện có.
+- [x] Ẩn hoặc thay thế các khối Warm-up/Shadowing/Quiz hardcoded khi mảng nguồn của ngày đang rỗng.
+- [x] Đồng bộ `days.json` vào `client/src/data/days.json` và cập nhật chỉ mục roadmap theo trạng thái nguồn.
+- [x] Lập báo cáo truy vết và dừng chờ xác nhận trước đợt Ngày 6–10.
+
+
+
 ## Vá lỗi khoa học/logic và ghi âm Mức 1
 
 - [x] Kiểm kê state `cardStates`, công thức `rateCard()` và luồng Shadowing.
