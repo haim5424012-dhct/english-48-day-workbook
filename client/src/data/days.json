@@ -1,0 +1,89 @@
+{
+  "courseTitle": "48 Ngày Lấy Gốc Tiếng Anh",
+  "version": "0.1-day-1",
+  "sourceUrl": "https://docs.google.com/spreadsheets/d/1xP0Ltw0ydYaLFeJal4w8ma36HdvoYpbfCt8Jmt5PcsI/edit?gid=1837150795",
+  "days": [
+    {
+      "day": 1,
+      "title": "Thể khẳng định và phủ định của động từ to be",
+      "level": "FOUNDATION",
+      "status": "ready",
+      "sourceNote": "Bản Ngày 1 này dùng nội dung tương đương theo đúng chủ đề vì chưa truy cập được tệp BÀI HỌC gốc trong Sheet.",
+      "warmupScript": "Hi, I'm Lan. I'm a student.\nMy brother is at home.\nWe aren't tired today.",
+      "grammarContent": "<p><strong>To be</strong> thường đứng trước danh từ, tính từ hoặc cụm từ chỉ nơi chốn để nói ai/cái gì là gì, như thế nào hoặc ở đâu.</p><div class=\"grammar-rule\"><strong>Khẳng định:</strong> I am · You/We/They are · He/She/It is</div><div class=\"grammar-rule\"><strong>Phủ định:</strong> I am not · You/We/They are not (aren't) · He/She/It is not (isn't)</div><p class=\"grammar-note\">Mẹo nhớ: nhìn chủ ngữ trước, chọn đúng am / is / are sau đó mới quyết định có thêm not hay không.</p>",
+      "listeningItems": [
+        { "audioText": "She is a teacher.", "blankSentence": "She ___ a teacher.", "answer": "is" },
+        { "audioText": "They aren't ready.", "blankSentence": "They ___ ready.", "answer": "aren't" },
+        { "audioText": "I am at home.", "blankSentence": "I ___ at home.", "answer": "am" }
+      ],
+      "shadowingSentences": [
+        "I am happy today.",
+        "He isn't ready yet.",
+        "We are from Vietnam."
+      ],
+      "writingPrompts": [
+        "Viết một câu giới thiệu bản thân dùng am.",
+        "Viết một câu phủ định về một người bạn dùng isn't hoặc aren't."
+      ],
+      "quiz": [
+        { "question": "Chọn câu đúng.", "options": ["She are a student.", "She is a student.", "She am a student."], "correctIndex": 1 },
+        { "question": "Dạng phủ định của “They are tired” là gì?", "options": ["They not are tired.", "They isn't tired.", "They aren't tired."], "correctIndex": 2 },
+        { "question": "Điền từ: I ___ from Can Tho.", "options": ["am", "is", "are"], "correctIndex": 0 },
+        { "question": "Chọn câu dùng to be đúng với “he”.", "options": ["He is at home.", "He are at home.", "He am at home."], "correctIndex": 0 }
+      ],
+      "srsCards": [
+        { "front": "am = ?", "back": "dùng với I" },
+        { "front": "is = ?", "back": "dùng với he / she / it" },
+        { "front": "are = ?", "back": "dùng với you / we / they" },
+        { "front": "isn't = ?", "back": "is not — dạng phủ định của is" }
+      ]
+    },
+    { "day": 2, "title": "Thể nghi vấn của động từ to be", "level": "NEXT", "status": "coming-soon" },
+    { "day": 3, "title": "Câu hỏi Who và What với động từ to be", "level": "NEXT", "status": "coming-soon" },
+    { "day": 4, "title": "Câu hỏi Where và When với động từ to be", "level": "NEXT", "status": "coming-soon" },
+    { "day": 5, "title": "Động từ thường ở hiện tại", "level": "NEXT", "status": "coming-soon" },
+    { "day": 6, "title": "Thể phủ định của động từ thường ở hiện tại", "level": "NEXT", "status": "coming-soon" },
+    { "day": 7, "title": "Thể nghi vấn của động từ thường ở hiện tại", "level": "NEXT", "status": "coming-soon" },
+    { "day": 8, "title": "Thì hiện tại đơn", "level": "NEXT", "status": "coming-soon" },
+    { "day": 9, "title": "Từ loại", "level": "NEXT", "status": "coming-soon" },
+    { "day": 10, "title": "Thì hiện tại tiếp diễn", "level": "NEXT", "status": "coming-soon" },
+    { "day": 11, "title": "Phân biệt thì hiện tại đơn và hiện tại tiếp diễn", "level": "NEXT", "status": "coming-soon" },
+    { "day": 12, "title": "Thì quá khứ đơn thể khẳng định", "level": "NEXT", "status": "coming-soon" },
+    { "day": 13, "title": "Thì quá khứ đơn thể phủ định và nghi vấn", "level": "NEXT", "status": "coming-soon" },
+    { "day": 14, "title": "Thì quá khứ tiếp diễn", "level": "NEXT", "status": "coming-soon" },
+    { "day": 15, "title": "Thì hiện tại hoàn thành", "level": "NEXT", "status": "coming-soon" },
+    { "day": 16, "title": "Thì tương lai đơn", "level": "NEXT", "status": "coming-soon" },
+    { "day": 17, "title": "Thì tương lai hoàn thành", "level": "NEXT", "status": "coming-soon" },
+    { "day": 18, "title": "Học ngữ âm với giáo viên nước ngoài", "level": "NEXT", "status": "coming-soon" },
+    { "day": 19, "title": "Tìm hiểu về trọng âm trong tiếng Anh", "level": "NEXT", "status": "coming-soon" },
+    { "day": 20, "title": "Các câu hỏi với từ để hỏi khác trong tiếng Anh", "level": "NEXT", "status": "coming-soon" },
+    { "day": 21, "title": "Luyện nghe số và tên", "level": "NEXT", "status": "coming-soon" },
+    { "day": 22, "title": "Động từ khuyết thiếu", "level": "NEXT", "status": "coming-soon" },
+    { "day": 23, "title": "Liên từ and, but, or, so và because", "level": "NEXT", "status": "coming-soon" },
+    { "day": 24, "title": "Liên từ chỉ thời gian", "level": "NEXT", "status": "coming-soon" },
+    { "day": 25, "title": "Liên từ chỉ sự đối lập", "level": "NEXT", "status": "coming-soon" },
+    { "day": 26, "title": "Câu điều kiện loại 1", "level": "NEXT", "status": "coming-soon" },
+    { "day": 27, "title": "Câu điều kiện loại 2", "level": "NEXT", "status": "coming-soon" },
+    { "day": 28, "title": "Câu điều kiện loại 3", "level": "NEXT", "status": "coming-soon" },
+    { "day": 29, "title": "Luyện nghe điền từ", "level": "NEXT", "status": "coming-soon" },
+    { "day": 30, "title": "Luyện nghe chép chính tả", "level": "NEXT", "status": "coming-soon" },
+    { "day": 31, "title": "Luyện nghe về giờ", "level": "NEXT", "status": "coming-soon" },
+    { "day": 32, "title": "Luyện nghe ngày tháng", "level": "NEXT", "status": "coming-soon" },
+    { "day": 33, "title": "Luyện nghe địa điểm", "level": "NEXT", "status": "coming-soon" },
+    { "day": 34, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 35, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 36, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 37, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 38, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 39, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 40, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 41, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 42, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 43, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 44, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 45, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 46, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 47, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" },
+    { "day": 48, "title": "Chưa đọc được chủ đề gốc từ Sheet", "level": "PENDING", "status": "pending-source" }
+  ]
+}
