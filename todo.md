@@ -166,3 +166,11 @@
 - [x] Tạo launcher Windows độc lập, tự xác định thư mục và chạy localhost.
 - [x] Kiểm thử mở bài học từ launcher và từ file HTML, cập nhật hướng dẫn tránh mở file tạm trực tiếp.
 
+
+## Sửa ảnh thiếu trong Comet preview
+
+- [x] Kiểm kê nguồn ảnh, tên file, MIME và mọi tham chiếu `/manus-storage` còn sót.
+- [x] Sửa generator để ảnh trong gói dùng đường dẫn tương thích Windows hoặc data URI hợp lệ.
+- [x] Kiểm thử logo và ảnh Bài 1 trên file:// và localhost.
+- [x] Cập nhật QA, tạo ZIP mới và bàn giao.
+

@@ -19,15 +19,14 @@ const cometPathShim = `<script>
   var folderMatch = pathname.match(/\\/(lo-trinh|quiz-lab|on-tap)\\/index\\.html$/);
   var route = queryRoute || (dayMatch ? "/ngay/" + dayMatch[1] : folderMatch ? "/" + folderMatch[1] : "/");
   window.__COMET_PREVIEW_PATH__ = route;
-  var marker = pathname.search(/\\/(ngay|lo-trinh|quiz-lab|on-tap)(?:\\/|$)/);
-  window.__COMET_PREVIEW_ROOT__ = marker >= 0 ? pathname.slice(0, marker + 1) : pathname.slice(0, pathname.lastIndexOf("/") + 1);
+  window.__COMET_PREVIEW_ROOT__ = pathname.slice(0, pathname.lastIndexOf("/") + 1);
   function resolve(href) {
     if (!href || href.charAt(0) !== "/") return null;
     var hashIndex = href.indexOf("#");
     var path = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
     var hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    var route = path === "" || path === "/" ? "/" : path;
-    return window.__COMET_PREVIEW_ROOT__ + "index.html?cometRoute=" + encodeURIComponent(route) + hash;
+    var targetRoute = path === "" || path === "/" ? "/" : path;
+    return window.__COMET_PREVIEW_ROOT__ + "index.html?cometRoute=" + encodeURIComponent(targetRoute) + hash;
   }
   document.addEventListener("click", function (event) {
     var anchor = event.target.closest && event.target.closest("a");
@@ -40,32 +39,39 @@ const cometPathShim = `<script>
 })();
 </script>`;
 
-const replaceAssetUrls = (value, mode, assetPrefix) => localAssets.reduce((result, [remoteName, localName]) => {
+const replaceAssetUrls = (value, mode, assetPrefix, assetData) => localAssets.reduce((result, [remoteName, localName]) => {
   if (mode === "js") {
-    const replacement = `window.__COMET_PREVIEW_ROOT__ + "assets/${localName}"`;
+    const inline = assetData?.[localName];
+    const replacement = inline ? JSON.stringify(inline) : `window.__COMET_PREVIEW_ROOT__ + "assets/${localName}"`;
     return result
       .replaceAll(`"/manus-storage/${remoteName}"`, replacement)
       .replaceAll(`'/manus-storage/${remoteName}'`, replacement);
   }
-  return result.replaceAll(`/manus-storage/${remoteName}`, `${assetPrefix}assets/${localName}`);
+  const replacement = assetData?.[localName] ?? `${assetPrefix}assets/${localName}`;
+  return result.replaceAll(`/manus-storage/${remoteName}`, replacement);
 }, value);
 
-const prepareHtml = (html, css, js, assetPrefix) => {
-  let result = replaceAssetUrls(html, "html", assetPrefix)
-    .replace(/<link rel="preconnect"[^>]*>/g, "")
-    .replace(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/g, "")
-    .replace(/\s*<script src="[^\"]*debug-collector\.js" defer><\/script>/g, "")
-    .replace(/\s*<script defer src="https:\/\/manus-analytics\.com\/umami"[^>]*><\/script>/g, "")
-    .replace(/<link rel="stylesheet"[^>]*>/, `<style>${replaceAssetUrls(css, "html", assetPrefix)}</style>`)
-    .replace(/\s*<script type="module"[^>]*><\/script>/, "")
-    .replace("</head>", `${cometPathShim}\n  </head>`)
-    .replace("</body>", `<script>${replaceAssetUrls(js, "js", assetPrefix)}</script>\n  </body>`);
-  return result;
-};
+const prepareHtml = (html, css, js, assetPrefix, assetData) => html
+  .replace(/<link rel="preconnect"[^>]*>/g, "")
+  .replace(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/g, "")
+  .replace(/\s*<script src="[^\"]*debug-collector\.js" defer><\/script>/g, "")
+  .replace(/\s*<script defer src="https:\/\/manus-analytics\.com\/umami"[^>]*><\/script>/g, "")
+  .replace(/<link rel="stylesheet"[^>]*>/, `<style>${replaceAssetUrls(css, "html", assetPrefix, assetData)}</style>`)
+  .replace(/\s*<script type="module"[^>]*><\/script>/, "")
+  .replace("</head>", `${cometPathShim}\n  </head>`)
+  .replace("</body>", `<script>${replaceAssetUrls(js, "js", assetPrefix, assetData)}</script>\n  </body>`);
+
+const routeShell = (route) => `<!doctype html><html lang="vi"><head><meta charset="UTF-8"><title>48 Ngày Lấy Gốc Tiếng Anh</title><script>(function(){var q=${JSON.stringify(route)};var base=location.pathname.slice(0,location.pathname.lastIndexOf("/")+1);location.replace(base+"index.html?cometRoute="+encodeURIComponent(q));})();</script></head><body>Đang mở bài học…</body></html>`;
 
 await rm(outputDir, { recursive: true, force: true });
 await mkdir(assetDir, { recursive: true });
-for (const [, localName] of localAssets) await cp(new URL(`../../webdev-static-assets/${localName}`, import.meta.url), new URL(localName, assetDir));
+const assetData = {};
+for (const [remoteName, localName] of localAssets) {
+  const source = new URL(`../../webdev-static-assets/${localName}`, import.meta.url);
+  await cp(source, new URL(localName, assetDir));
+  const bytes = await readFile(source);
+  assetData[localName] = `data:image/png;base64,${bytes.toString("base64")}`;
+}
 
 const builtFiles = await readdir(new URL("assets/", sourceDir));
 const cssFile = builtFiles.find((fileName) => fileName.endsWith(".css"));
@@ -75,30 +81,26 @@ const css = await readFile(new URL(`assets/${cssFile}`, sourceDir), "utf8");
 const js = await readFile(new URL(`assets/${jsFile}`, sourceDir), "utf8");
 const rootHtml = await readFile(new URL("index.html", sourceDir), "utf8");
 
-await writeFile(new URL("index.html", outputDir), prepareHtml(rootHtml, css, js, "./"));
+await writeFile(new URL("index.html", outputDir), prepareHtml(rootHtml, css, js, "./", assetData));
 await mkdir(new URL("ngay/", outputDir), { recursive: true });
-for (let day = 1; day <= 48; day += 1) await writeFile(new URL(`ngay/${String(day).padStart(2, "0")}.html`, outputDir), prepareHtml(rootHtml, css, js, "../"));
+for (let day = 1; day <= 48; day += 1) await writeFile(new URL(`ngay/${String(day).padStart(2, "0")}.html`, outputDir), routeShell(`/ngay/${String(day).padStart(2, "0")}.html`));
 for (const route of ["lo-trinh", "quiz-lab", "on-tap"]) {
   const routeDir = new URL(`${route}/`, outputDir);
   await mkdir(routeDir, { recursive: true });
-  await writeFile(new URL("index.html", routeDir), prepareHtml(rootHtml, css, js, "../"));
+  await writeFile(new URL("index.html", routeDir), routeShell(`/${route}`));
 }
 
 const readme = `# 48 Ngày Lấy Gốc Tiếng Anh — Gói Comet tương thích cao
 
-Mỗi file HTML trong gói đã nhúng trực tiếp JavaScript và CSS. Ảnh được giữ thành file local trong thư mục \`assets\` để tránh tạo file HTML quá lớn; các đường dẫn ảnh đều là relative path đúng theo từng thư mục route. Không có module script, analytics, Google Fonts hoặc asset mạng bắt buộc.
+Bản này dùng một \`index.html\` trung tâm tự chứa JavaScript, CSS và toàn bộ 4 ảnh dưới dạng data URI. Các file trong \`ngay/\`, \`quiz-lab/\` và \`on-tap/\` chỉ là file mở bài rồi chuyển về index trung tâm; vì vậy không phụ thuộc ảnh hoặc bundle nằm ngoài file gốc.
 
 ## Cách chạy
 
-Giải nén gói, sau đó bấm đúp trực tiếp vào \`index.html\`, \`ngay/13.html\`, hoặc một route khác. Không cần Node.js, Python hay web server. Nếu Comet chặn JavaScript từ file local, hãy bật quyền chạy nội dung local cho thư mục này hoặc dùng phương án localhost:
+Giải nén toàn bộ ZIP vào một thư mục cố định, không mở bản xem trước trong thư mục \`AppData\\Local\\Temp\`. Bấm đúp \`index.html\`. Sau đó bấm thẻ \`LESSON / 01\`; ứng dụng sẽ hiển thị Bài 1 ngay trong index trung tâm.
 
-\`\`\`bash
-python3 -m http.server 4173
-\`\`\`
+Nếu Comet chặn JavaScript từ file local, bấm đúp \`start-comet-preview.bat\`; launcher sẽ chạy localhost bằng Python nếu máy đã có \`py\` hoặc \`python\`.
 
-Mở \`http://localhost:4173/\` sau khi chạy lệnh. Gói gồm 52 HTML, 4 ảnh local và QA report.
-
-Trên Windows, có thể bấm đúp \`start-comet-preview.bat\`. File này thử dùng \`py\`, sau đó \`python\`, rồi mở trang tại \`http://localhost:4173/\`. Đây là phương án nên dùng nếu mở trực tiếp vẫn hiện trang trắng do chính sách bảo mật của Comet.
+Gói gồm 1 HTML trung tâm tự chứa, 51 route shell, 4 ảnh dự phòng và QA report. Không có module script, Google Fonts, analytics hoặc asset mạng bắt buộc.
 `;
 await writeFile(new URL("README-COMET.md", outputDir), readme);
 const windowsLauncher = `@echo off
@@ -110,3 +112,5 @@ pause
 `;
 await writeFile(new URL("start-comet-preview.bat", outputDir), windowsLauncher);
 console.log(`Comet compatible preview written to ${outputDir.pathname}`);
+console.log(`Central HTML size: ${(Buffer.byteLength(await readFile(new URL("index.html", outputDir))) / 1024 / 1024).toFixed(1)} MB`);
+
