@@ -80,3 +80,7 @@ Mọi trang, component và file CSS mới phải giữ hệ mực–giấy, rail
 - Mọi bề mặt quiz phải dùng ngôn ngữ workbook-native: số thứ tự ở lề, vùng trả lời có đường kẻ, đường perforation, nhãn nguồn và phản hồi dạng con dấu.
 - Mọi route nhìn thấy bởi học sinh phải có ít nhất một dấu hiệu của lộ trình 48 ngày; Phòng quiz dùng rail sáu bước và nhãn nhiệm vụ để không tách rời phương pháp học.
 - Thuật ngữ nội bộ như “schema/lab” chỉ giữ ở annotation nhỏ; tiêu đề và CTA chính phải nói trực tiếp, rõ ràng với người học.
+
+- Dashboard tổng kết phải đọc như **workbook audit của người học**, không như analytics dashboard: số liệu dùng ledger, con dấu, nhãn ngày, đường ruled/perforation và trạng thái tiến bộ.
+- Tiếng Anh kiểu lab như “field record / source ledger / audit” chỉ dùng ở annotation nhỏ; headline, CTA và trạng thái chính dùng tiếng Việt trực tiếp, hướng dẫn học sinh.
+- Signal Coral `#F05A4F` chỉ là mực hành động/thành tựu: CTA, active/progress, row marker quan trọng và dấu XONG; hierarchy thường ngày dựa vào ink navy, scale chữ, đường kẻ và nhãn notebook.

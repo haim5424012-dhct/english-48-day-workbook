@@ -13,6 +13,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 declare global {
   interface Window {
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/ngay/:day.html" component={Home} />
       <Route path="/on-tap" component={Review} />
       <Route path="/quiz-lab" component={QuizLab} />
+      <Route path="/tong-ket" component={Dashboard} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

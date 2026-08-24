@@ -271,4 +271,14 @@
 - [x] Đồng bộ `data/days.json` và `client/src/data/days.json`, rebuild `days-index`.
 - [x] Chạy `test-days`, `pnpm check`, `pnpm build` và QA route Ngày 46–48.
 - [x] Cập nhật báo cáo Batch 10, README, hồ sơ/audit và QA Comet.
-- [ ] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận hoàn tất 48 ngày.
+- [x] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận hoàn tất 48 ngày.
+
+
+## Dashboard tổng kết 48 ngày — từ vựng và ngữ pháp
+
+- [x] Audit schema và đếm chính xác mục từ vựng/cấu trúc từ dữ liệu thật.
+- [x] Chốt định nghĩa thống kê, ghi rõ trường thiếu hoặc không thể định lượng.
+- [x] Thiết kế dashboard Editorial Lab Notebook với thẻ tổng quan, biểu đồ và bảng theo ngày/giai đoạn.
+- [x] Thêm route dashboard, điều hướng và bộ lọc tương tác.
+- [x] Kiểm thử dữ liệu, responsive, route và build production.
+- [ ] Lưu checkpoint và bàn giao dashboard.

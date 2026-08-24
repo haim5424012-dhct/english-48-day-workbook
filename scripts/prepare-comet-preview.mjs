@@ -16,7 +16,7 @@ const cometPathShim = `<script>
   var pathname = decodeURIComponent(window.location.pathname).replace(/\\\\/g, "/");
   var queryRoute = new URLSearchParams(window.location.search).get("cometRoute");
   var dayMatch = pathname.match(/\\/ngay\\/(\\d+\\.html)$/);
-  var folderMatch = pathname.match(/\\/(lo-trinh|quiz-lab|on-tap)\\/index\\.html$/);
+  var folderMatch = pathname.match(/\/(lo-trinh|quiz-lab|on-tap|tong-ket)\/index\.html$/);
   var route = queryRoute || (dayMatch ? "/ngay/" + dayMatch[1] : folderMatch ? "/" + folderMatch[1] : "/");
   window.__COMET_PREVIEW_PATH__ = route;
   window.__COMET_PREVIEW_ROOT__ = pathname.slice(0, pathname.lastIndexOf("/") + 1);
@@ -84,7 +84,7 @@ const rootHtml = await readFile(new URL("index.html", sourceDir), "utf8");
 await writeFile(new URL("index.html", outputDir), prepareHtml(rootHtml, css, js, "./", assetData));
 await mkdir(new URL("ngay/", outputDir), { recursive: true });
 for (let day = 1; day <= 48; day += 1) await writeFile(new URL(`ngay/${String(day).padStart(2, "0")}.html`, outputDir), routeShell(`/ngay/${String(day).padStart(2, "0")}.html`));
-for (const route of ["lo-trinh", "quiz-lab", "on-tap"]) {
+for (const route of ["lo-trinh", "quiz-lab", "on-tap", "tong-ket"]) {
   const routeDir = new URL(`${route}/`, outputDir);
   await mkdir(routeDir, { recursive: true });
   await writeFile(new URL("index.html", routeDir), routeShell(`/${route}`));
@@ -100,7 +100,7 @@ Giải nén toàn bộ ZIP vào một thư mục cố định, không mở bản
 
 Nếu Comet chặn JavaScript từ file local, bấm đúp \`start-comet-preview.bat\`; launcher sẽ chạy localhost bằng Python nếu máy đã có \`py\` hoặc \`python\`.
 
-Gói gồm 1 HTML trung tâm tự chứa, 51 route shell, 4 ảnh dự phòng và QA report. Không có module script, Google Fonts, analytics hoặc asset mạng bắt buộc.
+Gói gồm 1 HTML trung tâm tự chứa, 52 route shell, 4 ảnh dự phòng và QA report. Không có module script, Google Fonts, analytics hoặc asset mạng bắt buộc.
 `;
 await writeFile(new URL("README-COMET.md", outputDir), readme);
 const windowsLauncher = `@echo off
