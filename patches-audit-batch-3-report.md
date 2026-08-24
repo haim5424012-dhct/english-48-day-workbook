@@ -16,7 +16,7 @@ Nhánh `activeStep === 1` trong `Home.tsx` nay kiểm tra `day.grammarContent` t
 
 Với Ngày 13, do có `srsCards` nhưng không có `grammarContent`, Bước 6 hiển thị thêm ghi chú rằng các thẻ được suy luận có căn cứ từ bài thi gốc, chưa phải nguồn Input từ bài giảng lý thuyết đầy đủ. Dữ liệu thẻ không bị thay đổi và không bị ẩn.
 
-QA preview `/ngay/13.html` xác nhận tiêu đề đúng, Bước 2 hiển thị `01 / SOURCE STATUS`, và `sourceNote` vẫn hiện bên dưới.
+QA preview `/ngay/13.html` xác nhận tiêu đề đúng, nhánh rỗng của Bước 2 hiển thị khối thông báo SOURCE STATUS trong vùng đang có kicker cố định `02 / BUILD THE RULE`, và `sourceNote` vẫn hiện bên dưới. Không sửa nhãn kicker trong đợt này.
 
 ## Việc 2 — Điều kiện bất biến của validator
 

@@ -109,3 +109,11 @@
 - [x] Backfill tiêu đề Ngày 34–48 từ CSV, đồng bộ hai nguồn dữ liệu nếu cần.
 - [x] Chạy test/check/build, lập báo cáo và đóng gói một ZIP đầy đủ gồm ba bản vá cùng QuizRenderer/QuizLab.
 
+
+## Sửa fixture QuizLab theo source-extracts
+
+- [x] Đọc toàn bộ `specimens` và đối chiếu đủ 5 mục với source-extract tương ứng.
+- [x] Sửa matching Ngày 3 theo đúng cặp “What is that? – It's a banana.” và sửa short-answer Ngày 7.
+- [x] Cập nhật báo cáo để mô tả đúng nhãn Bước 2 thực tế trong code.
+- [x] Chạy `pnpm check`, `pnpm build`, đóng gói ZIP và báo cáo; không ánh xạ dữ liệu thật.
+

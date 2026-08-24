@@ -35,3 +35,6 @@ QA sau revision QuizLab: desktop hiển thị headline học sinh, nhãn Bước
 
 
 QA bản vá: route `/ngay/13.html` tải đúng tiêu đề “Thì quá khứ đơn thể phủ định và nghi vấn”. Khi mở Bước 2, giao diện hiển thị `01 / SOURCE STATUS` cùng thông báo “Chưa có phần lý thuyết đầy đủ từ nguồn Ngày 13” và hướng dẫn xem ghi chú nguồn; không còn khung grammar trống. SourceNote vẫn hiển thị đầy đủ bên dưới.
+
+
+QA fixture correction: `/quiz-lab` sau cập nhật hiển thị đủ 5 câu hỏi matching của Ngày 3 với 5 đáp án lựa chọn, trong đó có “What is that?” và “It’s a banana.”; short-answer Ngày 7 hiển thị placeholder `Yes, …`. Không thấy dữ liệu fixture bị ghi vào `days.json`.
