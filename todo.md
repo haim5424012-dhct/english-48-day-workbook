@@ -117,3 +117,19 @@
 - [x] Cập nhật báo cáo để mô tả đúng nhãn Bước 2 thực tế trong code.
 - [x] Chạy `pnpm check`, `pnpm build`, đóng gói ZIP và báo cáo; không ánh xạ dữ liệu thật.
 
+
+## Gói chạy thử trên trình duyệt Comet
+
+- [x] Xác định các route cần tạo fallback static.
+- [x] Tạo bản build static có các route `/`, `/lo-trinh`, `/quiz-lab` và `/ngay/01.html`–`/ngay/48.html`.
+- [x] Viết README hướng dẫn chạy local trên Comet.
+- [x] Kiểm tra gói và đóng ZIP duy nhất để tải về.
+
+
+## Sửa trang trắng khi mở trực tiếp file HTML
+
+- [x] Xác định nguyên nhân asset/module tuyệt đối không tải được qua `file://`.
+- [x] Tạo gói preview mới có asset relative và trang hướng dẫn chạy đúng trên Comet.
+- [x] Kiểm tra file trực tiếp, localhost routes và runtime không lỗi.
+- [x] Đóng gói ZIP sửa lỗi và bàn giao.
+

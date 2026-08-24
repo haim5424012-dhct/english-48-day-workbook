@@ -55,7 +55,7 @@ type ProgressState = {
   cardStates: SRSCardState[];
 };
 
-const requestedDay = typeof window !== "undefined" ? Number(window.location.pathname.match(/ngay\/(\d+)/)?.[1] ?? 1) : 1;
+const requestedDay = typeof window !== "undefined" ? Number((window.__COMET_PREVIEW_PATH__ ?? window.location.pathname).match(/ngay\/(\d+)/)?.[1] ?? 1) : 1;
 const day = (daysData.days.find((entry) => entry.day === requestedDay) ?? daysData.days[0]) as DayContent;
 const storageKey = `english48-day${day.day}-progress`;
 const stepLabels = ["Khởi động", "Học", "Nghe chủ động", "Nói", "Viết", "Kiểm tra + Ôn tập"];

@@ -9,14 +9,23 @@ import NotFound from "@/pages/NotFound";
 import Roadmap from "@/pages/Roadmap";
 import Review from "@/pages/Review";
 import QuizLab from "@/pages/QuizLab";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
+declare global {
+  interface Window {
+    __COMET_PREVIEW_PATH__?: string;
+  }
+}
+
 function Router() {
+  const [location] = useLocation();
+  const previewLocation = typeof window !== "undefined" ? window.__COMET_PREVIEW_PATH__ : undefined;
+
   return (
-    <Switch>
+    <Switch location={previewLocation ?? location}>
       <Route path="/" component={Roadmap} />
       <Route path="/lo-trinh" component={Roadmap} />
       <Route path="/ngay/:day.html" component={Home} />
