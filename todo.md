@@ -174,3 +174,11 @@
 - [x] Kiểm thử logo và ảnh Bài 1 trên file:// và localhost.
 - [x] Cập nhật QA, tạo ZIP mới và bàn giao.
 
+
+## Cập nhật hồ sơ website theo thay đổi đã kiểm chứng
+
+- [x] Kiểm kê README, audit, QA, dữ liệu và mã nguồn hiện hành.
+- [x] Đối chiếu trạng thái 48 ngày, tính năng quiz/SRS/ghi âm và gói Comet với bằng chứng.
+- [x] Cập nhật hồ sơ website và hướng dẫn chạy theo trạng thái thực tế.
+- [x] Kiểm tra liên kết chéo, chạy check/build và lưu phiên bản cập nhật.
+

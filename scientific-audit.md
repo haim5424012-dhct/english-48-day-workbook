@@ -2,7 +2,7 @@
 
 ## Kết luận
 
-Bản build hiện hoàn chỉnh luồng tương tác của Ngày 1 theo sáu nguyên tắc bắt buộc: Input trước Output; dictation; shadowing; viết có phản hồi tức thì; test-enhanced learning; và lặp lại giãn cách. Nội dung có thể mở rộng bằng cách thêm object vào `data/days.json`.
+Bản build hiện hoàn chỉnh luồng tương tác của Ngày 1 theo sáu nguyên tắc bắt buộc: Input trước Output; dictation; shadowing; viết có phản hồi tức thì; test-enhanced learning; và lặp lại giãn cách. Dữ liệu nguồn đã được xử lý theo các batch đến Ngày 15; các trường thiếu nguồn vẫn được giữ rỗng và hiển thị trạng thái giới hạn. Nội dung có thể mở rộng bằng cách thêm object vào `data/days.json`.
 
 ## Nguồn
 
@@ -15,7 +15,7 @@ Bản build hiện hoàn chỉnh luồng tương tác của Ngày 1 theo sáu ng
 
 ## Quyết định nội dung
 
-Do chưa truy cập được tệp BÀI HỌC gốc, Ngày 1 dùng ví dụ tương đương, bám đúng chủ đề `am / is / are` ở thể khẳng định và phủ định. Website hiển thị giới hạn này ngay dưới bài học và có liên kết quay về nguồn Sheet; không trình bày phần biên soạn tương đương như nội dung nguyên văn của giáo viên.
+Ngày 1 dùng ví dụ tương đương bám đúng chủ đề `am / is / are` ở thể khẳng định và phủ định trong luồng tương tác. Các batch Ngày 1–15 được lưu artifact và báo cáo riêng; phần nào chưa có nguồn hoặc không khớp schema vẫn được ghi trạng thái giới hạn, không trình bày như nguyên văn của giáo viên.
 
 ## Ma trận truy vết Ngày 1
 
@@ -41,7 +41,7 @@ Do chưa truy cập được tệp BÀI HỌC gốc, Ngày 1 dùng ví dụ tư�
 | Console sau tương tác | Không có console output lỗi |
 | Hoàn thành Bước 1 | Đã xác nhận tiến trình chuyển 0/6 → 1/6 và Bước 2 mở |
 | SpeechRecognition | Có fallback rõ ràng khi trình duyệt không hỗ trợ hoặc micro bị chặn |
-| Offline HTML trực tiếp | Logic app không yêu cầu API; asset generated dùng Manus Storage URL nên bản đóng gói offline cần thay asset bằng tệp tự chứa nếu không có mạng |
+| Offline HTML trực tiếp | Bản Comet mới có index trung tâm tự chứa JS/CSS/ảnh bằng data URI; route shell và launcher localhost là phương án dự phòng khi Comet chặn file:// |
 
 ## Giới hạn và bước tiếp theo
 
@@ -59,3 +59,33 @@ Bước Shadowing giữ nguyên SpeechRecognition làm lớp phản hồi phụ 
 ## Giới hạn đã ghi nhận
 
 Waveform trực quan bằng Web Audio API và chấm phát âm thật qua API bên thứ ba chưa triển khai. Nếu thực hiện chấm phát âm về sau, cần route server-side riêng để bảo vệ API key; không đưa khóa dịch vụ vào frontend.
+
+
+## Cập nhật hồ sơ — 24/08/2026
+
+### Trạng thái dữ liệu hiện hành
+
+| Phạm vi | Kết quả kiểm kê | Mức xác nhận |
+|---|---|---|
+| Toàn khóa | 48 ngày, gồm 10 giai đoạn lộ trình | `[S]` từ `days-index.json` và giao diện Roadmap |
+| Nội dung đã xử lý | Ngày 1–15 qua các batch đã lưu trong `source-extracts/` và báo cáo tương ứng | `[S]` trong phạm vi artifact đã lưu |
+| `grammarContent` | Có dữ liệu ở 14 ngày | `[S]` từ kiểm kê `data/days.json` |
+| `srsCards` | Có dữ liệu ở 15 ngày | `[S]` từ kiểm kê `data/days.json` |
+| `listeningItems`, `writingPrompts`, `quiz` chính thức | Chưa có trường có nội dung trong bản kiểm kê hiện tại | `[S]`; không tự suy ra nội dung còn thiếu |
+| Ngày 16–48 | Giữ khung/trạng thái chờ nguồn theo từng object | `[S]`/`[U]` tùy trường nguồn |
+
+### Phân biệt QuizLab và dữ liệu bài thi
+
+`QuizRenderer`/`QuizLab` là lớp giao diện tương thích cho năm dạng: MCQ legacy, fill-blank, transformation, matching và short-answer. Các `specimens` của QuizLab đã được đối chiếu với source extracts cho các mục đã ghi nhận, nhưng vẫn là **fixture minh họa giao diện**, không phải dữ liệu bài thi chính thức. Không có fixture nào được ghi vào `days.json`; việc ánh xạ quiz thật vẫn hoãn theo `quiz-schema-gaps.md` cho đến khi đủ mẫu và có quyết định schema.
+
+### Ghi âm và lưu trữ cục bộ
+
+Shadowing tách SpeechRecognition dùng làm phản hồi transcript khỏi MediaRecorder dùng ghi âm tạm. URL âm thanh cũ được giải phóng khi cần, bản ghi tốt nhất được theo dõi theo câu trong phiên học, và file âm thanh không được ghi vào localStorage hoặc backend. Khả năng ghi thật còn phụ thuộc quyền microphone của trình duyệt; sandbox chỉ xác nhận được fallback khi quyền bị chặn, không thay thế kiểm thử thiết bị người dùng.
+
+### Gói Comet và bằng chứng kiểm thử
+
+Generator `scripts/prepare-comet-preview.mjs` tạo một `index.html` trung tâm nhúng JS, CSS và bốn ảnh PNG bằng data URI; các route phụ là shell chuyển về index qua `cometRoute`. Bản QA sandbox xác nhận logo/ảnh Bài 1 có `complete=true`, `naturalWidth=1920`, không có ảnh hỏng và không còn tham chiếu ảnh mạng bắt buộc. Đây là bằng chứng trong sandbox, không phải xác nhận độc lập rằng mọi cấu hình Comet Windows đều cho phép JavaScript từ `file://`; vì vậy gói vẫn có `start-comet-preview.bat` làm đường chạy localhost dự phòng.
+
+### Giới hạn chưa được kết luận
+
+Chưa thể kết luận website đã đồng bộ tiến trình hoặc điểm lên Google Sheets; dữ liệu người học vẫn nằm cục bộ trên thiết bị. Chưa thể gọi các ngày chưa có nguồn là bài học hoàn chỉnh. Chưa có waveform Web Audio API, chấm phát âm qua dịch vụ bên thứ ba, hoặc kiểm thử microphone thành công trên thiết bị thật trong hồ sơ hiện tại.
