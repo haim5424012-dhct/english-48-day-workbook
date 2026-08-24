@@ -58,3 +58,16 @@ Nguồn Batch 4 được lưu trong `source-extracts/batch-4/ngay-16.md` đến 
 | 30 | Nghe điền từ/chép chính tả theo các đoạn mp3 | 19 chỗ trống | —; toàn bộ phụ thuộc mp3.1–mp3.6 |
 
 Batch 6 tiếp tục cho thấy hai nhóm cần schema riêng: **điền/chia động từ không có options** và **nghe điền thông tin/chép chính tả phụ thuộc audio**. Các câu MCQ 2 lựa chọn của Ngày 26–28 được thống kê nhưng chưa chuyển vào `quiz` chính thức; audio/video gốc của Ngày 29–30 không được tải hoặc nhúng khi chưa xác minh quyền sử dụng.
+
+
+## Batch 7 — Ngày 31–35
+
+| Ngày | Dạng không phải MCQ / cần schema mới | Số câu hoặc mục | MCQ và số lựa chọn gốc |
+|---:|---|---:|---|
+| 31 | Nghe viết số giờ | 10 câu | 8 câu 2 lựa chọn + 5 câu 3 lựa chọn |
+| 32 | Nghe viết ngày, năm và ngày–tháng | 15 câu theo PDF bài học | 9 câu 2 lựa chọn + 5 câu 3 lựa chọn |
+| 33 | Nghe điền địa điểm/từ trong đoạn văn và hội thoại | 9 chỗ trống | 6 câu 2 lựa chọn |
+| 34 | Nghe điền thông tin về đồ vật, màu sắc, giá tiền và tính chất | 8 chỗ trống | 10 câu 3 lựa chọn |
+| 35 | FILE ĐỀ online và ĐÁP ÁN Drive liên kết ở Sheet mang chủ đề “Sự hoà hợp về thì”, không khớp “Đại từ phản thân”; cần xác minh nguồn đúng trước khi định lượng bài thi | Chưa xác định | PDF bài học có các bài chọn đáp án 2 lựa chọn, nhưng chưa coi là đề online chính thức |
+
+Batch 7 bổ sung hai nhóm cần schema riêng: **nghe viết/điền không có options** và **bài nghe phụ thuộc audio**. Ngày 35 không được ánh xạ câu hỏi từ file lệch chủ đề; không dùng dữ liệu “Sự hoà hợp về thì” để lấp bài Đại từ phản thân. Không mở rộng schema quiz trong batch này.

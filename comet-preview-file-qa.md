@@ -26,3 +26,11 @@ QA self-contained tối ưu: mở trực tiếp `ngay/13.html` chuyển về `in
 ## QA Batch 5 — file:// preview
 
 Ngày 21 và Ngày 25 đã được mở bằng route trung tâm `index.html?cometRoute=...` trong gói Comet sau khi nạp Batch 5. Sandbox render đúng `DAY 21 / NEXT` với chủ đề “LUYỆN NGHE SỐ VÀ TÊN” và `DAY 25 / NEXT` với chủ đề “LIÊN TỪ CHỈ SỰ ĐỐI LẬP”. Route không rơi về roadmap; ảnh minh họa trung tâm vẫn hiển thị. Đây là kiểm thử sandbox Chromium/file://, chưa thay thế kiểm thử Comet Windows thực tế.
+
+## QA Batch 7 và lesson-focused pass — 24/08/2026
+
+- Đã tạo lại preview self-contained sau import Ngày 31–35; central `index.html` khoảng 35,9 MB, ảnh PNG được nhúng data URI.
+- Đã kiểm tra trực quan `/ngay/31.html` và `/ngay/35.html`: tiêu đề, margin note theo ngày, `SOURCE STATUS`, rail sáu bước, nút Coral “Đánh dấu bước này XONG” và thanh ngữ cảnh workbook hiển thị đúng.
+- Các route ngày hợp lệ trong gói dùng hậu tố `.html`; route phụ chuyển về central index qua `cometRoute`.
+- Không tải hoặc nhúng audio/video gốc; các phần thiếu vẫn hiển thị trạng thái nguồn.
+- `pnpm check`, `pnpm build` và `node scripts/test-days.mjs` đạt trước khi đóng gói.

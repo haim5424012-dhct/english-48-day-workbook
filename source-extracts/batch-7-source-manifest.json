@@ -1,0 +1,63 @@
+{
+  "spreadsheetId": "1xP0Ltw0ydYaLFeJal4w8ma36HdvoYpbfCt8Jmt5PcsI",
+  "sheetTitle": "48 NGÀY LẤY  GỐC TIẾNG ANH TOÀN DIỆN",
+  "retrievedAt": "2026-08-24",
+  "sheetRange": "A90:H106",
+  "days": [
+    {
+      "day": 31,
+      "title": "Luyện nghe về giờ",
+      "rows": {"heading": 92, "lesson": 93, "online": 94},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1LUwVa68ozjosBdNa_kzx35OdZPAk41rd/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/7iBxymaFreM?si=TO4MPxzboQy3OlKE",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1w8zrzfzwiRE0uBseYkD_5xnUTxrA6yo-",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/08/bai-thi-online-luyen-nghe-ve-gio.html"
+      }
+    },
+    {
+      "day": 32,
+      "title": "Luyện nghe ngày tháng",
+      "rows": {"heading": 95, "lesson": 96, "online": 97},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1kouDz4lxMV6fW5rKP8zCsJzQxfh1F9ou/view?usp=drivesdk",
+        "baiHoc": "https://drive.google.com/drive/folders/1nwCaRx5izlIirO5ukcS4gbvJsOuaSuOo",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1Nmxrv-jNIbK94LVWTwFSQj_lyng8NyOs",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/08/bai-thi-online-luyen-nghe-ngay-thang.html"
+      }
+    },
+    {
+      "day": 33,
+      "title": "Luyện nghe địa điểm",
+      "rows": {"heading": 98, "lesson": 99, "online": 100},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1n9Oz1YpPpyrfx6w-czBkdBPbg-2FBJHM/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/7GwdWb1z1-U?si=edFAZ0WEJJbLqXDE",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1FUNOkg8bcLmjqq45FrP50npBYVzvbQPu",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/08/thi-online-luyen-nghe-ia-iem.html"
+      }
+    },
+    {
+      "day": 34,
+      "title": "Luyện nghe về tiền bạc",
+      "rows": {"heading": 101, "lesson": 102, "online": 103},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1h2aL1XSDyGpcsJQ5FQOU7-pwnuSDDKeV/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/k8MzuTLOcJ4?si=LbPgrs6qd392NucY",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1F2wxqD8hfRta1KLsSIq7ZwyfELuimh6C",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/08/thi-online-luyen-nghe-ve-tien-bac.html"
+      }
+    },
+    {
+      "day": 35,
+      "title": "Đại từ phản thân",
+      "rows": {"heading": 104, "lesson": 105, "online": 106},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1yv4t3dtyK7x0Gz3WQHMnbj4-2hnrun00/view?usp=drive_link",
+        "baiHoc": "https://youtu.be/L1-0CrXhz_I?si=Xjz_5xF0K3OglHI",
+        "fileDeOnline": "https://drive.google.com/file/d/1w0etZrWAVf4xBCtmmPdRsZGAKmBnPPAI/view?usp=drive_link",
+        "dapAn": "https://drive.google.com/file/d/1l5JxP6zle8WsE-JLKbf7vmyHy-6Hv2pv/view?usp=drive_link"
+      }
+    }
+  ]
+}
