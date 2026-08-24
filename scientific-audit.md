@@ -2,7 +2,7 @@
 
 ## Kết luận
 
-Bản build hiện hoàn chỉnh luồng tương tác của Ngày 1 theo sáu nguyên tắc bắt buộc: Input trước Output; dictation; shadowing; viết có phản hồi tức thì; test-enhanced learning; và lặp lại giãn cách. Dữ liệu nguồn đã được xử lý theo các batch đến Ngày 25; các trường thiếu nguồn vẫn được giữ rỗng và hiển thị trạng thái giới hạn. Nội dung có thể mở rộng bằng cách thêm object vào `data/days.json`.
+Bản build hiện hoàn chỉnh luồng tương tác của Ngày 1 theo sáu nguyên tắc bắt buộc: Input trước Output; dictation; shadowing; viết có phản hồi tức thì; test-enhanced learning; và lặp lại giãn cách. Dữ liệu nguồn đã được xử lý theo các batch đến Ngày 30; các trường thiếu nguồn vẫn được giữ rỗng và hiển thị trạng thái giới hạn. Nội dung có thể mở rộng bằng cách thêm object vào `data/days.json`.
 
 ## Nguồn
 
@@ -68,11 +68,12 @@ Waveform trực quan bằng Web Audio API và chấm phát âm thật qua API b�
 | Phạm vi | Kết quả kiểm kê | Mức xác nhận |
 |---|---|---|
 | Toàn khóa | 48 ngày, gồm 10 giai đoạn lộ trình | `[S]` từ `days-index.json` và giao diện Roadmap |
-| Nội dung đã xử lý | Ngày 1–25 qua các batch đã lưu trong `source-extracts/` và báo cáo tương ứng | `[S]` trong phạm vi artifact đã lưu |
-| `grammarContent` | Có dữ liệu ở 25 ngày | `[S]` từ kiểm kê `data/days.json` |
-| `srsCards` | Có dữ liệu ở 25 ngày | `[S]` từ kiểm kê `data/days.json` |
+| Nội dung đã xử lý | Ngày 1–30 qua các batch đã lưu trong `source-extracts/` và báo cáo tương ứng | `[S]` trong phạm vi artifact đã lưu |
+| `grammarContent` | Có dữ liệu ở 29 ngày | `[S]` từ kiểm kê `data/days.json` |
+| `srsCards` | Có dữ liệu ở 30 ngày | `[S]` từ kiểm kê `data/days.json` |
 | `listeningItems`, `writingPrompts`, `quiz` chính thức | Chưa có trường có nội dung trong bản kiểm kê hiện tại | `[S]`; không tự suy ra nội dung còn thiếu |
-| Ngày 26–48 | Giữ khung/trạng thái chờ nguồn theo từng object | `[S]`/`[U]` tùy trường nguồn |
+| Ngày 26–30 | Đã nạp lý thuyết/SRS; quiz, audio và phần viết chưa ánh xạ | `[S]`/`[U]`; xem `batch-6-report.md` |
+| Ngày 31–48 | Giữ khung/trạng thái chờ nguồn theo từng object | `[S]`/`[U]` tùy trường nguồn |
 
 ### Phân biệt QuizLab và dữ liệu bài thi
 

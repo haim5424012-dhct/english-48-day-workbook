@@ -1,6 +1,6 @@
 # 48 Ngày Lấy Gốc Tiếng Anh
 
-Website workbook tương tác dành cho học sinh Việt Nam muốn xây lại nền tảng tiếng Anh trong 48 ngày. Luồng tương tác đầy đủ đã được xây cho **Ngày 1 — Thể khẳng định và phủ định của động từ to be**; dữ liệu nguồn đã được xử lý theo các batch đến **Ngày 25**, còn Ngày 26–48 giữ khung hoặc trạng thái chờ nguồn.
+Website workbook tương tác dành cho học sinh Việt Nam muốn xây lại nền tảng tiếng Anh trong 48 ngày. Luồng tương tác đầy đủ đã được xây cho **Ngày 1 — Thể khẳng định và phủ định của động từ to be**; dữ liệu nguồn đã được xử lý theo các batch đến **Ngày 30**, còn Ngày 31–48 giữ khung hoặc trạng thái chờ nguồn.
 
 > **Định hướng thiết kế:** Editorial Lab Notebook — mực xanh đậm trên giấy xanh-trắng, Signal Coral cho hành động và trạng thái, sáu bước học tuần tự, đường perforation và dấu XONG.
 
@@ -91,14 +91,14 @@ Trang Ngày 1 gọi `markDayComplete(1)` sau khi đủ sáu bước, ghi schema 
 
 ## Hồ sơ cập nhật — 24/08/2026
 
-Website hiện có **48 trạm học và 10 giai đoạn** trên lộ trình. Nội dung nguồn đã được xử lý theo năm đợt đến **Ngày 1–25**; Ngày 26–48 giữ trạng thái khung hoặc `pending-source`, không tự điền nội dung khi thiếu nguồn. Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 24 ngày, `srsCards` có ở 25 ngày, còn `listeningItems`, `writingPrompts` và `quiz` chính thức chưa được ánh xạ vào `days.json` khi chưa có format nguồn tương thích.
+Website hiện có **48 trạm học và 10 giai đoạn** trên lộ trình. Nội dung nguồn đã được xử lý theo sáu đợt đến **Ngày 1–30**; Ngày 31–48 giữ trạng thái khung hoặc `pending-source`, không tự điền nội dung khi thiếu nguồn. Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 29 ngày, `srsCards` có ở 30 ngày, còn `listeningItems`, `writingPrompts` và `quiz` chính thức chưa được ánh xạ vào `days.json` khi chưa có format nguồn tương thích.
 
 | Hạng mục | Trạng thái hiện tại | Ghi chú truy vết |
 |---|---|---|
 | Lộ trình | Đã có 48 ngày, 10 giai đoạn | `data/days-index.json`, `Roadmap.tsx` |
-| Nội dung nguồn | Đã xử lý Ngày 1–25 theo các batch đã ghi nhận | `source-extracts/`, `batch-5-report.md` |
+| Nội dung nguồn | Đã xử lý Ngày 1–30 theo các batch đã ghi nhận | `source-extracts/`, `batch-6-report.md` |
 | Ngày 1 | Có luồng học sáu bước và nội dung tương tác | `data/days.json`, `Home.tsx` |
-| Ngày 2–25 | Có dữ liệu lý thuyết/SRS ở mức đã trích xuất; trường thiếu nguồn được giữ rỗng | Không dùng nội dung giả để lấp chỗ trống; xem `batch-5-report.md` |
+| Ngày 2–30 | Có dữ liệu lý thuyết/SRS ở mức đã trích xuất; trường thiếu nguồn được giữ rỗng | Không dùng nội dung giả để lấp chỗ trống; xem các báo cáo batch |
 | QuizLab | Có fixture minh họa cho MCQ, fill-blank, transformation, matching, short-answer | Không ghi fixture vào quiz chính thức |
 | Quiz chính thức | Chưa ánh xạ các dạng không tương thích vào `days.json` | Theo quyết định hoãn mở rộng schema |
 | Ôn tập SRS | Lưu cục bộ theo ngày, có interval/easeFactor/lastReviewedAt và lọc thẻ đến hạn | Khóa localStorage, chưa đồng bộ đám mây |

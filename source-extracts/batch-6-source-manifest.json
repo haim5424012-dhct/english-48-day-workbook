@@ -1,0 +1,62 @@
+{
+  "spreadsheetId": "1xP0Ltw0ydYaLFeJal4w8ma36HdvoYpbfCt8Jmt5PcsI",
+  "sheetTitle": "48 NGÀY LẤY  GỐC TIẾNG ANH TOÀN DIỆN",
+  "retrievedAt": "2026-08-24",
+  "days": [
+    {
+      "day": 26,
+      "title": "Câu điều kiện loại 1",
+      "rows": {"lesson": 78, "online": 79},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1CJjOurAqn2aDM7XKNosJUB7YrHoBLyXm/view?usp=drive_link",
+        "baiHoc": "https://drive.google.com/file/d/1BEOiqnAtzTGRp3pvHkt0M5DNaowmGIHO/view?usp=drive_link",
+        "fileDeOnline": "https://drive.google.com/file/d/1-L_pGqs495exoAyxsCI4ytH5CuUlnSDf/view?usp=drive_link",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/07/ap-bai-thi-online-cau-ieu-kien-loai-1.html"
+      }
+    },
+    {
+      "day": 27,
+      "title": "Câu điều kiện loại 2",
+      "rows": {"lesson": 81, "online": 82},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1UV527fRZktSUT1s0JBlQEhyCrrtkv69k/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/4A7cZuP4Nfk?si=IOjd9MXOhBsfSDNd",
+        "fileDeOnline": "https://drive.google.com/file/d/1sW3HVRcztpcCyQTEozyflelQKjse2N2_/view?usp=drivesdk",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/07/ap-bai-thi-online-cau-ieu-kien-loai-2.html"
+      }
+    },
+    {
+      "day": 28,
+      "title": "Câu điều kiện loại 3",
+      "rows": {"lesson": 84, "online": 85},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1OrwXqislIj56e6BKS6pKbBWDzV3UNh7j/view?usp=drive_link",
+        "baiHoc": "https://drive.google.com/file/d/1yCJQquqTs4qH7ob7z0Qx4WxXxS-Cja-6/view?usp=drive_link",
+        "fileDeOnline": "https://drive.google.com/file/d/1nRwAXWCVZ8kgahPPhAuGe2-UUdhdnieq/view?usp=drive_link",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/07/bai-thi-online-cau-ieu-kien-loai-3.html"
+      }
+    },
+    {
+      "day": 29,
+      "title": "Luyện nghe điền từ",
+      "rows": {"lesson": 87, "online": 88},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1yzLHiY0FGHR_eq5E1bPw-SbpjP_ToqGz/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/ab_Sq6nfnHY?si=LXQEgq21rXkpVbt1",
+        "fileDeOnline": "https://drive.google.com/file/d/1AhiE3aYmotGVWrx5R0J4lEBlAvQywpGN/view?usp=drivesdk",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/07/ap-bai-thi-online-luyen-nghe-ien-tu.html"
+      }
+    },
+    {
+      "day": 30,
+      "title": "Luyện nghe chép chính tả",
+      "rows": {"lesson": 90, "online": 91},
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1Uoy2jlOufDsZPJ3OnU61h6a-kKshDByH/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/OZXByAfxax8?si=6nNGny0IJAQL97Ga",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1p9GSYOHB4NneVYZU1FXro0XjEu4sPDFS",
+        "dapAn": "https://anhnguyenhi.blogspot.com/2024/08/bai-thi-online-luyen-nghe-chep-chinh-ta.html"
+      }
+    }
+  ]
+}

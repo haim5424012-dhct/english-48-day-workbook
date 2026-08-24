@@ -18,6 +18,10 @@ QA self-contained tối ưu: mở trực tiếp `ngay/13.html` chuyển về `in
 
 Ảnh self-contained-v4: generator đã nhúng 4 ảnh PNG vào `index.html` bằng data URI; các route shell không còn cần tải ảnh local. Kiểm thử file:// cho thấy 2 ảnh đang hiển thị có `complete=true`, `naturalWidth=1920`, `src` bắt đầu bằng `data:image/png;base64`, và số ảnh hỏng là 0. Cần kiểm tra lại ZIP sau khi đóng gói.
 
+## QA Batch 6 — 24/08/2026
+
+Đã chạy lại `scripts/prepare-comet-preview.mjs` sau khi nạp Ngày 26–30. Generator tạo 52 HTML route shell và `index.html` trung tâm tự chứa JavaScript/CSS cùng bốn ảnh PNG bằng data URI. Các route hợp lệ `ngay/26.html`, `ngay/27.html`, `ngay/28.html`, `ngay/29.html` và `ngay/30.html` hiển thị đúng tiêu đề và nội dung nguồn tương ứng trong preview sandbox. URL dạng `/ngay/26` không có hậu tố `.html` rơi vào 404 vì không nằm trong khai báo route; đây không phải định dạng route của gói Comet. Không tải hoặc nhúng audio/video gốc.
+
 
 ## QA Batch 5 — file:// preview
 

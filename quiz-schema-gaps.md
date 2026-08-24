@@ -45,3 +45,16 @@ Nguồn Batch 4 được lưu trong `source-extracts/batch-4/ngay-16.md` đến 
 | 25 | Không có dạng ngoài MCQ trong đề online | — | 20 câu 2 lựa chọn |
 
 Đối với Ngày 21, PDF ĐÁP ÁN Drive đã tải được nhưng lớp text chỉ còn watermark/metadata, nên không dùng để suy đoán đáp án. Các bài viết số, số điện thoại, chữ cái và tên cần audio gốc hoặc đáp án xác minh trước khi đưa vào dữ liệu tương tác. Batch 5 không chuyển các câu trên thành MCQ 3 lựa chọn.
+
+
+## Batch 6 — Ngày 26–30
+
+| Ngày | Dạng không phải MCQ / cần schema mới | Số câu hoặc mục | MCQ và số lựa chọn gốc |
+|---|---|---:|---|
+| 26 | Chia dạng thức động từ trong ngoặc | 10 câu | 10 câu, mỗi câu 2 lựa chọn |
+| 27 | Chia dạng thức động từ trong ngoặc | 10 câu | 10 câu, mỗi câu 2 lựa chọn |
+| 28 | Chia dạng thức câu điều kiện loại 3 của động từ trong ngoặc | 5 câu | 15 câu, mỗi câu 2 lựa chọn |
+| 29 | Nghe điền tên, số điện thoại, lớp học, hoạt động, vị trí và hội thoại tổng hợp | 24 chỗ trống | —; toàn bộ phụ thuộc mp3.1–mp3.6 |
+| 30 | Nghe điền từ/chép chính tả theo các đoạn mp3 | 19 chỗ trống | —; toàn bộ phụ thuộc mp3.1–mp3.6 |
+
+Batch 6 tiếp tục cho thấy hai nhóm cần schema riêng: **điền/chia động từ không có options** và **nghe điền thông tin/chép chính tả phụ thuộc audio**. Các câu MCQ 2 lựa chọn của Ngày 26–28 được thống kê nhưng chưa chuyển vào `quiz` chính thức; audio/video gốc của Ngày 29–30 không được tải hoặc nhúng khi chưa xác minh quyền sử dụng.

@@ -207,3 +207,15 @@
 - [x] Đồng bộ root/client days.json, rebuild days-index và cập nhật báo cáo/hồ sơ.
 - [x] Chạy test-days, `pnpm check`, `pnpm build`, QA preview và tạo checkpoint.
 - [ ] Chờ xác nhận người dùng nếu có nguồn thiếu hoặc cần mở rộng schema quiz.
+
+
+## Nạp nội dung thật Ngày 26–30 — Batch 6
+
+- [ ] Kiểm kê nguồn Sheet và bốn loại nguồn cho Ngày 26–30.
+- [ ] Tải/trích xuất các artifact truy cập được, lưu source-extracts Batch 6.
+- [ ] Ghi rõ nguồn bị chặn, thiếu transcript/audio hoặc không thể xác minh.
+- [ ] Cập nhật `quiz-schema-gaps.md` cho các dạng bài mới nếu có.
+- [ ] Nạp dữ liệu nguồn bằng `merge_source_fields`; không bịa và không ép quiz sai schema.
+- [ ] Đồng bộ root/client days.json, rebuild days-index và cập nhật báo cáo/hồ sơ.
+- [ ] Chạy test-days, `pnpm check`, `pnpm build`, QA preview và tạo checkpoint.
+- [ ] Chờ xác nhận người dùng nếu có nguồn thiếu hoặc cần mở rộng schema quiz.
