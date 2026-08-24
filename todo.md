@@ -293,3 +293,20 @@
 - [ ] Bổ sung kiểm thử bất biến dữ liệu và kiểm thử các luồng chính.
 - [ ] Chạy validator, `pnpm check`, `pnpm build` và QA web/Comet.
 - [ ] Cập nhật hồ sơ, báo cáo giới hạn và lưu checkpoint bàn giao.
+
+
+## Đợt hoàn thiện theo pasted_content_2.txt
+
+- [x] Đọc và đối chiếu toàn bộ file nguồn code/dữ liệu/báo cáo theo mục 1.
+- [x] Ghi nhận hiện trạng thật: field riêng từng ngày, quiz IDs/types/explanations, pronunciationFocus, curriculum links và UI render.
+- [x] Thiết kế `curriculum-map.json` với prerequisites, introduces, reinforces, preparesFor, retrievalFromDays, canDoOutcome.
+- [x] Bổ sung/kiểm định metadata riêng từng ngày; loại bỏ giá trị generic và estimatedMinutes mặc định.
+- [x] Rà 48 ngày, bảo đảm nội dung riêng và gắn `contentOrigin`/`sourceNote` đúng.
+- [x] Làm lại quiz theo mục tiêu; đủ 5 dạng, ID duy nhất, đáp án cân bằng, distractor hợp lý, explanation cụ thể.
+- [x] Hiển thị pronunciationFocus, curriculum bridge, writing rules và rubric trong UI.
+- [x] Kiểm tra listening TTS, shadowing fallback, writing rules/feedback.
+- [x] Kiểm tra completion evidence, route lock và migration localStorage.
+- [x] Mở rộng validator/unit tests/curriculum QA.
+- [x] Chạy test content, logic, check, build và QA trực quan.
+- [x] Cập nhật README, scientific-audit, finalization-report.
+- [x] Tạo ZIP Comet/source và báo cáo giới hạn còn lại.

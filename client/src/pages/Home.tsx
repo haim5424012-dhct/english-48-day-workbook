@@ -55,6 +55,16 @@ type DayContent = {
   masteryCriteria?: string;
   estimatedMinutes?: number;
   contentOrigin?: string;
+  pronunciationFocus?: string;
+  writingRules?: string[];
+  writingKeywords?: string[];
+  introduces?: string[];
+  reinforces?: string[];
+  preparesFor?: string[];
+  retrievalFromDays?: number[];
+  canDoOutcome?: string;
+  projectPhase?: string;
+  rubric?: string[];
 };
 
 type ProgressState = {
@@ -126,6 +136,7 @@ export default function Home() {
   const [bestAudioUrls, setBestAudioUrls] = useState<(string | null)[]>(() => Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => null));
   const [writingAnswers, setWritingAnswers] = useState<Record<number, string>>({});
   const [writingFeedback, setWritingFeedback] = useState<Record<number, "ready" | "good" | "revise"> >({});
+  const [writingMessages, setWritingMessages] = useState<Record<number, string>>({});
   const [notice, setNotice] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const recognitionRef = useRef<any>(null);
@@ -286,6 +297,13 @@ export default function Home() {
     setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? false : value));
     setShadowIndex(nextIndex);
   }
+  function confirmShadowFallback() {
+    setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? true : value));
+    setShadowFeedback("correct");
+    setShadowTranscript("Tự xác nhận đã luyện nghe mẫu và nói lại.");
+    announce("Đã lưu fallback tự xác nhận cho câu này; đây không phải điểm chấm phát âm.");
+  }
+
   function startShadowing() {
     const Recognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!Recognition) {
@@ -318,9 +336,17 @@ export default function Home() {
   }
 
   function checkWriting(index: number) {
-    const answer = normalize(writingAnswers[index] ?? "");
+    const raw = writingAnswers[index] ?? "";
+    const answer = normalize(raw);
     const wordCount = answer ? answer.split(" ").filter(Boolean).length : 0;
-    setWritingFeedback((current) => ({ ...current, [index]: wordCount >= 4 && answer.length > 12 ? "good" : "revise" }));
+    const keywords = day.writingKeywords ?? [];
+    const hasKeyword = keywords.length === 0 || keywords.some((keyword) => answer.includes(normalize(keyword)));
+    const hasVerb = /\b(am|is|are|do|does|did|was|were|have|has|will|can|should|must|enjoy|like|play|use|work|thank|sorry|would)\b/.test(answer);
+    const hasPunctuation = /[.!?]$/.test(raw.trim());
+    const good = wordCount >= 4 && hasKeyword && hasVerb && hasPunctuation;
+    const message = good ? "Đủ ý: có cấu trúc/từ khóa của bài, động từ và dấu câu." : !hasKeyword ? `Thiếu từ khóa của bài: ${(keywords.slice(0, 3).join(", ") || "từ khóa mục tiêu")}.` : !hasVerb ? "Thiếu động từ hoặc trợ động từ; hãy kiểm tra khung câu." : !hasPunctuation ? "Thêm dấu chấm, chấm hỏi hoặc dấu chấm than ở cuối câu." : "Câu còn ngắn hoặc thiếu ý; viết ít nhất bốn từ theo đúng prompt.";
+    setWritingFeedback((current) => ({ ...current, [index]: good ? "good" : "revise" }));
+    setWritingMessages((current) => ({ ...current, [index]: message }));
   }
 
   function rateCard(remembered: boolean) {
@@ -342,7 +368,7 @@ export default function Home() {
           <div className="warmup-intro">
             <div>
               <h3>Nghe một đoạn ngắn. Chưa cần hiểu hết.</h3>
-              <p>Chạm phát âm, nghe nhịp câu và đoán xem <em>am / is / are</em> đang đứng ở đâu.</p>
+              <p>Chạm phát âm TTS, nghe nhịp câu và tập trung vào điểm phát âm: <em>{day.pronunciationFocus}</em></p>
             </div>
             <div className="warmup-stamp">LISTEN<br /><span>FIRST</span></div>
           </div>
@@ -366,7 +392,7 @@ export default function Home() {
       return (
         <div className="step-content">
           <div className="section-kicker">02 / BUILD THE RULE</div>
-          <div className="content-heading-row"><div><h3>{day.title}</h3><p>Đọc phần lý thuyết được trích từ tài liệu nguồn.</p></div><span className="page-number">p. 01</span></div>
+          <div className="content-heading-row"><div><h3>{day.title}</h3><p>{day.contentOrigin === "source-extracted" ? "Đọc phần lý thuyết đã trích từ tài liệu nguồn." : "Đọc phần lý thuyết và thực hành do workbook biên soạn, có ghi rõ nguồn."}</p></div><span className="page-number">p. 01</span></div>
           {day.grammarContent ? <div className="grammar-panel" dangerouslySetInnerHTML={{ __html: day.grammarContent }} /> : <div className="source-gap"><h3>Chưa trích xuất được phần lý thuyết đầy đủ từ nguồn Ngày {day.day}.</h3><p>Xem ghi chú nguồn bên dưới để biết chi tiết về phần tài liệu còn thiếu.</p></div>}
           
           <CompleteButton index={1} done={completed[1]} onComplete={completeStep} />
@@ -412,7 +438,7 @@ export default function Home() {
               {shadowFeedback === "correct" && <><Check size={17} /> Câu bạn nói khớp với câu mẫu.</>}
               {shadowFeedback === "close" && <><Waves size={17} /> Chưa khớp hoàn toàn. Nghe lại câu mẫu rồi thử lại.</>}
               {shadowFeedback === "unsupported" && "Trình duyệt chưa hỗ trợ SpeechRecognition. Hãy dùng Chrome/Edge và bật quyền micro."}
-              {shadowFeedback === "error" && "Chưa nhận được câu nói. Kiểm tra micro rồi thử lại."}
+              {shadowFeedback === "error" && "Chưa nhận được câu nói. Kiểm tra micro rồi thử lại."}{(shadowFeedback === "unsupported" || shadowFeedback === "error") && <button className="text-action" type="button" onClick={confirmShadowFallback}>Tự xác nhận đã luyện câu này</button>}
               {audioRecording === "denied" && "Micro bị từ chối. Hãy cho phép quyền micro trong cài đặt trình duyệt rồi thử lại."}
               {audioRecording === "unsupported" && "Trình duyệt chưa hỗ trợ MediaRecorder hoặc không cấp được micro."}
               {audioRecording === "error" && "Ghi âm chưa thành công. Kiểm tra micro rồi thử lại."}
@@ -431,10 +457,10 @@ export default function Home() {
       return (
         <div className="step-content">
           <div className="section-kicker">05 / MAKE IT YOURS</div>
-          <div className="content-heading-row"><div><h3>Viết câu mới, không chép lại.</h3><p>Phản hồi nhanh dựa trên độ dài tối thiểu và số từ; hãy đối chiếu thêm với mục tiêu, lỗi thường gặp và mẫu nguồn của ngày này.</p></div><span className="page-number">2 prompts</span></div>
+          <div className="content-heading-row"><div><h3>Viết câu mới, không chép lại.</h3><p>Phản hồi kiểm tra cấu trúc và từ khóa của riêng Ngày {String(day.day).padStart(2, "0")}; hãy đối chiếu mục tiêu, lỗi thường gặp và mẫu nguồn.</p><div className="writing-rules"><span className="tiny-label">RULE CARD / {String(day.day).padStart(2, "0")}</span>{(day.writingRules ?? []).map((rule) => <span key={rule}>{rule}</span>)}</div></div><span className="page-number">2 prompts</span></div>
           <div className="writing-list">
             {(day.writingPrompts ?? []).map((prompt, index) => (
-              <div className="writing-item" key={prompt}><div className="writing-prompt"><span className="item-index">0{index + 1}</span><span>{prompt}</span></div><textarea aria-label={prompt} value={writingAnswers[index] ?? ""} onChange={(event) => { setWritingAnswers((current) => ({ ...current, [index]: event.target.value })); setWritingFeedback((current) => ({ ...current, [index]: "ready" })); }} placeholder="Write your sentence here…" rows={2} /><div className="writing-footer"><span className={`writing-hint hint-${writingFeedback[index] ?? "ready"}`}>{writingFeedback[index] === "good" ? <><Check size={15} /> Câu đủ ý — tốt lắm.</> : writingFeedback[index] === "revise" ? "Hãy viết lại thành một câu rõ ý, tối thiểu bốn từ." : "Phản hồi sẽ xuất hiện ngay tại đây."}</span><button className="text-action" onClick={() => checkWriting(index)}>Kiểm tra câu</button></div></div>
+              <div className="writing-item" key={prompt}><div className="writing-prompt"><span className="item-index">0{index + 1}</span><span>{prompt}</span></div><textarea aria-label={prompt} value={writingAnswers[index] ?? ""} onChange={(event) => { setWritingAnswers((current) => ({ ...current, [index]: event.target.value })); setWritingFeedback((current) => ({ ...current, [index]: "ready" })); setWritingMessages((current) => ({ ...current, [index]: "" })); }} placeholder="Write your sentence here…" rows={2} /><div className="writing-footer"><span className={`writing-hint hint-${writingFeedback[index] ?? "ready"}`}>{writingFeedback[index] === "good" ? <><Check size={15} /> {writingMessages[index] || "Câu đạt yêu cầu."}</> : writingFeedback[index] === "revise" ? (writingMessages[index] || "Kiểm tra cấu trúc và từ khóa của bài.") : "Phản hồi sẽ xuất hiện ngay tại đây."}</span><button className="text-action" onClick={() => checkWriting(index)}>Kiểm tra câu</button></div></div>
             ))}
           </div>
           <CompleteButton index={4} done={completed[4]} onComplete={completeStep} />
@@ -482,7 +508,7 @@ export default function Home() {
 
         <section className="study-shell" id="lesson">
           <aside className="step-rail" aria-label={`Các bước trong Ngày ${day.day}`}><div className="rail-title"><span className="tiny-label">TODAY'S SEQUENCE</span><strong>06 bước<br />một mạch.</strong></div><div className="rail-steps">{stepLabels.map((label, index) => { const Icon = stepIcons[index]; const locked = index > 0 && !completed[index - 1]; return <button className={`rail-step ${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""} ${locked ? "locked" : ""}`} key={label} onClick={() => activateStep(index)} aria-current={activeStep === index ? "step" : undefined}><span className="rail-step-number">{completed[index] ? <Check size={14} /> : locked ? <Lock size={13} /> : `0${index + 1}`}</span><span className="rail-step-copy"><strong>{label}</strong><small>{stepSkills[index]}</small></span>{completed[index] && <span className="done-stamp">XONG</span>}</button>; })}</div><div className="rail-note"><Pencil size={16} /><span>Input trước.<br />Output sau.</span></div></aside>
-          <div className="study-canvas" id="lesson-canvas"><div className="canvas-header"><div><div className="eyebrow"><span className="eyebrow-dot" /> BÀI HỌC TƯƠNG TÁC</div><h2>{day.title}</h2><p>Hôm nay bạn không học thuộc một công thức. Bạn sẽ nghe nó, nhìn nó, nói nó và tự viết một câu của mình.</p></div><div className="canvas-meta"><span className="day-label">DAY<br /><strong>{String(day.day).padStart(2, "0")}</strong></span><span className="source-code">CORE<br />GRAMMAR</span></div></div><div className="perforation" /><div className="canvas-margin-note"><span className="margin-note-index">MARGIN NOTE / {String(day.day).padStart(2, "0")}</span><strong>{day.title}</strong><span className="margin-note-rule" /><span className="margin-note-status">SOURCE-CHECKED LESSON</span></div><section className="lesson-brief" aria-label="Hồ sơ bài học"><div><span className="tiny-label">OBJECTIVES / {day.estimatedMinutes ?? 25} PHÚT</span><ul>{(day.learningObjectives ?? []).map((objective) => <li key={objective}>{objective}</li>)}</ul></div><div><span className="tiny-label">BRIDGE FROM DAY {String(Math.max(day.day - 1, 1)).padStart(2, "0")}</span><p>{day.bridgeFromPreviousDay}</p><p><strong>Cần có:</strong> {day.prerequisites}</p></div><div><span className="tiny-label">MASTERY NOTE</span><p>{day.masteryCriteria}</p><p><strong>Lỗi cần tránh:</strong> {(day.commonMistakes ?? []).join(" · ")}</p></div></section><div className="mobile-step-strip">{stepLabels.map((label, index) => <button className={`${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""}`} key={label} onClick={() => activateStep(index)}>{completed[index] ? <Check size={14} /> : `0${index + 1}`}<span>{label}</span></button>)}</div><div className="step-panel">{renderStepContent()}</div><div className="source-strip"><span className="source-dot" /><span><strong>{day.contentOrigin === "workbook-authored" ? "WORKBOOK-AUTHORED" : day.contentOrigin === "mixed" ? "MIXED SOURCE" : "SOURCE-EXTRACTED"}</strong> · {day.sourceNote}</span><a href={daysData.sourceUrl} target="_blank" rel="noreferrer">Mở nguồn gốc <ArrowRight size={14} /></a></div></div>
+          <div className="study-canvas" id="lesson-canvas"><div className="canvas-header"><div><div className="eyebrow"><span className="eyebrow-dot" /> BÀI HỌC TƯƠNG TÁC</div><h2>{day.title}</h2><p>Hôm nay bạn không học thuộc một công thức. Bạn sẽ nghe nó, nhìn nó, nói nó và tự viết một câu của mình.</p></div><div className="canvas-meta"><span className="day-label">DAY<br /><strong>{String(day.day).padStart(2, "0")}</strong></span><span className="source-code">{day.projectPhase ?? "CORE"}<br />GRAMMAR</span></div></div><div className="perforation" /><div className="canvas-margin-note"><span className="margin-note-index">MARGIN NOTE / {String(day.day).padStart(2, "0")}</span><strong>{day.title}</strong><span className="margin-note-rule" /><span className="margin-note-status">SOURCE-CHECKED LESSON</span></div><section className="lesson-brief" aria-label="Hồ sơ bài học"><div><span className="tiny-label">OBJECTIVES / {day.estimatedMinutes ?? 25} PHÚT</span><ul>{(day.learningObjectives ?? []).map((objective) => <li key={objective}>{objective}</li>)}</ul></div><div><span className="tiny-label">BRIDGE FROM DAY {String(Math.max(day.day - 1, 1)).padStart(2, "0")}</span><p>{day.bridgeFromPreviousDay}</p><p><strong>Cần có:</strong> {day.prerequisites}</p></div><div><span className="tiny-label">MASTERY NOTE</span><p>{day.masteryCriteria}</p><p><strong>Phát âm:</strong> {day.pronunciationFocus}</p><p><strong>Có thể làm:</strong> {day.canDoOutcome}</p>{day.rubric?.length ? <div className="lesson-rubric"><strong>RUBRIC / TỰ CHẤM</strong>{day.rubric.map((criterion) => <span key={criterion}>□ {criterion}</span>)}</div> : null}<p><strong>Lỗi cần tránh:</strong> {(day.commonMistakes ?? []).join(" · ")}</p></div></section><div className="mobile-step-strip">{stepLabels.map((label, index) => <button className={`${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""}`} key={label} onClick={() => activateStep(index)}>{completed[index] ? <Check size={14} /> : `0${index + 1}`}<span>{label}</span></button>)}</div><div className="step-panel">{renderStepContent()}</div><div className="source-strip"><span className="source-dot" /><span><strong>{day.contentOrigin === "workbook-authored" ? "WORKBOOK-AUTHORED" : day.contentOrigin === "mixed" ? "MIXED SOURCE" : "SOURCE-EXTRACTED"}</strong> · {day.sourceNote}</span><a href={daysData.sourceUrl} target="_blank" rel="noreferrer">Mở nguồn gốc <ArrowRight size={14} /></a></div></div>
         </section>
 
         <section className="lesson-context" aria-label="Ngữ cảnh workbook"><div><span className="section-kicker">INPUT → OUTPUT → RETURN</span><strong>Học theo đúng nhịp của ngày {String(day.day).padStart(2, "0")}.</strong></div><div className="context-rule" /><a className="secondary-action" href="/lo-trinh">Mở bản đồ 48 ngày <ArrowRight size={16} /></a><a className="secondary-action" href="/lo-trinh#principles">Xem phương pháp <CircleHelp size={16} /></a></section>

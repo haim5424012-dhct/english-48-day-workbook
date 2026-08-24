@@ -93,20 +93,20 @@ Trang học gọi `markDayComplete(day)` chỉ sau khi validator xác nhận đ�
 
 ## Hồ sơ cập nhật — 24/08/2026
 
-Website hiện có **48 trạm học và 10 giai đoạn** trên lộ trình. Nội dung nguồn đã được xử lý theo mười đợt đến **Ngày 1–48**; không có Ngày 49–50 trong cấu trúc workbook. Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 46 ngày, `srsCards` có ở 48 ngày, còn `listeningItems`, `writingPrompts` và `quiz` chính thức chưa được ánh xạ vào `days.json` khi chưa có format nguồn tương thích.
+Website hiện có **48 trạm học và 10 giai đoạn** trên lộ trình. Nội dung nguồn đã được xử lý theo mười đợt đến **Ngày 1–48**; không có Ngày 49–50 trong cấu trúc workbook. Theo kiểm kê dữ liệu hiện hành, cả 48 ngày có `grammarContent`, `listeningItems`, `writingPrompts`, `quiz` và `srsCards` hợp lệ theo schema workbook; quiz có 240 câu, mỗi ngày dùng đủ năm dạng. Phần authored vẫn được gắn `contentOrigin`/`sourceNote` và không được gọi là nguyên văn nguồn giáo viên.
 
 | Hạng mục | Trạng thái hiện tại | Ghi chú truy vết |
 |---|---|---|
 | Lộ trình | Đã có 48 ngày, 10 giai đoạn | `data/days-index.json`, `Roadmap.tsx` |
 | Nội dung nguồn | Đã xử lý Ngày 1–48 theo các batch đã ghi nhận | `source-extracts/`, `batch-10-report.md` |
 | Ngày 1 | Có luồng học sáu bước và nội dung tương tác | `data/days.json`, `Home.tsx` |
-| Ngày 2–48 | Có metadata đầy đủ, sáu khối hợp lệ; grammar/SRS theo mức nguồn hoặc authored được gắn nhãn | Trường thiếu nguồn giữ rỗng và hiển thị `SOURCE STATUS`; xem báo cáo batch |
+| Ngày 2–48 | Có metadata riêng, sáu khối hợp lệ, pronunciationFocus, writing rules và curriculum links | Phần authored được gắn nhãn; sourceNote vẫn giữ giới hạn bằng chứng |
 | QuizLab | Có fixture minh họa cho MCQ, fill-blank, transformation, matching, short-answer | Không ghi fixture vào quiz chính thức |
-| Quiz chính thức | Chưa ánh xạ các dạng không tương thích vào `days.json` | Theo quyết định hoãn mở rộng schema |
+| Quiz chính thức | 240 câu, 48 MCQ + 48 fill-blank + 48 transformation + 48 matching + 48 short-answer | Bộ authored theo mục tiêu workbook; dữ liệu nguồn không tương thích vẫn không bị nhận là nguyên văn |
 | Ôn tập SRS | Lưu cục bộ theo ngày, có interval/easeFactor/lastReviewedAt và lọc thẻ đến hạn | Khóa localStorage, chưa đồng bộ đám mây |
 | Shadowing | SpeechSynthesis, SpeechRecognition fallback và MediaRecorder ghi âm tạm | Cần quyền microphone để ghi thật |
 | Gói Comet | `index.html` trung tâm tự chứa JS/CSS/ảnh bằng data URI; route phụ chuyển về index | Có `README-COMET.md`, `start-comet-preview.bat` |
-| Kiểm thử mã nguồn | `test:content`, `test:logic`, `pnpm check` và `pnpm build` đạt | Có 3 unit tests completion; build còn cảnh báo chunk lớn/texture runtime, không phải lỗi biên dịch |
+| Kiểm thử mã nguồn | `test:content`, `test:logic`, `pnpm check` và `pnpm build` đạt | Validator kiểm tra 240 ID, 5 dạng quiz/ngày, map đồng bộ và pattern generic; build còn cảnh báo chunk lớn/texture runtime |
 
 ### Quy tắc xác nhận nội dung
 

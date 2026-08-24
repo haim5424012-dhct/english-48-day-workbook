@@ -962,3 +962,14 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
 .day-ledger-row::before{content:"";position:absolute;left:-1rem;top:0;bottom:0;border-left:1px dotted rgba(30,47,73,.16);}
 .day-ledger-number{font-family:"Space Grotesk",sans-serif;font-weight:800;}
 @media (max-width:800px){.gate-header-note{display:none}.gate-route-strip{flex-wrap:wrap}.gate-route-strip i{width:35px}.gate-steps{grid-template-columns:repeat(3,1fr);row-gap:.8rem}.dashboard-day-section::after{display:none}.day-node::after{display:none}}
+
+/* STYLE REMINDER — Writing rules are a visible paper checklist: specific, calm, and actionable. */
+.writing-rules{display:grid;gap:5px;margin-top:14px;padding:10px 12px;border-left:3px solid var(--coral);background:linear-gradient(90deg,#fffdf0,#fff);font-size:12px;color:var(--ink-soft);}
+.writing-rules .tiny-label{color:var(--coral-deep);margin-bottom:2px;}
+.writing-rules span:not(.tiny-label)::before{content:"— ";color:var(--coral);}
+.shadow-result .text-action{margin-left:12px;}
+
+/* STYLE REMINDER — The final presentation rubric is a tactile self-check, not a performance claim. */
+.lesson-rubric{display:grid;gap:5px;margin:12px 0;padding:9px 10px;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);font-size:11px;color:var(--ink-soft);}
+.lesson-rubric strong{font:700 9px "Space Grotesk",sans-serif;letter-spacing:.11em;color:var(--coral-deep);}
+.lesson-rubric span{line-height:1.35;}

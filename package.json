@@ -11,7 +11,8 @@
     "check": "tsc --noEmit",
     "test:content": "node scripts/test-days.mjs",
     "test:logic": "vitest run client/src/lib/lessonValidation.test.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "pnpm test:content && pnpm test:logic"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

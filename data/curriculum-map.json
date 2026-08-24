@@ -1,0 +1,1061 @@
+{
+  "version": "1.0-curriculum-map",
+  "title": "Curriculum map — 48 Ngày Lấy Gốc Tiếng Anh",
+  "note": "Bản đồ sư phạm của workbook; không tuyên bố là mục lục chính thức của tài liệu giáo viên.",
+  "days": [
+    {
+      "day": 1,
+      "title": "Thể khẳng định và phủ định của động từ to be",
+      "prerequisites": [
+        "Ngày 01: am/is/are và câu đơn."
+      ],
+      "introduces": [
+        "to be: khẳng định và phủ định"
+      ],
+      "reinforces": [
+        "Câu đơn và đại từ nhân xưng"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 02"
+      ],
+      "retrievalFromDays": [
+        1
+      ],
+      "canDoOutcome": "Người học có thể dùng to be: khẳng định và phủ định trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 2,
+      "title": "Thể nghi vấn của động từ to be",
+      "prerequisites": [
+        "Ngày 01: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "câu hỏi với to be"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 01"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 03"
+      ],
+      "retrievalFromDays": [
+        1
+      ],
+      "canDoOutcome": "Người học có thể dùng câu hỏi với to be trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 3,
+      "title": "Câu hỏi Who và What với động từ to be",
+      "prerequisites": [
+        "Ngày 02: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "Who và What với to be"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 02"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 04"
+      ],
+      "retrievalFromDays": [
+        1,
+        2
+      ],
+      "canDoOutcome": "Người học có thể dùng Who và What với to be trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 4,
+      "title": "Câu hỏi Where và When với động từ to be",
+      "prerequisites": [
+        "Ngày 03: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "Where và When với to be"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 03"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 05"
+      ],
+      "retrievalFromDays": [
+        1,
+        3
+      ],
+      "canDoOutcome": "Người học có thể dùng Where và When với to be trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 5,
+      "title": "Động từ thường ở hiện tại",
+      "prerequisites": [
+        "Ngày 04: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "động từ thường ở hiện tại"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 04"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 06"
+      ],
+      "retrievalFromDays": [
+        2,
+        4
+      ],
+      "canDoOutcome": "Người học có thể dùng động từ thường ở hiện tại trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 6,
+      "title": "Thể phủ định của động từ thường ở hiện tại",
+      "prerequisites": [
+        "Ngày 05: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "phủ định với do và does"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 05"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 07"
+      ],
+      "retrievalFromDays": [
+        3,
+        5
+      ],
+      "canDoOutcome": "Người học có thể dùng phủ định với do và does trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 7,
+      "title": "Thể nghi vấn của động từ thường ở hiện tại",
+      "prerequisites": [
+        "Ngày 06: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghi vấn với do và does"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 06"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 08"
+      ],
+      "retrievalFromDays": [
+        4,
+        6
+      ],
+      "canDoOutcome": "Người học có thể dùng nghi vấn với do và does trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 8,
+      "title": "Thì hiện tại đơn",
+      "prerequisites": [
+        "Ngày 07: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "hiện tại đơn"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 07"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 09"
+      ],
+      "retrievalFromDays": [
+        5,
+        7
+      ],
+      "canDoOutcome": "Người học có thể dùng hiện tại đơn trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 9,
+      "title": "Từ loại",
+      "prerequisites": [
+        "Ngày 08: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "từ loại: noun, adjective, adverb"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 08"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 10"
+      ],
+      "retrievalFromDays": [
+        6,
+        8
+      ],
+      "canDoOutcome": "Người học có thể dùng từ loại: noun, adjective, adverb trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 10,
+      "title": "Thì hiện tại tiếp diễn",
+      "prerequisites": [
+        "Ngày 09: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "hiện tại tiếp diễn"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 09"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 11"
+      ],
+      "retrievalFromDays": [
+        7,
+        9
+      ],
+      "canDoOutcome": "Người học có thể dùng hiện tại tiếp diễn trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 11,
+      "title": "Phân biệt thì hiện tại đơn và hiện tại tiếp diễn",
+      "prerequisites": [
+        "Ngày 10: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "so sánh hiện tại đơn và hiện tại tiếp diễn"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 10"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 12"
+      ],
+      "retrievalFromDays": [
+        8,
+        10
+      ],
+      "canDoOutcome": "Người học có thể dùng so sánh hiện tại đơn và hiện tại tiếp diễn trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 12,
+      "title": "Thì quá khứ đơn thể khẳng định",
+      "prerequisites": [
+        "Ngày 11: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "quá khứ đơn khẳng định"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 11"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 13"
+      ],
+      "retrievalFromDays": [
+        9,
+        11
+      ],
+      "canDoOutcome": "Người học có thể dùng quá khứ đơn khẳng định trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 13,
+      "title": "Thì quá khứ đơn thể phủ định và nghi vấn",
+      "prerequisites": [
+        "Ngày 12: V2 trong câu khẳng định quá khứ đơn."
+      ],
+      "introduces": [
+        "quá khứ đơn phủ định và nghi vấn"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 12"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 14"
+      ],
+      "retrievalFromDays": [
+        10,
+        12
+      ],
+      "canDoOutcome": "Người học có thể dùng quá khứ đơn phủ định và nghi vấn trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 14,
+      "title": "Thì quá khứ tiếp diễn",
+      "prerequisites": [
+        "Ngày 13: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "quá khứ tiếp diễn"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 13"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 15"
+      ],
+      "retrievalFromDays": [
+        11,
+        13
+      ],
+      "canDoOutcome": "Người học có thể dùng quá khứ tiếp diễn trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 15,
+      "title": "Thì hiện tại hoàn thành",
+      "prerequisites": [
+        "Ngày 12–14: mốc quá khứ, V2 và was/were + V-ing."
+      ],
+      "introduces": [
+        "hiện tại hoàn thành và dấu hiệu"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 14"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 16"
+      ],
+      "retrievalFromDays": [
+        12,
+        14
+      ],
+      "canDoOutcome": "Người học có thể dùng hiện tại hoàn thành và dấu hiệu trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 16,
+      "title": "Thì tương lai đơn",
+      "prerequisites": [
+        "Ngày 15: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "tương lai đơn với will"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 15"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 17"
+      ],
+      "retrievalFromDays": [
+        13,
+        15
+      ],
+      "canDoOutcome": "Người học có thể dùng tương lai đơn với will trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 17,
+      "title": "Thì tương lai hoàn thành",
+      "prerequisites": [
+        "Ngày 16: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "tương lai hoàn thành"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 16"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 18"
+      ],
+      "retrievalFromDays": [
+        14,
+        16
+      ],
+      "canDoOutcome": "Người học có thể dùng tương lai hoàn thành trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 18,
+      "title": "Học ngữ âm với giáo viên nước ngoài",
+      "prerequisites": [
+        "Ngày 17: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "phát âm âm cuối"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 17"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 19"
+      ],
+      "retrievalFromDays": [
+        15,
+        17
+      ],
+      "canDoOutcome": "Người học có thể dùng phát âm âm cuối trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 19,
+      "title": "Tìm hiểu về trọng âm trong tiếng Anh",
+      "prerequisites": [
+        "Ngày 18: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "trọng âm từ"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 18"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 20"
+      ],
+      "retrievalFromDays": [
+        16,
+        18
+      ],
+      "canDoOutcome": "Người học có thể dùng trọng âm từ trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 20,
+      "title": "Các câu hỏi với từ để hỏi khác trong tiếng Anh",
+      "prerequisites": [
+        "Ngày 19: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "câu hỏi WH"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 19"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 21"
+      ],
+      "retrievalFromDays": [
+        17,
+        19
+      ],
+      "canDoOutcome": "Người học có thể dùng câu hỏi WH trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 21,
+      "title": "Luyện nghe số và tên",
+      "prerequisites": [
+        "Ngày 20: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe số và tên"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 20"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 22"
+      ],
+      "retrievalFromDays": [
+        18,
+        20
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe số và tên trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 22,
+      "title": "Động từ khuyết thiếu",
+      "prerequisites": [
+        "Ngày 21: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "động từ khuyết thiếu"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 21"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 23"
+      ],
+      "retrievalFromDays": [
+        19,
+        21
+      ],
+      "canDoOutcome": "Người học có thể dùng động từ khuyết thiếu trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 23,
+      "title": "Liên từ and, but, or, so và because",
+      "prerequisites": [
+        "Ngày 22: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "and, but, or, so, because"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 22"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 24"
+      ],
+      "retrievalFromDays": [
+        20,
+        22
+      ],
+      "canDoOutcome": "Người học có thể dùng and, but, or, so, because trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 24,
+      "title": "Liên từ chỉ thời gian",
+      "prerequisites": [
+        "Ngày 23: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "liên từ chỉ thời gian"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 23"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 25"
+      ],
+      "retrievalFromDays": [
+        21,
+        23
+      ],
+      "canDoOutcome": "Người học có thể dùng liên từ chỉ thời gian trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 25,
+      "title": "Liên từ chỉ sự đối lập",
+      "prerequisites": [
+        "Ngày 24: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "liên từ chỉ sự đối lập"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 24"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 26"
+      ],
+      "retrievalFromDays": [
+        22,
+        24
+      ],
+      "canDoOutcome": "Người học có thể dùng liên từ chỉ sự đối lập trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 26,
+      "title": "Câu điều kiện loại 1",
+      "prerequisites": [
+        "Ngày 25: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "điều kiện loại 1"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 25"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 27"
+      ],
+      "retrievalFromDays": [
+        23,
+        25
+      ],
+      "canDoOutcome": "Người học có thể dùng điều kiện loại 1 trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 27,
+      "title": "Câu điều kiện loại 2",
+      "prerequisites": [
+        "Ngày 26: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "điều kiện loại 2"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 26"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 28"
+      ],
+      "retrievalFromDays": [
+        24,
+        26
+      ],
+      "canDoOutcome": "Người học có thể dùng điều kiện loại 2 trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 28,
+      "title": "Câu điều kiện loại 3",
+      "prerequisites": [
+        "Ngày 27: If + past simple, would + V."
+      ],
+      "introduces": [
+        "điều kiện loại 3 và had + V3"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 27"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 29"
+      ],
+      "retrievalFromDays": [
+        25,
+        27
+      ],
+      "canDoOutcome": "Người học có thể dùng điều kiện loại 3 và had + V3 trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 29,
+      "title": "Luyện nghe điền từ",
+      "prerequisites": [
+        "Ngày 28: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe và điền từ"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 28"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 30"
+      ],
+      "retrievalFromDays": [
+        26,
+        28
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe và điền từ trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 30,
+      "title": "Luyện nghe chép chính tả",
+      "prerequisites": [
+        "Ngày 29: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe và chép chính tả"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 29"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 31"
+      ],
+      "retrievalFromDays": [
+        27,
+        29
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe và chép chính tả trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 31,
+      "title": "Luyện nghe về giờ",
+      "prerequisites": [
+        "Ngày 30: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe về giờ"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 30"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 32"
+      ],
+      "retrievalFromDays": [
+        28,
+        30
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe về giờ trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 32,
+      "title": "Luyện nghe ngày tháng",
+      "prerequisites": [
+        "Ngày 31: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe ngày tháng"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 31"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 33"
+      ],
+      "retrievalFromDays": [
+        29,
+        31
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe ngày tháng trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 33,
+      "title": "Luyện nghe địa điểm",
+      "prerequisites": [
+        "Ngày 32: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe địa điểm"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 32"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 34"
+      ],
+      "retrievalFromDays": [
+        30,
+        32
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe địa điểm trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 34,
+      "title": "Luyện nghe về tiền bạc",
+      "prerequisites": [
+        "Ngày 33: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghe về tiền bạc"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 33"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 35"
+      ],
+      "retrievalFromDays": [
+        31,
+        33
+      ],
+      "canDoOutcome": "Người học có thể dùng nghe về tiền bạc trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 35,
+      "title": "Đại từ phản thân",
+      "prerequisites": [
+        "Ngày 34: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "đại từ phản thân"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 34"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 36"
+      ],
+      "retrievalFromDays": [
+        32,
+        34
+      ],
+      "canDoOutcome": "Người học có thể dùng đại từ phản thân trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 36,
+      "title": "Mệnh đề thời gian: phối hợp thì",
+      "prerequisites": [
+        "Ngày 24–25: liên từ thời gian và ý đối lập."
+      ],
+      "introduces": [
+        "mệnh đề thời gian và phối hợp thì"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 35"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 37"
+      ],
+      "retrievalFromDays": [
+        33,
+        35
+      ],
+      "canDoOutcome": "Người học có thể dùng mệnh đề thời gian và phối hợp thì trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 37,
+      "title": "Tiếng Anh giao tiếp (1)",
+      "prerequisites": [
+        "Ngày 36: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "tiếng Anh giao tiếp: mở lời và phản hồi"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 36"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 38"
+      ],
+      "retrievalFromDays": [
+        34,
+        36
+      ],
+      "canDoOutcome": "Người học có thể dùng tiếng Anh giao tiếp: mở lời và phản hồi trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 38,
+      "title": "Liên từ tương liên",
+      "prerequisites": [
+        "Ngày 37: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "liên từ tương liên"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 37"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 39"
+      ],
+      "retrievalFromDays": [
+        35,
+        37
+      ],
+      "canDoOutcome": "Người học có thể dùng liên từ tương liên trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 39,
+      "title": "Luyện nghe về các quốc gia và châu lục",
+      "prerequisites": [
+        "Ngày 38: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "quốc gia, quốc tịch và châu lục"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 38"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 40"
+      ],
+      "retrievalFromDays": [
+        36,
+        38
+      ],
+      "canDoOutcome": "Người học có thể dùng quốc gia, quốc tịch và châu lục trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 40,
+      "title": "Luyện nghe về sở thích",
+      "prerequisites": [
+        "Ngày 39: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "sở thích và hoạt động yêu thích"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 39"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 41"
+      ],
+      "retrievalFromDays": [
+        37,
+        39
+      ],
+      "canDoOutcome": "Người học có thể dùng sở thích và hoạt động yêu thích trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 41,
+      "title": "Luyện nghe về các phương tiện giao thông",
+      "prerequisites": [
+        "Ngày 40: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "phương tiện giao thông"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 40"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 42"
+      ],
+      "retrievalFromDays": [
+        38,
+        40
+      ],
+      "canDoOutcome": "Người học có thể dùng phương tiện giao thông trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 42,
+      "title": "Luyện nghe về thể thao",
+      "prerequisites": [
+        "Ngày 41: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "thể thao"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 41"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 43"
+      ],
+      "retrievalFromDays": [
+        39,
+        41
+      ],
+      "canDoOutcome": "Người học có thể dùng thể thao trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 43,
+      "title": "Luyện nghe về nghề nghiệp",
+      "prerequisites": [
+        "Ngày 42: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "nghề nghiệp"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 42"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 44"
+      ],
+      "retrievalFromDays": [
+        40,
+        42
+      ],
+      "canDoOutcome": "Người học có thể dùng nghề nghiệp trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 44,
+      "title": "Luyện nghe về công nghệ",
+      "prerequisites": [
+        "Ngày 43: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "công nghệ và thiết bị"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 43"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 45"
+      ],
+      "retrievalFromDays": [
+        41,
+        43
+      ],
+      "canDoOutcome": "Người học có thể dùng công nghệ và thiết bị trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": null
+    },
+    {
+      "day": 45,
+      "title": "Tiếng Anh giao tiếp (2)",
+      "prerequisites": [
+        "Ngày 44: gọi lại cấu trúc trọng tâm và từ khóa của bài trước."
+      ],
+      "introduces": [
+        "giao tiếp: cảm ơn, xin lỗi, đề nghị"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 44"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 46"
+      ],
+      "retrievalFromDays": [
+        42,
+        44
+      ],
+      "canDoOutcome": "Người học có thể dùng giao tiếp: cảm ơn, xin lỗi, đề nghị trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": "03 / PREPARE"
+    },
+    {
+      "day": 46,
+      "title": "Note-taking: ghi chú khi nghe",
+      "prerequisites": [
+        "Ngày 45: cảm ơn, xin lỗi, đề nghị trong hội thoại."
+      ],
+      "introduces": [
+        "note-taking: ghi chú khi nghe"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 45"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 47"
+      ],
+      "retrievalFromDays": [
+        43,
+        45
+      ],
+      "canDoOutcome": "Người học có thể dùng note-taking: ghi chú khi nghe trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": "01 / NOTE-TAKE"
+    },
+    {
+      "day": 47,
+      "title": "Paraphrasing: diễn đạt lại",
+      "prerequisites": [
+        "Ngày 46: chọn thông tin chính và ghi chú bằng từ khóa."
+      ],
+      "introduces": [
+        "paraphrasing: diễn đạt lại"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 46"
+      ],
+      "preparesFor": [
+        "Chuẩn bị cho Ngày 48"
+      ],
+      "retrievalFromDays": [
+        44,
+        46
+      ],
+      "canDoOutcome": "Người học có thể dùng paraphrasing: diễn đạt lại trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": "02 / PARAPHRASE"
+    },
+    {
+      "day": 48,
+      "title": "Thuyết trình: giới thiệu bản thân",
+      "prerequisites": [
+        "Ngày 47: paraphrase giữ nguyên nghĩa và phát triển ý."
+      ],
+      "introduces": [
+        "giới thiệu bản thân và thuyết trình"
+      ],
+      "reinforces": [
+        "Ôn lại mục tiêu Ngày 47"
+      ],
+      "preparesFor": [
+        "Bài trình bày cuối khóa"
+      ],
+      "retrievalFromDays": [
+        45,
+        47
+      ],
+      "canDoOutcome": "Người học có thể dùng giới thiệu bản thân và thuyết trình trong một tình huống A1–A2 quen thuộc.",
+      "projectPhase": "04 / PRESENT"
+    }
+  ]
+}

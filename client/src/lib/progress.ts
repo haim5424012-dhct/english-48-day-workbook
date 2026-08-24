@@ -7,12 +7,13 @@ export const ROADMAP_STORAGE_KEY = "english48-roadmap-progress";
 export const DAY1_STORAGE_KEY = "english48-day1-progress";
 
 export type RoadmapProgress = {
+  version: 2;
   completedDays: number[];
   lastCompletedAt: string | null;
   streak: number;
 };
 
-const fallback: RoadmapProgress = { completedDays: [], lastCompletedAt: null, streak: 0 };
+const fallback: RoadmapProgress = { version: 2, completedDays: [], lastCompletedAt: null, streak: 0 };
 
 export function readRoadmapProgress(): RoadmapProgress {
   if (typeof window === "undefined") return fallback;
@@ -20,11 +21,14 @@ export function readRoadmapProgress(): RoadmapProgress {
     const saved = window.localStorage.getItem(ROADMAP_STORAGE_KEY);
     if (!saved) return fallback;
     const parsed = JSON.parse(saved) as Partial<RoadmapProgress>;
-    return {
+    const migrated = {
+      version: 2 as const,
       completedDays: Array.isArray(parsed.completedDays) ? Array.from(new Set(parsed.completedDays.filter((day): day is number => Number.isInteger(day) && day >= 1 && day <= 48))).sort((a, b) => a - b) : [],
       lastCompletedAt: typeof parsed.lastCompletedAt === "string" ? parsed.lastCompletedAt : null,
       streak: Number.isInteger(parsed.streak) ? Math.max(0, Number(parsed.streak)) : 0,
     };
+    if (parsed.version !== 2) window.localStorage.setItem(ROADMAP_STORAGE_KEY, JSON.stringify(migrated));
+    return migrated;
   } catch {
     return fallback;
   }
@@ -40,11 +44,12 @@ function dayDifference(from: string | null, to: string) {
 export function markDayComplete(day: number): RoadmapProgress {
   if (!Number.isInteger(day) || day < 1 || day > 48) return readRoadmapProgress();
   const current = readRoadmapProgress();
+  if (day > 1 && !current.completedDays.includes(day - 1)) return current;
   const today = new Date().toISOString().slice(0, 10);
   const completedDays = Array.from(new Set([...current.completedDays, day])).sort((a, b) => a - b);
   const difference = dayDifference(current.lastCompletedAt, today);
   const streak = current.lastCompletedAt === today ? current.streak : difference === 1 ? current.streak + 1 : 1;
-  const next = { completedDays, lastCompletedAt: today, streak };
+  const next = { version: 2 as const, completedDays, lastCompletedAt: today, streak };
   window.localStorage.setItem(ROADMAP_STORAGE_KEY, JSON.stringify(next));
   return next;
 }

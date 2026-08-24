@@ -107,3 +107,8 @@ Về sư phạm, các cầu nối quan trọng đã được ghi rõ cho Ngày 1
 Kiểm thử ngày 25/08/2026: `pnpm test:content` đạt 48/48; `pnpm test:logic` đạt 3/3; `pnpm check` đạt; `pnpm build` đạt. QA trực quan đã bao phủ roadmap, bài học mở, bài học bị khóa và dashboard. Cảnh báo build về chunk lớn và texture runtime không phải lỗi biên dịch.
 
 Giới hạn cần công khai: nội dung authored không thay thế tài liệu nguồn; audio mẫu dùng SpeechSynthesis/TTS hoặc khả năng trình duyệt, không phải audio gốc; tiến trình, SRS và ghi âm lưu trong localStorage; việc ghi âm thành công cần kiểm tra thêm trên trình duyệt/thiết bị có quyền microphone thật.
+
+
+## Hiệu chỉnh trạng thái sau đợt hoàn thiện theo pasted_content_2.txt
+
+Các đoạn lịch sử phía trên từng ghi nhận quiz chính thức và một số block nghe/viết còn chưa ánh xạ. Trạng thái đó không còn là trạng thái hiện hành: bản hiện tại đã sinh **240 quiz items có ID duy nhất**, sử dụng đủ năm dạng quiz ở mỗi ngày, cùng listening, shadowing và writing blocks hợp lệ cho 48 ngày. Tuy vậy, vì các câu mới được workbook biên soạn để phục vụ thực hành, chúng phải tiếp tục được đọc với nhãn `workbook-authored` hoặc `mixed`; không chuyển thành tuyên bố rằng đây là nội dung nguyên văn từ giáo viên.

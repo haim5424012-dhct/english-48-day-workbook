@@ -1,9 +1,84 @@
 import json
 from copy import deepcopy
+import re
 from pathlib import Path
 
 ROOT = Path('/home/ubuntu/english-48-day-workbook')
-AUTHORED_NOTE = 'Nội dung thực hành do workbook biên soạn dựa trên mục tiêu ngữ pháp/chủ đề; không phải bản sao tài liệu nguồn.'
+AUTHORED_NOTE = 'Nội dung thực hành do workbook biên soạn dựa trên mục tiêu học tập; không phải bản sao tài liệu nguồn.'
+OLD_AUTHORED_NOTE = 'Nội dung thực hành do workbook biên soạn dựa trên mục tiêu ngữ pháp/chủ đề; không phải bản sao tài liệu nguồn.'
+
+PRONUNCIATION = {
+    1: 'Phân biệt /æ/ trong am và nhịp yếu của I am.', 2: 'Nối âm trong câu hỏi Am I / Is she / Are they.', 3: 'Ngữ điệu lên ở câu hỏi What/Who và âm cuối /s/ số nhiều.', 4: 'Trọng âm từ hỏi Where/When và âm cuối của địa điểm.', 5: 'Âm cuối /s/ và /z/ trong reads, watches, studies.', 6: 'Âm /dʌz/ trong does và giữ nguyên âm tiết của động từ sau does.', 7: 'Ngữ điệu lên trong câu hỏi Do/Does và xuống ở câu trả lời ngắn.', 8: 'Âm cuối của trạng từ tần suất và nhịp câu thói quen.', 9: 'Trọng âm noun/adjective/adverb trong câu mô tả.', 10: 'Đuôi -ing /ɪŋ/ và âm /z/ trong is.', 11: 'Nhấn từ chỉ thời gian usually, now, today để phân biệt hai thì.', 12: 'Đuôi -ed /t/, /d/, /ɪd/ trong động từ quá khứ.', 13: 'Âm /dɪd/ và phủ định did not không nuốt âm cuối.', 14: 'Phân biệt was/were và nhịp V-ing trong when.', 15: 'Nối have/has với V3 và nhấn for, since, just.', 16: 'Âm /l/ trong will và nhịp dự đoán với tonight/tomorrow.', 17: 'Nhấn mốc by Friday/by noon trong tương lai hoàn thành.', 18: 'Đối chiếu /s/, /z/, /t/ ở âm cuối từ số nhiều và quá khứ.', 19: 'Trọng âm âm tiết đầu/cuối trong present và teacher.', 20: 'Ngữ điệu câu hỏi WH: xuống ở cuối câu hỏi thông tin.', 21: 'Đọc dãy số theo nhóm và đánh vần tên rõ từng chữ.', 22: 'Âm cuối không bật mạnh sau can, should, must.', 23: 'Nhịp và nối âm trước and, but, or, so, because.', 24: 'Nhấn before, after, until, when để nghe quan hệ thời gian.', 25: 'Ngữ điệu tương phản ở although, but và however.', 26: 'Nhịp điều kiện If..., I will... và âm cuối trong rains/study.', 27: 'Giảm âm would và nhấn were/free trong lời khuyên giả định.', 28: 'Phân biệt had studied và would have passed theo nhịp ba phần.', 29: 'Nghe rõ phụ âm đầu ở please, starts, check.', 30: 'Nối âm trong Listen carefully và Read aloud.', 31: 'Đọc giờ half past, o’clock với trọng âm mốc giờ.', 32: 'Phân biệt ordinal third và tên tháng May/June.', 33: 'Nhấn next to, across from, at để định vị.', 34: 'Đọc số tiền và trọng âm dollars/card.', 35: 'Âm cuối -self/-selves trong myself, themselves.', 36: 'Nhấn since, when và giữ thì sau liên từ thời gian.', 37: 'Ngữ điệu lịch sự trong Could you repeat that, please?', 38: 'Nhịp cân bằng either...or, neither...nor, both...and.', 39: 'Trọng âm tên quốc gia/quốc tịch và âm cuối -ian.', 40: 'Âm /dʒ/ trong enjoy và nhịp enjoy + V-ing.', 41: 'Nối by bus, ride a bike và trọng âm phương tiện.', 42: 'Âm cuối -ing trong swimming và nhịp good at.', 43: 'Trọng âm nghề nghiệp nurse, office và câu hỏi does.', 44: 'Âm /juː/ trong use và phụ âm cuối computer/screen.', 45: 'Ngữ điệu cảm ơn, xin lỗi và lời đề nghị lịch sự.', 46: 'Đọc từ khóa trong ghi chú, bỏ từ chức năng không cần thiết.', 47: 'Nhấn từ mang nghĩa khi đổi câu, giữ nguyên thông tin chính.', 48: 'Nhịp mở bài, hai ý chính và câu kết trong bài nói 1–2 phút.'
+}
+
+MINUTES = {day: 18 + (day % 5) * 3 + (5 if day in {12, 15, 28, 36, 46, 47, 48} else 0) for day in range(1, 49)}
+
+MISTAKES = {
+    1: ['Dùng is với I hoặc are với he/she.', 'Đặt not sau động từ chính thay vì sau am/is/are.'], 2: ['Đảo sai am/is/are lên trước chủ ngữ.', 'Trả lời Yes/No không lặp đúng chủ ngữ.'], 3: ['Dùng what cho người hoặc who cho đồ vật.', 'Quên số ít/số nhiều trong is/are.'], 4: ['Nhầm where hỏi nơi với when hỏi thời gian.', 'Để giới từ ở vị trí không tự nhiên.'], 5: ['Quên -s/-es ở he/she/it.', 'Đọc watches như watchs thay vì /ɪz/.'], 6: ['Giữ -s sau does not.', 'Dùng not do cho chủ ngữ he/she/it.'], 7: ['Dùng do với he/she/it.', 'Viết câu trả lời dài nhưng không trả lời đúng Yes/No.'], 8: ['Đặt trạng từ tần suất sai vị trí.', 'Dùng hiện tại tiếp diễn cho sự thật thường xuyên.'], 9: ['Dùng adjective thay cho adverb sau động từ.', 'Không nhận ra noun đứng sau a/an/the.'], 10: ['Quên động từ be trước V-ing.', 'Thêm -ing sai với động từ tận cùng e.'], 11: ['Dùng usually với hiện tại tiếp diễn.', 'Dùng hiện tại đơn cho việc đang xảy ra now.'], 12: ['Dùng V nguyên thể sau yesterday.', 'Đọc hoặc viết V2 bất quy tắc theo quy tắc -ed.'], 13: ['Giữ V2 sau did not/did.', 'Quên đảo did lên trước chủ ngữ trong câu hỏi.'], 14: ['Dùng was với you/they.', 'Không dùng when để nối hành động đang diễn ra và hành động xen vào.'], 15: ['Dùng V2 sau have/has.', 'Nhầm for (khoảng thời gian) với since (mốc bắt đầu).'], 16: ['Dùng will + to V.', 'Dùng will cho kế hoạch đã có bằng chứng mà không nêu ngữ cảnh.'], 17: ['Quên have sau will.', 'Dùng V2 thay V3 trong will have finished.'], 18: ['Bỏ âm cuối khi nói số nhiều.', 'Đọc -ed giống nhau trong mọi từ.'], 19: ['Đổi trọng âm làm đổi nghĩa present.', 'Nhấn đều mọi âm tiết.'], 20: ['Dùng do/does sai theo chủ ngữ trong WH-question.', 'Trả lời bằng Yes/No cho câu hỏi thông tin.'], 21: ['Đọc liền dãy số không chia nhóm.', 'Nhầm name với surname khi đánh vần.'], 22: ['Thêm to sau modal verb.', 'Dùng shoulds/musts ở ngôi thứ ba.'], 23: ['Dùng because và so cùng một quan hệ trong một câu.', 'Quên dấu phẩy khi nối hai mệnh đề dài.'], 24: ['Dùng will ngay sau when/before/after.', 'Nhầm until với before.'], 25: ['Dùng although...but cùng lúc.', 'Đặt however như liên từ nối trực tiếp hai mệnh đề.'], 26: ['Dùng will trong mệnh đề If.', 'Nhầm điều kiện có thật với giả định.'], 27: ['Dùng was cho mọi chủ ngữ trong If I were you.', 'Quên would ở mệnh đề kết quả.'], 28: ['Dùng would have ở mệnh đề If.', 'Dùng V2 thay had + V3.'], 29: ['Nghe nhầm số với từ có âm gần.', 'Điền từ không khớp loại từ trong câu.'], 30: ['Bỏ từ nhỏ khi chép chính tả.', 'Không viết hoa đầu câu hoặc đặt dấu chấm.'], 31: ['Nhầm quarter past với half past.', 'Dùng at cho ngày thay vì giờ.'], 32: ['Dùng on với tháng đơn lẻ.', 'Nhầm số thứ tự với số đếm trong ngày tháng.'], 33: ['Đảo next to và across from.', 'Dùng in khi muốn nói điểm gặp cụ thể at.'], 34: ['Đọc five dollars như số năm đơn lẻ.', 'Nhầm pay by card với pay cash.'], 35: ['Dùng myself khi chủ ngữ là they.', 'Dùng đại từ phản thân thay tân ngữ thường.'], 36: ['Dùng will sau when trong mệnh đề thời gian.', 'Dùng since với khoảng thời gian không có mốc.'], 37: ['Dùng câu mệnh lệnh khi muốn nhờ lịch sự.', 'Không dùng please hoặc intonation phù hợp.'], 38: ['Dùng either...and hoặc both...or.', 'Không giữ cấu trúc song song sau liên từ.'], 39: ['Nhầm quốc gia với quốc tịch.', 'Dùng in trước quốc tịch thay vì đến từ.'], 40: ['Dùng enjoy + to V.', 'Nhầm like doing với câu hỏi What do you like doing?'], 41: ['Dùng by với ride a bike.', 'Nhầm go by bus với take a bus trong ngữ cảnh.'], 42: ['Dùng good in thay vì good at.', 'Nhầm play với go/do trong môn thể thao.'], 43: ['Quên a/an trước nghề nghiệp số ít.', 'Dùng work như danh từ trong câu hỏi nghề nghiệp.'], 44: ['Nhầm use to study với used to study.', 'Dùng turn on/off ngược nghĩa.'], 45: ['Dùng sorry for I am late.', 'Đề nghị trực tiếp mà thiếu Would you like...?'], 46: ['Chép cả câu thay vì lọc từ khóa.', 'Bỏ sót tên hoặc nơi làm việc trong ghi chú.'], 47: ['Đổi nghĩa khi thay từ.', 'Dùng từ đồng nghĩa không phù hợp mức A1–A2.'], 48: ['Đọc nguyên văn dàn ý không nhìn người nghe.', 'Thiếu ví dụ hoặc câu kết trong 1–2 phút.']
+}
+
+PREREQS = {day: (['Ngày 01: am/is/are và câu đơn.'] if day == 1 else [f'Ngày {day-1:02d}: gọi lại cấu trúc trọng tâm và từ khóa của bài trước.']) for day in range(1, 49)}
+PREREQS.update({13: ['Ngày 12: V2 trong câu khẳng định quá khứ đơn.'], 15: ['Ngày 12–14: mốc quá khứ, V2 và was/were + V-ing.'], 28: ['Ngày 27: If + past simple, would + V.'], 36: ['Ngày 24–25: liên từ thời gian và ý đối lập.'], 46: ['Ngày 45: cảm ơn, xin lỗi, đề nghị trong hội thoại.'], 47: ['Ngày 46: chọn thông tin chính và ghi chú bằng từ khóa.'], 48: ['Ngày 47: paraphrase giữ nguyên nghĩa và phát triển ý.']})
+
+SPECIAL_OBJECTIVES = {
+    1: ['Dùng am/is/are để giới thiệu người và trạng thái.', 'Đặt not đúng vị trí trong câu phủ định.', 'Nói và viết ba câu tự giới thiệu ngắn.'],
+    13: ['Đổi câu quá khứ đơn sang phủ định bằng did not.', 'Tạo câu hỏi Did và câu trả lời ngắn có căn cứ.', 'Giữ động từ nguyên thể sau did/did not.'],
+    15: ['Phân biệt hành động đã kết thúc ở mốc quá khứ với kết quả hiện tại.', 'Dùng have/has + V3 với for, since, just.', 'Viết câu trải nghiệm với ever/never.'],
+    28: ['Tạo giả định trái với quá khứ bằng If + had + V3.', 'Dùng would have + V3 ở mệnh đề kết quả.', 'Giải thích quan hệ nguyên nhân–kết quả đã không xảy ra.'],
+    36: ['Chọn thì phù hợp sau since, when, before và after.', 'Nối hai mệnh đề thời gian mà không dùng will sau when.', 'Kể lại một chuỗi hành động có mốc rõ.'],
+    46: ['Nghe một lời giới thiệu và lọc tên, nơi làm việc, sở thích.', 'Viết ghi chú bằng từ khóa thay vì chép nguyên câu.', 'Dùng ghi chú để kể lại ba thông tin chính.'],
+    47: ['Giữ nguyên thông tin khi đổi cấu trúc câu.', 'Thay từ/cụm từ bằng cách nói A1–A2 tương đương.', 'Viết lại một lời yêu cầu theo cách lịch sự hơn.'],
+    48: ['Lập dàn ý giới thiệu bản thân có mở, thân và kết.', 'Nói 1–2 phút với ít nhất hai ý chính và ví dụ.', 'Tự chấm bài nói bằng rubric bốn tiêu chí.']
+}
+
+
+def objectives_for(number, focus):
+    if number in SPECIAL_OBJECTIVES: return SPECIAL_OBJECTIVES[number]
+    return [f'Nhận diện {focus} trong ít nhất ba câu ngắn.', f'Tạo hai câu dùng {focus} đúng ngữ cảnh.', f'Tự sửa một lỗi liên quan đến {focus} sau khi nghe hoặc viết.']
+
+
+def writing_keywords_for(number, focus):
+    if number <= 4: return ['am', 'is', 'are']
+    if number in {5, 8, 11}: return ['every', 'usually', 'now', 'does', 'is']
+    if number in {6, 7, 20}: return ['do', 'does']
+    if number in {9}: return ['noun', 'adjective', 'adverb']
+    if number == 10: return ['am', 'is', 'are']
+    if number in {12, 13, 14}: return ['did', 'was', 'were']
+    if number == 15: return ['have', 'has', 'since', 'for']
+    if number in {16, 17}: return ['will']
+    if number in {18, 19}: return ['s', 'ed', 'stress']
+    if number == 21: return ['name', 'number']
+    if number == 22: return ['can', 'should', 'must']
+    if number in {23, 24, 25}: return ['and', 'but', 'because', 'when', 'although']
+    if number in {26, 27, 28}: return ['if']
+    if number in {29, 30}: return ['listen', 'write', 'answer']
+    if number == 31: return ['at', 'o’clock']
+    if number == 32: return ['on', 'in']
+    if number == 33: return ['next', 'across', 'at']
+    if number == 34: return ['dollar', 'card', 'how much']
+    if number == 35: return ['myself', 'yourself', 'themselves']
+    if number == 36: return ['since', 'when', 'before', 'after']
+    if number == 37: return ['please', 'could']
+    if number == 38: return ['either', 'neither', 'both']
+    if number == 39: return ['from', 'in']
+    if number == 40: return ['enjoy', 'like']
+    if number == 41: return ['by', 'ride']
+    if number == 42: return ['play', 'good at']
+    if number == 43: return ['is', 'works', 'does']
+    if number == 44: return ['use', 'turn on']
+    if number == 45: return ['thank', 'sorry', 'would']
+    if number == 46: return ['name', 'work', 'like']
+    if number == 47: return ['please', 'close', 'small']
+    return ['hello', 'today', 'thank']
+
+
+def curriculum_for(number, focus):
+    introduces = [focus]
+    reinforces = [f'Ôn lại mục tiêu Ngày {max(number-1, 1):02d}'] if number > 1 else ['Câu đơn và đại từ nhân xưng']
+    prepares = [f'Chuẩn bị cho Ngày {min(number+1, 48):02d}'] if number < 48 else ['Bài trình bày cuối khóa']
+    retrieval = sorted(set([max(1, number-1), max(1, number-3)]))
+    return {'prerequisites': PREREQS[number], 'introduces': introduces, 'reinforces': reinforces, 'preparesFor': prepares, 'retrievalFromDays': retrieval, 'canDoOutcome': f'Người học có thể dùng {focus} trong một tình huống A1–A2 quen thuộc.'}
+
 
 specs = {
 1: ('to be: khẳng định và phủ định', ['I am ready.', 'She is at home.', 'They are not late.'], ['Viết hai câu giới thiệu bản thân dùng am/is/are.', 'Viết một câu phủ định về hôm nay.']),
@@ -59,24 +134,20 @@ specs = {
 def esc(text):
     return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
-def grammar_for(focus, examples):
+def grammar_for(number, focus, examples):
     ex = ' '.join(f'{esc(s)}' for s in examples)
-    return f'<p><strong>Mục tiêu hôm nay:</strong> {esc(focus)}.</p><p><strong>Cách dùng:</strong> Quan sát chủ ngữ, động từ và từ chỉ thời gian trước khi đặt câu. Mẫu luyện tập do workbook biên soạn giúp em chuyển kiến thức thành đầu ra ngắn, rõ.</p><p><strong>Ví dụ:</strong> {ex}</p><p><strong>Lỗi thường gặp:</strong> Không dịch từng từ theo tiếng Việt; hãy giữ đúng trật tự câu và kiểm tra trợ động từ, dạng động từ hoặc giới từ.</p>'
+    mistakes = ' '.join(f'<li>{esc(item)}</li>' for item in MISTAKES[number])
+    return f'<p><strong>Mục tiêu:</strong> {esc(focus)}.</p><p><strong>Quy tắc thao tác:</strong> Đọc chủ ngữ, xác định dấu hiệu thời gian/chức năng, chọn khung câu rồi mới thay từ. Ví dụ: {ex}</p><p><strong>Lỗi người Việt hay gặp trong bài này:</strong></p><ul>{mistakes}</ul>'
 
-def quiz_for(focus, examples):
-    items = []
-    for i in range(5):
-        correct = examples[i % len(examples)]
-        wrong = examples[(i + 1) % len(examples)]
-        items.append({
-            'id': f'day-question-{i+1}',
-            'type': 'multiple-choice',
-            'question': f'Câu {i+1}: Câu nào phù hợp nhất với mục tiêu “{focus}”?',
-            'options': [correct, f'{wrong} yesterday.', 'This sentence needs another structure.'],
-            'correctIndex': 0,
-            'explanation': f'Đáp án này là ví dụ luyện tập cho {focus}; hãy đọc to và kiểm tra từ khóa.'
-        })
-    return items
+def quiz_for(number, focus, examples):
+    a, b, c = examples
+    return [
+        {'id': f'day-{number}-q-01', 'type': 'multiple-choice', 'question': f'Chọn câu đúng về {focus}.', 'options': ([a, c, b] if number % 3 == 0 else [b, c, a] if number % 3 == 1 else [c, a, b]), 'correctIndex': (2 if number % 3 == 0 else 0 if number % 3 == 1 else 1), 'explanation': f'Câu "{a}" dùng đúng trọng tâm {focus}; các lựa chọn còn lại kiểm tra hai lỗi dễ nhầm về ngữ cảnh hoặc cấu trúc.'},
+        {'id': f'day-{number}-q-02', 'type': 'fill-blank', 'prompt': f'Điền từ còn thiếu để kiểm tra {focus}.', 'sentence': '___ ' + ' '.join(a.split()[1:]), 'blanks': [{'acceptedAnswers': [a.split()[0]], 'answer': a.split()[0]}], 'explanation': f'Từ "{a.split()[0]}" là mảnh cần nghe/nhớ để hoàn chỉnh câu theo {focus}.'},
+        {'id': f'day-{number}-q-03', 'type': 'transformation', 'prompt': f'Viết lại câu theo yêu cầu về {focus}.', 'instruction': 'Thực hiện phép chuyển đổi theo cấu trúc bài học; kiểm tra chủ ngữ, trợ động từ và dạng động từ.', 'sourceSentence': a, 'acceptedAnswers': [b], 'answer': b, 'explanation': f'Câu trả lời dùng đúng thao tác chuyển đổi của {focus}; kiểm tra chủ ngữ, trợ động từ và dạng động từ trước khi nộp.'},
+        {'id': f'day-{number}-q-04', 'type': 'matching', 'prompt': f'Nối câu với tình huống phù hợp về {focus}.', 'leftItems': [a, b, c], 'rightItems': [f'Tình huống B: {b}', f'Tình huống C: {c}', f'Tình huống A: {a}'], 'correctMatches': [2, 0, 1], 'explanation': f'Mỗi cặp được nối theo nghĩa và dấu hiệu cấu trúc của {focus}, không chỉ theo vị trí từ.'},
+        {'id': f'day-{number}-q-05', 'type': 'short-answer', 'prompt': f'Gõ lại câu tham chiếu để kiểm tra trí nhớ về {focus}:', 'acceptedAnswers': [c], 'answer': c, 'placeholder': 'Gõ lại câu tham chiếu…', 'explanation': f'Câu được chấp nhận khi khớp câu tham chiếu "{c}"; hoạt động này kiểm tra gọi lại chính xác cấu trúc {focus}.'}
+    ]
 
 def enrich(day):
     number = day['day']
@@ -89,9 +160,18 @@ def enrich(day):
         47: 'Paraphrasing: diễn đạt lại',
         48: 'Thuyết trình: giới thiệu bản thân',
     }.get(number, day.get('title', focus.title()))
-    day['learningObjectives'] = [f'Nhận diện và dùng được {focus}.', 'Tạo ít nhất hai câu đúng ngữ cảnh.', 'Tự sửa một lỗi sau khi nghe, nói hoặc viết.']
-    day['prerequisites'] = 'Ôn lại cấu trúc của ngày trước và các từ cơ bản A1–A2.'
-    day['bridgeFromPreviousDay'] = f'Bài này nối từ nội dung Ngày {max(number-1, 1):02d} sang mục tiêu {focus}, để kiến thức được gọi lại trước khi tạo câu mới.'
+    day['learningObjectives'] = objectives_for(number, focus)
+    curriculum = curriculum_for(number, focus)
+    day['prerequisites'] = '; '.join(curriculum['prerequisites'])
+    day['bridgeFromPreviousDay'] = f"Gọi lại {', '.join(curriculum['reinforces'])}; sau đó chuyển sang {focus}."
+    day['introduces'] = curriculum['introduces']
+    day['reinforces'] = curriculum['reinforces']
+    day['preparesFor'] = curriculum['preparesFor']
+    day['retrievalFromDays'] = curriculum['retrievalFromDays']
+    day['canDoOutcome'] = curriculum['canDoOutcome']
+    day['pronunciationFocus'] = PRONUNCIATION[number]
+    day['commonMistakes'] = MISTAKES[number]
+    day['estimatedMinutes'] = MINUTES[number]
     special_bridges = {
         13: 'Ngày 12 đã tạo câu quá khứ đơn khẳng định; hôm nay dùng chính nền đó để thêm did not và Did, đồng thời đưa động từ về nguyên thể.',
         15: 'Ngày 12–14 kể về một thời điểm trong quá khứ; hôm nay đối chiếu quá khứ đơn với hiện tại hoàn thành để phân biệt mốc thời gian và kết quả hiện tại.',
@@ -112,22 +192,31 @@ def enrich(day):
         day['rubric'] = ['Mở đầu và giới thiệu chủ đề rõ ràng.', 'Có ít nhất hai ý chính với ví dụ.', 'Kết thúc, cảm ơn và mời câu hỏi.', 'Nói 1–2 phút với tốc độ dễ nghe.']
     elif number == 45:
         day['projectPhase'] = '03 / PREPARE'
-    day['commonMistakes'] = ['Dịch từng từ theo tiếng Việt và bỏ qua trật tự câu tiếng Anh.', 'Quên kiểm tra chủ ngữ, trợ động từ hoặc dấu hiệu thời gian.']
-    day['masteryCriteria'] = 'Hoàn thành đủ sáu bước; đạt ít nhất 4/5 câu quiz; có ba câu nghe–chép đúng; nói đủ ba câu; nộp hai câu viết và tự đánh giá thẻ SRS.'
-    day['estimatedMinutes'] = 25
+    day['masteryCriteria'] = f"Hoàn thành đủ sáu bước; đạt ít nhất 4/5 câu quiz; đúng 3 nhiệm vụ nghe; nói đủ 3 câu; đạt 2 đầu ra viết theo rule của bài; đánh giá đủ 5 thẻ SRS."
     day['contentOrigin'] = 'mixed' if day.get('grammarContent', '').strip() else 'workbook-authored'
-    day['pronunciationFocus'] = 'Đọc rõ âm cuối, trọng âm từ khóa và nối âm tự nhiên; nghe lại audio mẫu/TTS trước khi nói.'
-    if not day.get('grammarContent', '').strip():
-        day['grammarContent'] = grammar_for(focus, examples)
+    day['writingRules'] = [f'Phải dùng đúng dấu hiệu/cấu trúc {focus}.', 'Phải có chủ ngữ, động từ và dấu câu.', 'Không đánh dấu đạt nếu câu dài nhưng lệch nhiệm vụ.']
+    day['writingKeywords'] = writing_keywords_for(number, focus)
+    grammar = day.get('grammarContent', '').strip()
+    if (not grammar) or '<strong>Mục tiêu hôm nay:</strong>' in grammar or 'Quan sát chủ ngữ, động từ và từ chỉ thời gian' in grammar or 'Mẫu luyện tập do workbook biên soạn' in grammar:
+        day['grammarContent'] = grammar_for(number, focus, examples)
+    else:
+        grammar = re.sub(r'<p><strong>Góc tự luyện:</strong>.*?</p>', '', grammar)
+        day['grammarContent'] = grammar.rstrip() + f'<p><strong>Góc tự luyện:</strong> {esc(" ".join(MISTAKES[number]))}</p>'
     if not day.get('warmupScript', '').strip():
         day['warmupScript'] = '\n'.join(examples)
-    day['listeningItems'] = [
-        {'audioText': sentence, 'blankSentence': '___ ' + ' '.join(sentence.split()[1:]), 'answer': sentence.split()[0]}
-        for sentence in examples[:3]
-    ]
+    listening_items = []
+    for item_index, sentence in enumerate(examples[:3]):
+        words = sentence.split()
+        blank_index = 1 if item_index < 2 and len(words) > 1 else 0
+        if item_index == 1 and len(words) > 3:
+            blank_index = len(words) - 1
+        answer = words[blank_index].strip('.,!?')
+        masked = ' '.join(('___' if index == blank_index else word) for index, word in enumerate(words))
+        listening_items.append({'audioText': sentence, 'blankSentence': masked, 'answer': answer})
+    day['listeningItems'] = listening_items
     day['shadowingSentences'] = examples[:3]
     day['writingPrompts'] = prompts[:2]
-    day['quiz'] = quiz_for(focus, examples)
+    day['quiz'] = quiz_for(number, focus, examples)
     cards = list(day.get('srsCards') or [])
     for sentence in examples:
         if len(cards) >= 5: break
@@ -135,7 +224,7 @@ def enrich(day):
     while len(cards) < 5:
         cards.append({'front': f'What does {focus} mean?', 'back': 'Hãy giải thích bằng tiếng Việt và tạo một câu.'})
     day['srsCards'] = cards[:5]
-    note = day.get('sourceNote', '').strip()
+    note = day.get('sourceNote', '').strip().replace(OLD_AUTHORED_NOTE, '').strip()
     if AUTHORED_NOTE not in note:
         day['sourceNote'] = (note + ' ' + AUTHORED_NOTE).strip()
     day['status'] = 'ready'
