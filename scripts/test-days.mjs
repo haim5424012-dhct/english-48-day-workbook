@@ -33,7 +33,8 @@ if (!Array.isArray(dayOne.listeningItems) || !Array.isArray(dayOne.shadowingSent
 }
 
 for (const [index, day] of days.entries()) {
-  const needsSourceNote = day.day <= 5 || day.status === "pending-source";
+  const hasContent = Boolean(day.grammarContent) || Boolean(day.listeningItems?.length) || Boolean(day.shadowingSentences?.length) || Boolean(day.writingPrompts?.length) || Boolean(day.quiz?.length) || Boolean(day.srsCards?.length);
+  const needsSourceNote = hasContent || day.status === "pending-source";
   if (needsSourceNote && (!day.sourceNote || typeof day.sourceNote !== "string")) {
     throw new Error(`Day ${index + 1} must include a traceable sourceNote`);
   }

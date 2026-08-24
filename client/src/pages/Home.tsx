@@ -340,7 +340,7 @@ export default function Home() {
         <div className="step-content">
           <div className="section-kicker">02 / BUILD THE RULE</div>
           <div className="content-heading-row"><div><h3>{day.title}</h3><p>Đọc phần lý thuyết được trích từ tài liệu nguồn.</p></div><span className="page-number">p. 01</span></div>
-          <div className="grammar-panel" dangerouslySetInnerHTML={{ __html: day.grammarContent ?? "" }} />
+          {day.grammarContent ? <div className="grammar-panel" dangerouslySetInnerHTML={{ __html: day.grammarContent }} /> : <div className="source-gap"><h3>Chưa trích xuất được phần lý thuyết đầy đủ từ nguồn Ngày {day.day}.</h3><p>Xem ghi chú nguồn bên dưới để biết chi tiết về phần tài liệu còn thiếu.</p></div>}
           
           <CompleteButton index={1} done={completed[1]} onComplete={completeStep} />
         </div>
@@ -420,6 +420,7 @@ export default function Home() {
         <div className="section-kicker">06 / TEST + SPACE IT OUT</div>
         <div className="content-heading-row"><div><h3>Kiểm tra để nhớ lâu hơn.</h3><p>Làm quiz trước, sau đó lật thẻ và tự đánh dấu mức độ nhớ. Kết quả được lưu trên thiết bị này.</p></div><span className="page-number">{quizScore === null ? "not scored" : `${quizScore}/${day.quiz?.length ?? 0}`}</span></div>
         {day.quiz?.length ? <QuizRenderer items={day.quiz} onSubmit={({ score, total }) => { setQuizScore(score); announce(`Đã chấm: ${score}/${total} câu đúng.`); }} /> : <div className="source-gap"><h3>Chưa có quiz tương thích trong nguồn đã trích xuất.</h3><p>Đáp án gốc đang ở dạng bài điền/viết hoặc chưa có link tương ứng; không tự chuyển thành câu hỏi trắc nghiệm.</p></div>}
+        {day.day === 13 && !day.grammarContent && <div className="source-gap srs-source-note"><h3>Ghi chú trước khi ôn thẻ.</h3><p>Các thẻ dưới đây được suy luận có căn cứ từ bài thi gốc; Ngày 13 chưa có phần bài giảng lý thuyết đầy đủ để làm nguồn Input. Hãy xem <strong>ghi chú nguồn</strong> trước khi chuyển sang bước Output.</p></div>}
         <div className="flashcard-block"><div className="flashcard-heading"><div><div className="section-kicker">SRS / FLASHCARD {cardIndex + 1}/{day.srsCards?.length ?? 0}</div><h4>Một thẻ, một lần nhớ có chủ đích.</h4></div><span className="interval-label">Ôn sau {cardStates[cardIndex]?.interval ?? 1} ngày</span></div>{currentCard && <button className={`flashcard ${cardFlipped ? "is-flipped" : ""}`} onClick={() => setCardFlipped((flipped) => !flipped)} aria-label="Lật flashcard"><span className="flashcard-face flashcard-front"><span className="tiny-label">MẶT TRƯỚC</span><strong>{currentCard.front}</strong><span className="flip-hint">Chạm để lật thẻ</span></span><span className="flashcard-face flashcard-back"><span className="tiny-label">MẶT SAU</span><strong>{currentCard.back}</strong><span className="flip-hint">Chạm để xem mặt trước</span></span></button>}{cardFlipped && <div className="flashcard-actions"><button className="remember-action" onClick={() => rateCard(false)}>Chưa nhớ</button><button className="primary-action" onClick={() => rateCard(true)}><Check size={16} /> Nhớ</button></div>}</div>
         <CompleteButton index={5} done={completed[5]} onComplete={completeStep} />
       </div>

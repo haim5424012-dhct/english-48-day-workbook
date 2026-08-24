@@ -92,8 +92,20 @@
 
 ## Mở rộng frontend cho các dạng quiz mới
 
+> Tạm dừng ánh xạ câu vào schema mới và không mở rộng thêm QuizRenderer/QuizLab theo yêu cầu hiện tại.
+
 - [x] Rà soát schema dữ liệu quiz hiện tại và renderer trong Home.tsx.
 - [x] Chốt kiểu dữ liệu tương thích ngược cho MCQ, điền/chia, biến đổi câu, nối cặp và trả lời ngắn.
 - [x] Tách component renderer quiz dùng chung, có trạng thái chấm, phản hồi và reset rõ ràng.
 - [x] Tích hợp dữ liệu kiểm thử minh họa có nguồn, không thay đổi nội dung học thật ngoài phạm vi.
 - [x] Chạy `pnpm check`, `pnpm build`, kiểm tra preview desktop/mobile và lưu checkpoint.
+
+
+## Ba bản vá theo audit batch 3
+
+- [x] Đọc đặc tả `pasted_content_5.txt` và khóa phạm vi, không ánh xạ schema mới.
+- [x] Thêm fallback SOURCE STATUS cho Bước 2 khi `grammarContent` rỗng.
+- [x] Sửa `scripts/test-days.mjs` theo điều kiện bất biến.
+- [x] Backfill tiêu đề Ngày 34–48 từ CSV, đồng bộ hai nguồn dữ liệu nếu cần.
+- [x] Chạy test/check/build, lập báo cáo và đóng gói một ZIP đầy đủ gồm ba bản vá cùng QuizRenderer/QuizLab.
+

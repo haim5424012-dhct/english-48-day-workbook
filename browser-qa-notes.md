@@ -32,3 +32,6 @@ QA QuizLab hoàn chỉnh: đã chấm bộ 5 câu mẫu với toàn bộ đáp �
 
 
 QA sau revision QuizLab: desktop hiển thị headline học sinh, nhãn Bước 06, rail sáu bước và canvas workbook với số thứ tự ở lề, vùng trả lời có đường kẻ, đường perforation và feedback. Mobile 375px hiển thị đúng một cột; rail sáu bước cuộn ngang, các input/select không tràn, nút Chấm bài vẫn rõ và đủ vùng chạm. Đã sửa hiện tượng mobile bị co thành cột hẹp sau screenshot kiểm tra đầu tiên.
+
+
+QA bản vá: route `/ngay/13.html` tải đúng tiêu đề “Thì quá khứ đơn thể phủ định và nghi vấn”. Khi mở Bước 2, giao diện hiển thị `01 / SOURCE STATUS` cùng thông báo “Chưa có phần lý thuyết đầy đủ từ nguồn Ngày 13” và hướng dẫn xem ghi chú nguồn; không còn khung grammar trống. SourceNote vẫn hiển thị đầy đủ bên dưới.
