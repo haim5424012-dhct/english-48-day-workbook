@@ -13,9 +13,10 @@ const cometPathShim = `<script>
 (function () {
   if (window.location.protocol !== "file:") return;
   var pathname = decodeURIComponent(window.location.pathname).replace(/\\\\/g, "/");
+  var queryRoute = new URLSearchParams(window.location.search).get("cometRoute");
   var dayMatch = pathname.match(/\\/ngay\\/(\\d+\\.html)$/);
   var folderMatch = pathname.match(/\\/(lo-trinh|quiz-lab|on-tap)\\/index\\.html$/);
-  var route = dayMatch ? "/ngay/" + dayMatch[1] : folderMatch ? "/" + folderMatch[1] : "/";
+  var route = queryRoute || (dayMatch ? "/ngay/" + dayMatch[1] : folderMatch ? "/" + folderMatch[1] : "/");
   window.__COMET_PREVIEW_PATH__ = route;
 
   var marker = pathname.search(/\\/(ngay|lo-trinh|quiz-lab|on-tap)(?:\\/|$)/);
@@ -41,81 +42,79 @@ const cometPathShim = `<script>
 })();
 </script>`;
 
-const readHtml = async (fileUrl) => readFile(fileUrl, "utf8");
-const prepareHtml = (html, assetPrefix) => localAssets.reduce(
-  (result, [remoteName, localName]) => result.replaceAll(`/manus-storage/${remoteName}`, `${assetPrefix}assets/${localName}`),
-  html
-)
-  .replace(/<script type="module" crossorigin src="[^\"]*assets\/([^\"]+)"><\/script>/, `<script defer src="${assetPrefix}assets/$1"></script>`)
-  .replaceAll('href="./assets/', `href="${assetPrefix}assets/`)
-  .replace(/<link rel="stylesheet" crossorigin /, '<link rel="stylesheet" ')
-  .replace(/\s*<script src="[^\"]*debug-collector\.js" defer><\/script>/, "")
-  .replace("</head>", `${cometPathShim}\n  </head>`);
+const readBinaryAsDataUri = async (fileUrl) => `data:image/png;base64,${(await readFile(fileUrl)).toString("base64")}`;
+
+const replaceKnownAssets = (value, replacements) => replacements.reduce(
+  (result, [remoteName, dataUri]) => result.replaceAll(`/manus-storage/${remoteName}`, dataUri),
+  value
+);
+
+const prepareSelfContainedHtml = (html, css, js, replacements) => {
+  let result = replaceKnownAssets(html, replacements);
+  let inlineCss = replaceKnownAssets(css, replacements);
+  let inlineJs = replaceKnownAssets(js, replacements);
+  result = result
+    .replace(/<link rel="stylesheet"[^>]*>/, `<style>${inlineCss}</style>`)
+    .replace(/\s*<script type="module"[^>]*><\/script>/, "")
+    .replace(/\s*<script src="[^\"]*debug-collector\.js" defer><\/script>/, "")
+    .replace(/\s*<script defer src="https:\/\/manus-analytics\.com\/umami"[^>]*><\/script>/, "")
+    .replace(/\s*<script id="manus-runtime">[\s\S]*?<\/script>/, "")
+    .replace("</head>", `${cometPathShim}\n  </head>`)
+    .replace("</body>", `<script>${inlineJs}</script>\n  </body>`);
+  return result;
+};
 
 await rm(outputDir, { recursive: true, force: true });
 await mkdir(outputDir, { recursive: true });
 await cp(sourceDir, outputDir, { recursive: true });
+
+const assetReplacements = [];
 for (const [remoteName, localName] of localAssets) {
-  await cp(new URL(`../../webdev-static-assets/${localName}`, import.meta.url), new URL(`assets/${localName}`, outputDir));
-}
-const cssFile = (await readdir(new URL("assets/", outputDir))).find((fileName) => fileName.endsWith(".css"));
-if (cssFile) {
-  let css = await readFile(new URL(`assets/${cssFile}`, outputDir), "utf8");
-  for (const [remoteName, localName] of localAssets) {
-    css = css.replaceAll(`/manus-storage/${remoteName}`, `./${localName}`);
-  }
-  await writeFile(new URL(`assets/${cssFile}`, outputDir), css);
-}
-const jsFile = (await readdir(new URL("assets/", outputDir))).find((fileName) => fileName.endsWith(".js"));
-if (jsFile) {
-  let js = await readFile(new URL(`assets/${jsFile}`, outputDir), "utf8");
-  for (const [remoteName, localName] of localAssets) {
-    js = js.replaceAll(`"/manus-storage/${remoteName}"`, `window.__COMET_PREVIEW_ROOT__ + "assets/${localName}"`);
-  }
-  await writeFile(new URL(`assets/${jsFile}`, outputDir), js);
+  const dataUri = await readBinaryAsDataUri(new URL(`../../webdev-static-assets/${localName}`, import.meta.url));
+  assetReplacements.push([remoteName, dataUri]);
 }
 
-const rootHtml = await readHtml(new URL("index.html", sourceDir));
-await writeFile(new URL("index.html", outputDir), prepareHtml(rootHtml, "./"));
+const builtFiles = await readdir(new URL("assets/", sourceDir));
+const cssFile = builtFiles.find((fileName) => fileName.endsWith(".css"));
+const jsFile = builtFiles.find((fileName) => fileName.endsWith(".js"));
+if (!cssFile || !jsFile) throw new Error("Không tìm thấy CSS/JS production trong dist/public/assets");
+const css = await readFile(new URL(`assets/${cssFile}`, sourceDir), "utf8");
+const js = await readFile(new URL(`assets/${jsFile}`, sourceDir), "utf8");
+const rootHtml = await readFile(new URL("index.html", sourceDir), "utf8");
 
-for (let day = 1; day <= 48; day += 1) {
-  await mkdir(new URL("ngay/", outputDir), { recursive: true });
-  await writeFile(new URL(`ngay/${String(day).padStart(2, "0")}.html`, outputDir), prepareHtml(rootHtml, "../"));
-}
-
+await writeFile(new URL("index.html", outputDir), prepareSelfContainedHtml(rootHtml, css, js, assetReplacements));
+const routeRedirect = (route, prefix = "../") => `<!doctype html><meta charset="utf-8"><title>48 Ngày Lấy Gốc Tiếng Anh</title><script>window.location.replace("${prefix}index.html?cometRoute=${route}");</script><p>Đang mở workbook… <a href="${prefix}index.html?cometRoute=${route}">Bấm vào đây nếu cần</a>.</p>`;
+await mkdir(new URL("ngay/", outputDir), { recursive: true });
+for (let day = 1; day <= 48; day += 1) await writeFile(new URL(`ngay/${String(day).padStart(2, "0")}.html`, outputDir), routeRedirect(`/ngay/${String(day).padStart(2, "0")}.html`));
 for (const route of ["lo-trinh", "quiz-lab", "on-tap"]) {
   const routeDir = new URL(`${route}/`, outputDir);
   await mkdir(routeDir, { recursive: true });
-  await writeFile(new URL("index.html", routeDir), prepareHtml(rootHtml, "../"));
+  await writeFile(new URL("index.html", routeDir), routeRedirect(`/${route}`));
 }
+await rm(new URL("assets/", outputDir), { recursive: true, force: true });
 
-const readme = `# 48 Ngày Lấy Gốc Tiếng Anh — Gói chạy thử Comet
+const readme = `# 48 Ngày Lấy Gốc Tiếng Anh — Gói Comet tự chạy
 
-Đây là bản build tĩnh production đã được chuẩn bị để chạy bằng máy chủ cục bộ hoặc mở trực tiếp file HTML trên Windows/Comet.
+Đây là bản HTML self-contained tối ưu. File gốc \`index.html\` chứa trực tiếp JavaScript, CSS và ảnh thương hiệu; các file route nested là file chuyển tiếp rất nhỏ về file gốc kèm route cần hiển thị. Có thể mở trực tiếp bằng cách bấm đúp trên Windows/Comet, không cần cài Node.js, Python hoặc chạy máy chủ.
 
-## Cách chạy khuyến nghị
+## Cách chạy
 
-Giải nén gói, mở Terminal/PowerShell tại thư mục gói và chạy:
+1. Giải nén ZIP vào một thư mục bình thường.
+2. Mở thư mục \`comet-preview-48-day-workbook\`.
+3. Bấm đúp vào \`index.html\`.
+
+Các file có thể mở trực tiếp gồm \`ngay/01.html\` đến \`ngay/48.html\`, \`quiz-lab/index.html\`, \`lo-trinh/index.html\` và \`on-tap/index.html\`. Các file này tự chuyển về \`index.html\` và giữ đúng route trong chế độ \`file://\` trên Windows.
+
+Nếu Comet vẫn áp dụng chính sách chặn file local, dùng phương án dự phòng:
 
 \`\`\`bash
 python3 -m http.server 4173
 \`\`\`
 
-Sau đó mở Comet tại \`http://localhost:4173/\`. Nếu Windows không nhận \`python3\`, dùng \`py -m http.server 4173\`.
+rồi mở \`http://localhost:4173/\`. Bản self-contained không phụ thuộc ảnh hoặc JavaScript bên ngoài; font Google có thể dùng font dự phòng nếu offline.
 
-## Mở trực tiếp file HTML
-
-Bạn cũng có thể bấm đúp vào \`index.html\` hoặc một file trong \`ngay/\`. Gói này đã dùng asset relative và route shim cho chế độ \`file://\`. Tuy vậy, chạy qua \`localhost\` vẫn là cách ổn định nhất.
-
-Các URL thử nhanh khi chạy localhost:
-
-- \`http://localhost:4173/\`
-- \`http://localhost:4173/quiz-lab/\`
-- \`http://localhost:4173/ngay/13.html\`
-- \`http://localhost:4173/ngay/48.html\`
-
-Gói có 48 trang Ngày, Lộ trình, Phòng quiz và Ôn tập. Các ảnh nhận diện chính đã được đóng gói local; Internet chỉ cần nếu bạn muốn tải font Google, còn trình duyệt vẫn có font dự phòng. Tiến trình học và SRS lưu trong localStorage của Comet.
+Tiến trình học và SRS lưu trong localStorage của Comet. Quyền microphone chỉ cần cấp khi muốn thử ghi âm.
 `;
 await writeFile(new URL("README-COMET.md", outputDir), readme);
 
-console.log(`Comet preview written to ${outputDir.pathname}`);
+console.log(`Self-contained Comet preview written to ${outputDir.pathname}`);

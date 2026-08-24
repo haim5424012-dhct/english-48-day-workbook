@@ -133,3 +133,11 @@
 - [x] Kiểm tra file trực tiếp, localhost routes và runtime không lỗi.
 - [x] Đóng gói ZIP sửa lỗi và bàn giao.
 
+
+## Gói HTML self-contained cho Comet/Windows
+
+- [x] Inline JavaScript, CSS và ảnh vào HTML để loại bỏ phụ thuộc asset qua `file://`.
+- [x] Tạo lại root và toàn bộ route nested từ bản self-contained.
+- [x] Kiểm tra trực tiếp trên trình duyệt sandbox, file size và runtime.
+- [x] Đóng gói ZIP thay thế với hướng dẫn rõ ràng.
+
