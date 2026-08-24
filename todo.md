@@ -324,3 +324,11 @@
 - [ ] Commit và push an toàn, không force-push.
 - [ ] Theo dõi GitHub Actions, kiểm tra deployment và mở URL GitHub Pages thực tế.
 - [ ] Cập nhật README/hướng dẫn URL và báo cáo bàn giao.
+
+
+## Sau khi người dùng bật GitHub Pages
+
+- [ ] Kích hoạt lại workflow `Deploy workbook to GitHub Pages`.
+- [ ] Theo dõi build và deploy đến trạng thái thành công.
+- [ ] Kiểm tra deployment URL, HTTP status và asset chính.
+- [ ] Kiểm tra deep links đại diện và route fallback 404.

@@ -38,7 +38,7 @@ pnpm check
 pnpm build
 ```
 
-Bản xem trước hiện chạy trong Manus WebDev. Khi muốn xuất bản trên GitHub Pages, dùng GitHub Actions hoặc thư mục build theo cấu hình repository; không đưa khóa API hoặc thông tin đăng nhập vào frontend.
+Website đã được xuất bản thành công trên GitHub Pages: https://haim5424012-dhct.github.io/english-48-day-workbook/. Workflow GitHub Actions chạy test content, test logic, TypeScript check, build và deploy; không đưa khóa API hoặc thông tin đăng nhập vào frontend. Báo cáo QA nằm trong `github-pages-qa.md`.
 
 ## Thêm Ngày 2
 
