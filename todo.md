@@ -150,3 +150,11 @@
 - [x] Chọn phương án tương thích thực tế, sửa generator và cập nhật hướng dẫn mở file.
 - [x] Kiểm thử lại gói mới bằng nhiều entry point, đóng ZIP và ghi rõ giới hạn nếu Comet vẫn chặn file local.
 
+
+## Sửa liên kết Bài 1 trong Comet preview
+
+- [x] Truy vết href/route từ roadmap đến Ngày 1 và kiểm tra cấu trúc file thực tế.
+- [x] Sửa đường dẫn route local để không tạo ERR_FILE_NOT_FOUND.
+- [x] Kiểm thử click Bài 1 trên file:// và localhost.
+- [ ] Đóng gói ZIP mới, cập nhật QA và bàn giao.
+

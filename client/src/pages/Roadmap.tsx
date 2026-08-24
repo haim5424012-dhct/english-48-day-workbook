@@ -44,11 +44,28 @@ function stageProgress(stage: Stage, progress: RoadmapProgress) {
   return days.filter((entry) => progress.completedDays.includes(entry.day)).length;
 }
 
+function navigatePreview(path: string, setLocation: (path: string) => void) {
+  if (window.location.protocol !== "file:") {
+    setLocation(path);
+    return;
+  }
+  const pathname = decodeURIComponent(window.location.pathname).replace(/\\\\/g, "/");
+  const marker = pathname.search(/\/(ngay|lo-trinh|quiz-lab|on-tap)(?:\/|$)/);
+  const root = marker >= 0 ? pathname.slice(0, marker + 1) : pathname.slice(0, pathname.lastIndexOf("/") + 1);
+  if (path === "/") {
+    window.location.href = `${root}index.html`;
+  } else if (path === "/quiz-lab" || path === "/on-tap" || path === "/lo-trinh") {
+    window.location.href = `${root}${path.slice(1)}/index.html`;
+  } else {
+    window.location.href = `${root}${path.slice(1)}`;
+  }
+}
+
 function RoadmapHeader({ progress }: { progress: RoadmapProgress }) {
   const [, setLocation] = useLocation();
   return (
     <header className="topbar roadmap-topbar">
-      <button className="brand brand-button" onClick={() => setLocation("/")} aria-label="Về trang Ngày 1">
+      <button className="brand brand-button" onClick={() => navigatePreview("/", setLocation)} aria-label="Về trang Ngày 1">
         <span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span>
         <span className="brand-label-badge">48</span>
         <span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span>
@@ -96,7 +113,7 @@ export default function Roadmap() {
       setNotice(`Hoàn thành Ngày ${String(entry.day - 1).padStart(2, "0")} để mở trạm này.`);
       return;
     }
-    if (entry.day === 1) setLocation("/ngay/01.html");
+    if (entry.day === 1) navigatePreview("/ngay/01.html", setLocation);
     else setNotice("Nội dung ngày này đang chờ được bổ sung vào workbook.");
   }
 
