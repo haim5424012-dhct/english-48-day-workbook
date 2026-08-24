@@ -182,3 +182,16 @@
 - [x] Cập nhật hồ sơ website và hướng dẫn chạy theo trạng thái thực tế.
 - [x] Kiểm tra liên kết chéo, chạy check/build và lưu phiên bản cập nhật.
 
+
+
+## Nạp nội dung thật Ngày 16–20 — Batch 4
+
+- [x] Kiểm kê nguồn Sheet và 4 loại nguồn cho Ngày 16–20.
+- [x] Tải/trích xuất các PDF truy cập được và lưu source-extracts Batch 4.
+- [x] Ghi rõ FILE ĐỀ online Ngày 16 không truy cập được qua Drive API.
+- [x] Cập nhật `quiz-schema-gaps.md` cho các dạng điền, viết câu, âm vị, trọng âm và MCQ 2/3 lựa chọn.
+- [x] Nạp `grammarContent` và 5 SRS cards/ngày bằng `merge_source_fields`; không nạp quiz chưa khớp schema.
+- [x] Đồng bộ root/client days.json, cập nhật version `0.4-source-batch-4` và rebuild days-index.
+- [x] Cập nhật `batch-4-report.md`, `website-profile.md` và README.
+- [x] Chạy `test-days`, `pnpm check`, `pnpm build`, QA preview và tạo lại gói Comet.
+- [ ] Chờ người dùng xác nhận nguồn FILE ĐỀ online Ngày 16 hoặc quyết định mở rộng schema quiz.

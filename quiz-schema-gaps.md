@@ -19,9 +19,16 @@ Tài liệu này chỉ kiểm kê format nguồn để phục vụ quyết đị
 | 13 | Điền/chia quá khứ đơn phủ định/nghi vấn; trả lời Yes/No theo hình | 5 + 5 câu | 10 câu 3 lựa chọn |
 | 14 | Điền/chia quá khứ tiếp diễn | 5 câu | 5 câu 2 lựa chọn + 10 câu 3 lựa chọn |
 | 15 | Chuyển động từ sang quá khứ phân từ; điền/chia hiện tại hoàn thành | 5 mục + 5 câu | 5 câu 2 lựa chọn + 10 câu 3 lựa chọn |
+| 16 | Điền/chia động từ tương lai đơn; trả lời ngắn theo hình | 5 + 5 câu | 10 câu 3 lựa chọn |
+| 17 | Điền/chia động từ tương lai hoàn thành | 5 câu | 5 câu 2 lựa chọn + 10 câu 3 lựa chọn |
+| 18 | Chọn từ chứa âm mục tiêu theo phiên âm | — | 20 câu 2 lựa chọn |
+| 19 | Chọn vị trí trọng âm; chọn từ theo vị trí trọng âm | — | 5 câu 2 lựa chọn + 5 câu 3 lựa chọn + 5 câu 2 lựa chọn |
+| 20 | Điền từ để hỏi; viết câu hỏi từ từ gợi ý | 5 + 5 câu | 10 câu 3 lựa chọn |
 
 ## Ghi chú phương pháp
 
 Các số lượng trên được đếm từ các file text bài thi online đã lưu trong `/home/ubuntu/english_learning_project/materials/ngay_03` đến `ngay_15`, cùng báo cáo batch 1–2 đối với Ngày 1 và các ngày đã xử lý trước. Ngày 1 được ghi là chưa xác định thay vì suy đoán vì artifact bài thi text không có trong thư mục nguồn hiện tại. Các block MCQ được ghi theo số lựa chọn thực tế trong từng block; không giả định mọi ngày đều có 3 lựa chọn.
 
-Ngày 11–15 có các dạng mới cần cân nhắc khi thiết kế schema sau này: bảng biến đổi động từ, điền/chia động từ, trả lời ngắn theo hình, và trong Ngày 13 có câu trả lời theo quy ước `Did – break`. Ngày 15 có dạng điền hai vị trí như `have – made`, cần được xem là một format riêng nếu mở rộng schema.
+Ngày 11–20 có các dạng mới cần cân nhắc khi thiết kế schema sau này: bảng biến đổi động từ, điền/chia động từ, trả lời ngắn theo hình, câu hỏi âm vị, xác định vị trí trọng âm, chọn từ theo vị trí trọng âm, điền từ để hỏi và viết câu hỏi từ từ gợi ý. Ngày 13 có câu trả lời theo quy ước `Did – break`; Ngày 15, 16 và 17 có dạng điền hai vị trí hoặc nhiều thành phần như `have – made`, `Will – tell`, `Will – have arrived`. Không mở rộng schema trong Batch 4.
+
+Nguồn Batch 4 được lưu trong `source-extracts/batch-4/ngay-16.md` đến `ngay-20.md`; các số lượng trên dựa trên PDF đề online đã tải hoặc trang đáp án công khai khi FILE ĐỀ Drive không truy cập được. Riêng FILE ĐỀ online Ngày 16 trả 404 qua Drive API nên chỉ ghi nhận format từ trang đáp án công khai và giữ trạng thái pending-source cho file Drive.

@@ -19,9 +19,10 @@ Website tổ chức hành trình học thành 48 ngày và 10 giai đoạn. Mỗ
 | Ngày 1–5 | Đã xử lý theo batch nguồn và có audit lịch sử | `source-extracts/batch-1/` |
 | Ngày 6–10 | Đã xử lý theo batch nguồn, phần không khớp schema giữ trong source note | `source-extracts/batch-2/`, `batch-2-report.md` |
 | Ngày 11–15 | Đã xử lý theo batch nguồn, lưu trích xuất và merge theo trường | `source-extracts/batch-3/`, báo cáo batch 3 |
-| Ngày 16–48 | Chưa phải bài học hoàn chỉnh; giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
+| Ngày 16–20 | Đã nạp lý thuyết/SRS; quiz và media chưa ánh xạ | `batch-4-report.md`, `source-extracts/batch-4/` |
+| Ngày 21–48 | Chưa phải bài học hoàn chỉnh; giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
 
-Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 14 ngày và `srsCards` có ở 15 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức chưa có nội dung được ánh xạ trong bản dữ liệu hiện tại; không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
+Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 19 ngày và `srsCards` có ở 20 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức chưa có nội dung được ánh xạ trong bản dữ liệu hiện tại; không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
 
 ## 3. Tính năng hiện có
 
@@ -61,7 +62,7 @@ Khi chạy thử, cần giải nén toàn bộ ZIP vào Desktop hoặc Documents
 
 ## 7. Giới hạn và việc chưa thực hiện
 
-Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chưa có tài khoản người học, chưa có waveform Web Audio API và chưa chấm phát âm thật qua dịch vụ bên thứ ba. Việc nạp tiếp Ngày 16–20 chưa được thực hiện trong hồ sơ này. Không đưa audio/video gốc của giáo viên vào website khi chưa xác minh quyền sử dụng.
+Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chưa có tài khoản người học, chưa có waveform Web Audio API và chưa chấm phát âm thật qua dịch vụ bên thứ ba. Batch 4 đã cập nhật Ngày 16–20 nhưng còn các giới hạn về transcript video, FILE ĐỀ online Ngày 16 và schema quiz đã nêu ở báo cáo. Không đưa audio/video gốc của giáo viên vào website khi chưa xác minh quyền sử dụng.
 
 ## 8. Tệp tham chiếu chính
 
@@ -79,3 +80,20 @@ Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chư
 | `scripts/prepare-comet-preview.mjs` | Đóng gói preview Comet |
 | `comet-preview-file-qa.md` | Nhật ký QA file:///Comet |
 | `quiz-schema-gaps.md` | Khoảng trống schema quiz |
+
+
+## Phụ lục A — Cập nhật Batch 4: Ngày 16–20
+
+**Ngày cập nhật:** 24/08/2026. Batch 4 đã nạp dữ liệu nguồn cho Ngày 16–20 vào cả `data/days.json` và `client/src/data/days.json`. Mỗi ngày có `sourceNote`, `grammarContent` và 5 thẻ SRS dựa trên PDF lý thuyết đã tải và các ví dụ có thể truy vết.
+
+| Ngày | Chủ đề | Trạng thái dữ liệu |
+|---:|---|---|
+| 16 | Thì tương lai đơn | Đã nạp lý thuyết/SRS; FILE ĐỀ online Drive trả 404, không nhúng video |
+| 17 | Thì tương lai hoàn thành | Đã nạp lý thuyết/SRS; đề online PDF đã trích xuất |
+| 18 | Ngữ âm | Đã nạp IPA, ví dụ âm và SRS; đề online 20 câu/2 lựa chọn chưa đưa vào quiz chính thức |
+| 19 | Trọng âm | Đã nạp khái niệm/quy tắc và SRS; đề online trộn 2/3 lựa chọn chưa đưa vào quiz |
+| 20 | Các câu hỏi với từ để hỏi | Đã nạp mẫu How/Why/Which và SRS; dạng điền/viết câu hỏi chưa đưa vào quiz |
+
+Các trường `listeningItems`, `shadowingSentences`, `writingPrompts` và `quiz` của Batch 4 vẫn để mảng rỗng khi chưa có dữ liệu phù hợp hoặc schema đã được xác nhận. Video BÀI HỌC chưa có transcript nên không được tải hoặc nhúng. Các format quiz mới được thống kê trong `quiz-schema-gaps.md`, chưa tự chuyển đổi thành MCQ.
+
+Hồ sơ truy vết chi tiết nằm tại `batch-4-report.md` và `source-extracts/batch-4/`. `node scripts/test-days.mjs`, `pnpm check` và `pnpm build` đã đạt; build chỉ còn các cảnh báo không chặn về cấu hình pnpm cũ, chunk lớn và texture runtime.
