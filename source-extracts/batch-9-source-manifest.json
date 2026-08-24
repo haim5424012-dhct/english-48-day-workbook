@@ -1,0 +1,83 @@
+{
+  "spreadsheetId": "1xP0Ltw0ydYaLFeJal4w8ma36HdvoYpbfCt8Jmt5PcsI",
+  "sheetTitle": "48 NGÀY LẤY  GỐC TIẾNG ANH TOÀN DIỆN",
+  "retrievedAt": "2026-08-24",
+  "sheetRange": "A122:H136",
+  "days": [
+    {
+      "day": 41,
+      "title": "Luyện Nghe Về Các Phương Tiện Giao Thông",
+      "rows": {
+        "heading": 122,
+        "lesson": 123,
+        "online": 124
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/11KkXhMkXcVA2Q9jzAdvFt8OLUV1MAbTv/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/dR97c2THSZk?si=HXgqlBgnsrcm3-7w",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1Kh-5jjCD8bSlNYJmNGsITlLGvcv2zwBq",
+        "dapAn": "https://drive.google.com/file/d/1w6ib-0Q0txE3hxfbsH4LnbNw3NPQOkoq/view?usp=drive_link"
+      }
+    },
+    {
+      "day": 42,
+      "title": "Luyện Nghe Về Thể Thao",
+      "rows": {
+        "heading": 125,
+        "lesson": 126,
+        "online": 127
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/114u7QZWvn_eRWX1ddYw6q3Xyya7C6EPb/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/jf5TzsWPoEY?si=fN9DKKaK9aroR3x6",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1bPkNX5cSEi4rMeGJO8Y3SVFSWMarzZ6c",
+        "dapAn": "https://drive.google.com/file/d/1UBvwi56RYlHN0xMAMnRfBMa9y1tbHfio/view?usp=drive_link"
+      }
+    },
+    {
+      "day": 43,
+      "title": "Luyện Nghe Về Nghề Nghiệp",
+      "rows": {
+        "heading": 128,
+        "lesson": 129,
+        "online": 130
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1BsZw3fQLVXGuhAokPG1Ai6Q66UHWGwSk/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/5so36iLoHI8?si=h42kGBflXmAW84kq",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1ew6G69qWoTNxzB6hcPXCTGHxTre7b7Zt",
+        "dapAn": "https://drive.google.com/file/d/1WqFVbPfXJwpTLM9mX24iZLaIukeS9U6V/view?usp=drive_link"
+      }
+    },
+    {
+      "day": 44,
+      "title": "Luyện Nghe Về Công Nghệ",
+      "rows": {
+        "heading": 131,
+        "lesson": 132,
+        "online": 133
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1dVAVKEg8g1kEo-0Y-FfPNrXQKgrzXGEu/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/xBN2lJwrr6g?si=rs5BMqEc4t1J5F58",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1wAFqM0JQ6ERIDl0OPzMsHGI_0QUvZR3k",
+        "dapAn": "https://drive.google.com/file/d/19AGmmopyYhbgVgP9Vbfs9tEpMjqGIJtU/view?usp=drive_link"
+      }
+    },
+    {
+      "day": 45,
+      "title": "Tiếng Anh Giao Tiếp (2)",
+      "rows": {
+        "heading": 134,
+        "lesson": 135,
+        "online": 136
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1VgmgljnORPhgCyNhYm9GWGGticUSPFPx/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/tpkrpLwcXjs?si=7z39X-q74T58U_OJ",
+        "fileDeOnline": "https://drive.google.com/file/d/1VgmgljnORPhgCyNhYm9GWGGticUSPFPx/view?usp=drivesdk",
+        "dapAn": "https://drive.google.com/file/d/1OqPIZ52xHdEwB_ETemymgGpuF7UnndLp/view?usp=drive_link"
+      }
+    }
+  ]
+}

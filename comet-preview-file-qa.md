@@ -38,3 +38,8 @@ Ngày 21 và Ngày 25 đã được mở bằng route trung tâm `index.html?com
 ## QA Batch 8 — Ngày 36–40 — 24/08/2026
 
 Đã kiểm tra các route web hợp lệ `/ngay/36.html`, `/ngay/38.html`, `/ngay/39.html` và `/ngay/40.html`. Tiêu đề ngày, chủ đề, bố cục Editorial Lab Notebook và nút bắt đầu bài học hiển thị đúng; Ngày 39 hiển thị trạng thái nguồn phù hợp vì thiếu PDF FILE ĐỀ lý thuyết. Đường dẫn không có hậu tố như `/ngay/36` là 404 theo khai báo route hiện tại, không phải định dạng hợp lệ của ứng dụng/gói Comet. Không tải hoặc nhúng audio/video gốc.
+
+
+## QA Batch 9 — Ngày 41–45 — 24/08/2026
+
+Đã rebuild preview bằng `scripts/prepare-comet-preview.mjs` sau khi import Ngày 41–45; central `index.html` self-contained khoảng 35,9 MB. QA web preview xác nhận các route `/ngay/41.html` đến `/ngay/45.html` hiển thị đúng số ngày, chủ đề và trạng thái `NEXT`. Đã tạo ZIP `/home/ubuntu/english-48-day-workbook-batch-9-comet.zip` gồm mã nguồn, artifact PDF/text, source extracts, báo cáo và preview Comet. Không tải hoặc nhúng mp3/video gốc; việc mở ZIP trên Comet Windows thực tế vẫn cần người dùng xác nhận.

@@ -245,3 +245,16 @@
 - [x] Chạy `test-days`, `pnpm check`, `pnpm build` và QA route Ngày 36–40.
 - [x] Cập nhật báo cáo Batch 8, README, hồ sơ/audit và QA Comet.
 - [x] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận trước Batch 9.
+
+
+## Nạp nội dung thật Ngày 41–45 — Batch 9
+
+- [x] Kiểm kê Sheet và bốn loại nguồn: FILE ĐỀ, BÀI HỌC, FILE ĐỀ online, ĐÁP ÁN.
+- [x] Tải/trích xuất artifact truy cập được vào `source-extracts/batch-9/`.
+- [x] Ghi rõ nguồn bị chặn, thiếu transcript/audio hoặc không thể xác minh.
+- [x] Cập nhật `quiz-schema-gaps.md`; không mở rộng schema và không bịa phương án.
+- [x] Tạo importer Batch 9 dùng `merge_source_fields`, giữ nguyên dữ liệu cũ khi nguồn mới rỗng.
+- [x] Đồng bộ `data/days.json` và `client/src/data/days.json`, rebuild `days-index`.
+- [x] Chạy `test-days`, `pnpm check`, `pnpm build` và QA route Ngày 41–45.
+- [x] Cập nhật báo cáo Batch 9, README, hồ sơ/audit và QA Comet.
+- [ ] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận trước Batch 10.

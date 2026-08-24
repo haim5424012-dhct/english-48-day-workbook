@@ -84,3 +84,16 @@ Batch 7 bổ sung hai nhóm cần schema riêng: **nghe viết/điền không c�
 | 40 | Nghe điền từ về sở thích; đánh dấu/ghép sở thích theo người nói | 4 chỗ trống + 3 mục ghép/đánh dấu | 5 câu 2 lựa chọn + 3 câu 2 lựa chọn |
 
 Batch 8 tiếp tục cho thấy cần schema riêng cho **nghe điền thông tin**, **đánh dấu/ghép theo người nói** và nội dung nghe phụ thuộc mp3. Ngày 39 có PDF đề online/đáp án nhưng thiếu PDF FILE ĐỀ lý thuyết trong kho artifact hiện tại; không suy đoán Grammar/Vocabulary. Không mở rộng schema quiz và không ánh xạ các câu trên vào `days.json` trong batch này.
+
+
+## Batch 9 — Ngày 41–45
+
+| Ngày | Dạng không phải MCQ / cần schema mới | Số câu hoặc mục | MCQ và số lựa chọn gốc |
+|---:|---|---:|---|
+| 41 | Nghe hoàn thành câu về phương tiện giao thông | 9 chỗ trống | 7 câu, mỗi câu 2 lựa chọn |
+| 42 | Nghe hoàn thành câu về môn thể thao; đánh dấu/ghép dụng cụ theo 3 người nói | 4 chỗ trống + 3 người × 5 dụng cụ, 2 dụng cụ không được nhắc | 7 câu, mỗi câu 2 lựa chọn |
+| 43 | Nghe hoàn thành câu về nghề nghiệp; đánh dấu/ghép nghề theo 3 người nói | 5 chỗ trống + 3 người × 5 nghề, 2 nghề không được nhắc | 8 câu, mỗi câu 2 lựa chọn |
+| 44 | Nghe điền từ vào câu và ba đoạn thông tin về thiết bị/công nghệ | 4 câu + 9 chỗ trống trong đoạn | 7 câu, mỗi câu 2 lựa chọn |
+| 45 | Không có dạng ngoài MCQ trong phần Quiz/Practice của PDF | — | 19 câu, mỗi câu 2 lựa chọn |
+
+Batch 9 bổ sung rõ hai dạng cần schema riêng: **nghe điền nhiều chỗ trống** và **bảng đánh dấu/ghép nhiều người nói với mục tương ứng**. Ngày 45 là MCQ hai lựa chọn trong PDF lý thuyết/Practice nhưng vẫn chưa ánh xạ vào `quiz` chính thức theo quyết định hoãn. Không tải hoặc nhúng mp3/video gốc.
