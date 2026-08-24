@@ -281,4 +281,15 @@
 - [x] Thiết kế dashboard Editorial Lab Notebook với thẻ tổng quan, biểu đồ và bảng theo ngày/giai đoạn.
 - [x] Thêm route dashboard, điều hướng và bộ lọc tương tác.
 - [x] Kiểm thử dữ liệu, responsive, route và build production.
-- [ ] Lưu checkpoint và bàn giao dashboard.
+- [x] Lưu checkpoint và bàn giao dashboard.
+
+
+## Audit và hoàn thiện theo pasted_content.txt
+
+- [ ] Đọc toàn bộ đặc tả và lập ma trận yêu cầu–file–bằng chứng.
+- [ ] Audit schema, dữ liệu 48 ngày, nguồn và các trường còn thiếu.
+- [ ] Cập nhật dữ liệu đủ 48 ngày theo nguồn thật hoặc `SOURCE STATUS`, không bịa.
+- [ ] Sửa logic roadmap, mở khóa tuần tự và trạng thái hoàn thành bài.
+- [ ] Bổ sung kiểm thử bất biến dữ liệu và kiểm thử các luồng chính.
+- [ ] Chạy validator, `pnpm check`, `pnpm build` và QA web/Comet.
+- [ ] Cập nhật hồ sơ, báo cáo giới hạn và lưu checkpoint bàn giao.
