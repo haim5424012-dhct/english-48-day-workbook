@@ -14,9 +14,10 @@ const cometPathShim = `<script>
 (function () {
   if (window.location.protocol !== "file:") return;
   var pathname = decodeURIComponent(window.location.pathname).replace(/\\\\/g, "/");
+  var queryRoute = new URLSearchParams(window.location.search).get("cometRoute");
   var dayMatch = pathname.match(/\\/ngay\\/(\\d+\\.html)$/);
   var folderMatch = pathname.match(/\\/(lo-trinh|quiz-lab|on-tap)\\/index\\.html$/);
-  var route = dayMatch ? "/ngay/" + dayMatch[1] : folderMatch ? "/" + folderMatch[1] : "/";
+  var route = queryRoute || (dayMatch ? "/ngay/" + dayMatch[1] : folderMatch ? "/" + folderMatch[1] : "/");
   window.__COMET_PREVIEW_PATH__ = route;
   var marker = pathname.search(/\\/(ngay|lo-trinh|quiz-lab|on-tap)(?:\\/|$)/);
   window.__COMET_PREVIEW_ROOT__ = marker >= 0 ? pathname.slice(0, marker + 1) : pathname.slice(0, pathname.lastIndexOf("/") + 1);
@@ -25,9 +26,8 @@ const cometPathShim = `<script>
     var hashIndex = href.indexOf("#");
     var path = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
     var hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    if (path === "" || path === "/") return window.__COMET_PREVIEW_ROOT__ + "index.html" + hash;
-    if (path === "/quiz-lab" || path === "/on-tap" || path === "/lo-trinh") return window.__COMET_PREVIEW_ROOT__ + path.slice(1) + "/index.html" + hash;
-    return window.__COMET_PREVIEW_ROOT__ + path.slice(1) + hash;
+    var route = path === "" || path === "/" ? "/" : path;
+    return window.__COMET_PREVIEW_ROOT__ + "index.html?cometRoute=" + encodeURIComponent(route) + hash;
   }
   document.addEventListener("click", function (event) {
     var anchor = event.target.closest && event.target.closest("a");

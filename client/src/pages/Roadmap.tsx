@@ -52,13 +52,8 @@ function navigatePreview(path: string, setLocation: (path: string) => void) {
   const pathname = decodeURIComponent(window.location.pathname).replace(/\\\\/g, "/");
   const marker = pathname.search(/\/(ngay|lo-trinh|quiz-lab|on-tap)(?:\/|$)/);
   const root = marker >= 0 ? pathname.slice(0, marker + 1) : pathname.slice(0, pathname.lastIndexOf("/") + 1);
-  if (path === "/") {
-    window.location.href = `${root}index.html`;
-  } else if (path === "/quiz-lab" || path === "/on-tap" || path === "/lo-trinh") {
-    window.location.href = `${root}${path.slice(1)}/index.html`;
-  } else {
-    window.location.href = `${root}${path.slice(1)}`;
-  }
+  const route = path === "/" ? "/" : path;
+  window.location.href = `${root}index.html?cometRoute=${encodeURIComponent(route)}`;
 }
 
 function RoadmapHeader({ progress }: { progress: RoadmapProgress }) {

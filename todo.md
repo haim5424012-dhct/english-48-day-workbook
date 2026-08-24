@@ -156,5 +156,13 @@
 - [x] Truy vết href/route từ roadmap đến Ngày 1 và kiểm tra cấu trúc file thực tế.
 - [x] Sửa đường dẫn route local để không tạo ERR_FILE_NOT_FOUND.
 - [x] Kiểm thử click Bài 1 trên file:// và localhost.
-- [ ] Đóng gói ZIP mới, cập nhật QA và bàn giao.
+- [x] Đóng gói ZIP mới, cập nhật QA và bàn giao.
+
+
+## Điều tra ERR_FILE_NOT_FOUND trên Comet Windows
+
+- [x] Kiểm tra cấu trúc ZIP và các đường dẫn route khi giải nén vào thư mục Temp của Windows.
+- [x] Loại bỏ điều hướng tuyệt đối và cơ chế phụ thuộc file route con nếu cần.
+- [x] Tạo launcher Windows độc lập, tự xác định thư mục và chạy localhost.
+- [x] Kiểm thử mở bài học từ launcher và từ file HTML, cập nhật hướng dẫn tránh mở file tạm trực tiếp.
 
