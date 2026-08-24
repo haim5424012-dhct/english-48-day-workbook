@@ -43,3 +43,8 @@ Ngày 21 và Ngày 25 đã được mở bằng route trung tâm `index.html?com
 ## QA Batch 9 — Ngày 41–45 — 24/08/2026
 
 Đã rebuild preview bằng `scripts/prepare-comet-preview.mjs` sau khi import Ngày 41–45; central `index.html` self-contained khoảng 35,9 MB. QA web preview xác nhận các route `/ngay/41.html` đến `/ngay/45.html` hiển thị đúng số ngày, chủ đề và trạng thái `NEXT`. Đã tạo ZIP `/home/ubuntu/english-48-day-workbook-batch-9-comet.zip` gồm mã nguồn, artifact PDF/text, source extracts, báo cáo và preview Comet. Không tải hoặc nhúng mp3/video gốc; việc mở ZIP trên Comet Windows thực tế vẫn cần người dùng xác nhận.
+
+
+## QA Batch 10 — Ngày 46–48 — 24/08/2026
+
+Đã rebuild preview sau khi import Batch 10; central `index.html` self-contained khoảng 35,9 MB. QA web preview xác nhận `/ngay/46.html`, `/ngay/47.html` và `/ngay/48.html` hiển thị đúng tiêu đề, chủ đề và trạng thái `NEXT`; `/lo-trinh` vẫn hiển thị bản đồ 48 ngày. Đã tạo ZIP `/home/ubuntu/english-48-day-workbook-batch-10-comet.zip` gồm mã nguồn, artifact PDF/text, source extracts, báo cáo và preview Comet. Ngày 49–50 không có trong workbook và không tạo route mới. Không tải hoặc nhúng mp3/video gốc; việc mở ZIP trên Comet Windows thực tế vẫn cần người dùng xác nhận.

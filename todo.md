@@ -257,4 +257,18 @@
 - [x] Đồng bộ `data/days.json` và `client/src/data/days.json`, rebuild `days-index`.
 - [x] Chạy `test-days`, `pnpm check`, `pnpm build` và QA route Ngày 41–45.
 - [x] Cập nhật báo cáo Batch 9, README, hồ sơ/audit và QA Comet.
-- [ ] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận trước Batch 10.
+- [x] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận trước Batch 10.
+
+
+## Nạp nội dung thật Ngày 46–48 — Batch 10
+
+- [x] Kiểm kê Sheet và bốn loại nguồn: FILE ĐỀ, BÀI HỌC, FILE ĐỀ online, ĐÁP ÁN.
+- [x] Ghi nhận rõ Ngày 49–50 không tồn tại trong workbook 48 ngày và không tự tạo object mới.
+- [x] Tải/trích xuất artifact truy cập được vào `source-extracts/batch-10/`.
+- [x] Ghi rõ nguồn bị chặn, thiếu transcript/audio hoặc không thể xác minh.
+- [x] Cập nhật `quiz-schema-gaps.md`; không mở rộng schema và không bịa phương án.
+- [x] Tạo importer Batch 10 dùng `merge_source_fields`, giữ nguyên dữ liệu cũ khi nguồn mới rỗng.
+- [x] Đồng bộ `data/days.json` và `client/src/data/days.json`, rebuild `days-index`.
+- [x] Chạy `test-days`, `pnpm check`, `pnpm build` và QA route Ngày 46–48.
+- [x] Cập nhật báo cáo Batch 10, README, hồ sơ/audit và QA Comet.
+- [ ] Đóng gói Comet, tạo checkpoint và dừng chờ xác nhận hoàn tất 48 ngày.

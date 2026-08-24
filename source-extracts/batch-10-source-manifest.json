@@ -1,0 +1,53 @@
+{
+  "spreadsheetId": "1xP0Ltw0ydYaLFeJal4w8ma36HdvoYpbfCt8Jmt5PcsI",
+  "sheetTitle": "48 NGÀY LẤY  GỐC TIẾNG ANH TOÀN DIỆN",
+  "retrievedAt": "2026-08-24",
+  "sheetRange": "A137:H145",
+  "days": [
+    {
+      "day": 46,
+      "title": "Kỹ Năng Note-Taking",
+      "rows": {
+        "heading": 137,
+        "lesson": 138,
+        "online": 139
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1iDIoDTIxrdujs4170rHO1pu2VmCBkrTF/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/QeT5fj67Sec?si=3puyFPMbM39y9o03",
+        "fileDeOnline": "https://drive.google.com/drive/folders/14JDWZPGfORb_H_841n0DZU3cMWEtgrir",
+        "dapAn": "https://drive.google.com/file/d/1f0iP8kN4D0oEwTUC5iCrAxnl6o7rBVZ8/view?usp=drive_link"
+      }
+    },
+    {
+      "day": 47,
+      "title": "Kỹ Năng Paraphrasing",
+      "rows": {
+        "heading": 140,
+        "lesson": 141,
+        "online": 142
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/1lZWVQLEw8QT5i0_YT7i2NtyWixCFPO_D/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/qcvk1SxJ5lo?si=pE5qKGIO_iviqcM1",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1nJBLD_g_JGNjhJ_lRqmn0QJfLZqCOnHG",
+        "dapAn": "https://drive.google.com/file/d/1SXWr2bqb2-G553UHImuxYzZuyISIRmJJ/view?usp=drive_link"
+      }
+    },
+    {
+      "day": 48,
+      "title": "Tự Tin Giới Thiệu Bản Thân Và Thuyết Trình Bằng Tiếng Anh",
+      "rows": {
+        "heading": 143,
+        "lesson": 144,
+        "online": 145
+      },
+      "sources": {
+        "fileDe": "https://drive.google.com/file/d/14CDOAPh6rq_juONl1c7Gy7xl4seo886R/view?usp=drivesdk",
+        "baiHoc": "https://youtu.be/TK09i8WvsG4?si=dEjGBwifeG4fy4h0",
+        "fileDeOnline": "https://drive.google.com/drive/folders/1QYcsRN7vC4QjwvoQIlvmut6lDlri52tY",
+        "dapAn": "https://drive.google.com/file/d/1SXWr2bqb2-G553UHImuxYzZuyISIRmJJ/view?usp=drive_link"
+      }
+    }
+  ]
+}

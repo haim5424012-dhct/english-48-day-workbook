@@ -25,9 +25,10 @@ Website tổ chức hành trình học thành 48 ngày và 10 giai đoạn. Mỗ
 | Ngày 31–35 | Đã nạp lý thuyết/SRS; bài nghe/quiz chưa ánh xạ; Ngày 35 có file đề online lệch chủ đề | `batch-7-report.md`, `source-extracts/batch-7/` |
 | Ngày 36–40 | Đã nạp lý thuyết/SRS; quiz và media chưa ánh xạ; Ngày 39 thiếu PDF FILE ĐỀ lý thuyết trong artifact | `batch-8-report.md`, `source-extracts/batch-8/` |
 | Ngày 41–45 | Đã nạp lý thuyết/SRS; bài nghe/quiz chưa ánh xạ | `batch-9-report.md`, `source-extracts/batch-9/` |
-| Ngày 46–48 | Giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
+| Ngày 46–48 | Đã nạp lý thuyết/SRS; bài nghe, paraphrase, T/F và điền từ chưa ánh xạ | `batch-10-report.md`, `source-extracts/batch-10/` |
+| Ngày 49–50 | Không thuộc workbook hiện hành | Không tạo object mới; workbook có 48 ngày |
 
-Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 43 ngày và `srsCards` có ở 45 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức vẫn chưa có nội dung được ánh xạ trong các batch mới khi dạng bài cần audio/viết hoặc chưa khớp schema. Không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
+Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 46 ngày và `srsCards` có ở 48 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức vẫn chưa có nội dung được ánh xạ trong các batch mới khi dạng bài cần audio/viết hoặc chưa khớp schema. Không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
 
 ## 3. Tính năng hiện có
 
@@ -67,7 +68,7 @@ Khi chạy thử, cần giải nén toàn bộ ZIP vào Desktop hoặc Documents
 
 ## 7. Giới hạn và việc chưa thực hiện
 
-Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chưa có tài khoản người học, chưa có waveform Web Audio API và chưa chấm phát âm thật qua dịch vụ bên thứ ba. Batch 4–9 đã cập nhật Ngày 16–45 nhưng còn các giới hạn về transcript video, audio, một số PDF đáp án và schema quiz đã nêu ở các báo cáo. Không đưa audio/video gốc của giáo viên vào website khi chưa xác minh quyền sử dụng.
+Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chưa có tài khoản người học, chưa có waveform Web Audio API và chưa chấm phát âm thật qua dịch vụ bên thứ ba. Batch 4–10 đã cập nhật Ngày 16–48 nhưng còn các giới hạn về transcript video, audio, một số PDF đáp án và schema quiz đã nêu ở các báo cáo. Workbook hiện kết thúc ở Ngày 48; không tự mở rộng sang Ngày 49–50. Không đưa audio/video gốc của giáo viên vào website khi chưa xác minh quyền sử dụng.
 
 ## 8. Tệp tham chiếu chính
 

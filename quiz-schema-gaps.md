@@ -97,3 +97,14 @@ Batch 8 tiếp tục cho thấy cần schema riêng cho **nghe điền thông ti
 | 45 | Không có dạng ngoài MCQ trong phần Quiz/Practice của PDF | — | 19 câu, mỗi câu 2 lựa chọn |
 
 Batch 9 bổ sung rõ hai dạng cần schema riêng: **nghe điền nhiều chỗ trống** và **bảng đánh dấu/ghép nhiều người nói với mục tương ứng**. Ngày 45 là MCQ hai lựa chọn trong PDF lý thuyết/Practice nhưng vẫn chưa ánh xạ vào `quiz` chính thức theo quyết định hoãn. Không tải hoặc nhúng mp3/video gốc.
+
+
+## Batch 10 — Ngày 46–48
+
+| Ngày | Dạng không phải MCQ / cần schema mới | Số câu hoặc mục | MCQ và số lựa chọn gốc |
+|---:|---|---:|---|
+| 46 | Nghe đánh dấu True/False | 5 mệnh đề | 8 câu nghe, mỗi câu 3 lựa chọn |
+| 47 | Paraphrasing chọn câu tương đương; nghe đánh dấu True/False | 6 câu paraphrase + 5 mệnh đề T/F | 6 câu nghe, mỗi câu 2 lựa chọn |
+| 48 | Nghe điền từ vào bài giới thiệu bản thân và bài thuyết trình | 7 + 8 = 15 chỗ trống | — |
+
+Batch 10 bổ sung các dạng cần schema riêng: **note-taking kết hợp MCQ 3 lựa chọn**, **paraphrasing**, **True/False dạng bảng** và **nghe điền nhiều chỗ trống**. Ngày 47 được xác nhận trực quan vì text extract của PDF chỉ còn watermark. Ngày 48 có hyperlink đáp án trùng file ID với Ngày 47 nên chưa coi là đáp án độc lập. Không mở rộng schema quiz, không bịa phương án và không tải/nhúng mp3/video gốc.
