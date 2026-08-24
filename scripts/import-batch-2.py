@@ -58,16 +58,25 @@ patches = {
     },
 }
 
+OPTIONAL_ARRAY_FIELDS = {'listeningItems', 'shadowingSentences', 'writingPrompts', 'quiz'}
+
+
+def merge_source_fields(target, patch):
+    for field, value in patch.items():
+        # An empty array means “source not available”, not “erase prior work”.
+        if field in OPTIONAL_ARRAY_FIELDS and isinstance(value, list) and not value:
+            continue
+        target[field] = value
+    for field in OPTIONAL_ARRAY_FIELDS:
+        target.setdefault(field, [])
+
+
 for day in data['days']:
     if day['day'] not in patches:
         continue
-    day.update(patches[day['day']])
+    merge_source_fields(day, patches[day['day']])
     day['status'] = 'coming-soon'
     day.setdefault('warmupScript', '')
-    day.setdefault('listeningItems', [])
-    day.setdefault('shadowingSentences', [])
-    day.setdefault('writingPrompts', [])
-    day.setdefault('quiz', [])
 
 # Bump version only after controlled patch.
 data['version'] = '0.3-source-batch-2'

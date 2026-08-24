@@ -68,3 +68,23 @@
 - [x] Kiểm tra đồng thời `grammarContent`, `listeningItems`, `writingPrompts`, `quiz` và `srsCards` của Ngày 1.
 - [x] Nếu thiếu dữ liệu, truy nguyên qua lịch sử Git và khôi phục đúng bản gốc; nếu nguyên vẹn, ghi nhận rõ nhầm lẫn báo cáo.
 - [x] Chạy `pnpm check` và `pnpm build`, sau đó báo cáo và dừng phạm vi công việc.
+
+
+## Audit bản chất dữ liệu bị mất và logic đồng bộ
+
+- [x] Đối chiếu lịch sử Git trước/sau `08eb178` để xác định nguồn gốc ba trường Ngày 1 bị rỗng.
+- [x] Kiểm kê sáu trường của Ngày 2–5 trong cả root/client days.json.
+- [x] Đọc script/hàm đồng bộ của `08eb178`, xác định overwrite hay merge từng trường và rủi ro tái diễn.
+- [x] Không sửa dữ liệu; đóng gói mã nguồn hiện tại thành ZIP và lập báo cáo bằng chứng.
+
+
+## Nạp nội dung thật Ngày 11–15
+
+- [x] Đọc và kiểm kê file CSV người dùng gửi, xác định các cột/dòng cho Ngày 11–15.
+- [x] Kiểm kê 4 nguồn FILE ĐỀ/BÀI HỌC/FILE ĐỀ online/ĐÁP ÁN từ Google Sheet hoặc CSV thay thế.
+- [x] Kiểm tra phạm vi dữ liệu Sheet đến Ngày 48, chỉ ghi nhận Ngày 36–48.
+- [x] Trích xuất PDF và lưu `source-extracts/batch-3/ngay-11.md` đến `ngay-15.md`.
+- [x] Cập nhật `quiz-schema-gaps.md` cho Ngày 1, 3–10 và 11–15 nếu có dạng mới.
+- [x] Nạp grammar/SRS và trường có nguồn thật bằng merge an toàn; đồng bộ root/client JSON.
+- [x] Chạy test nội dung, `pnpm check`, `pnpm build`, kiểm tra preview đại diện và lập báo cáo batch 3.
+- [x] Đóng gói ZIP đầy đủ và dừng trước Ngày 16.

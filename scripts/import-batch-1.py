@@ -1,7 +1,8 @@
 import json
+import os
 from pathlib import Path
 
-ROOT = Path('/home/ubuntu/english-48-day-workbook')
+ROOT = Path(os.environ.get('WORKBOOK_ROOT', '/home/ubuntu/english-48-day-workbook'))
 source_path = ROOT / 'data' / 'days.json'
 client_path = ROOT / 'client' / 'src' / 'data' / 'days.json'
 
@@ -66,8 +67,21 @@ updates = {
     }
 }
 
+OPTIONAL_ARRAY_FIELDS = {'listeningItems', 'shadowingSentences', 'writingPrompts', 'quiz'}
+
+
+def merge_source_fields(target, patch):
+    for field, value in patch.items():
+        # An empty array means “source not available”, not “erase prior work”.
+        if field in OPTIONAL_ARRAY_FIELDS and isinstance(value, list) and not value:
+            continue
+        target[field] = value
+    for field in OPTIONAL_ARRAY_FIELDS:
+        target.setdefault(field, [])
+
+
 for day, patch in updates.items():
-    by_day[day].update(patch)
+    merge_source_fields(by_day[day], patch)
 
 payload = json.dumps(data, ensure_ascii=False, indent=2) + '\n'
 source_path.write_text(payload, encoding='utf-8')
