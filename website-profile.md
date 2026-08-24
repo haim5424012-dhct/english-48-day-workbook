@@ -20,9 +20,10 @@ Website tổ chức hành trình học thành 48 ngày và 10 giai đoạn. Mỗ
 | Ngày 6–10 | Đã xử lý theo batch nguồn, phần không khớp schema giữ trong source note | `source-extracts/batch-2/`, `batch-2-report.md` |
 | Ngày 11–15 | Đã xử lý theo batch nguồn, lưu trích xuất và merge theo trường | `source-extracts/batch-3/`, báo cáo batch 3 |
 | Ngày 16–20 | Đã nạp lý thuyết/SRS; quiz và media chưa ánh xạ | `batch-4-report.md`, `source-extracts/batch-4/` |
-| Ngày 21–48 | Chưa phải bài học hoàn chỉnh; giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
+| Ngày 21–25 | Đã nạp lý thuyết/SRS; quiz, audio và phần viết chưa ánh xạ | `batch-5-report.md`, `source-extracts/batch-5/` |
+| Ngày 26–48 | Chưa phải bài học hoàn chỉnh; giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
 
-Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 19 ngày và `srsCards` có ở 20 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức chưa có nội dung được ánh xạ trong bản dữ liệu hiện tại; không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
+Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 25 ngày và `srsCards` có ở 25 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức vẫn chưa có nội dung được ánh xạ trong các batch mới khi dạng bài cần audio/viết hoặc chưa khớp schema; không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
 
 ## 3. Tính năng hiện có
 
@@ -62,7 +63,7 @@ Khi chạy thử, cần giải nén toàn bộ ZIP vào Desktop hoặc Documents
 
 ## 7. Giới hạn và việc chưa thực hiện
 
-Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chưa có tài khoản người học, chưa có waveform Web Audio API và chưa chấm phát âm thật qua dịch vụ bên thứ ba. Batch 4 đã cập nhật Ngày 16–20 nhưng còn các giới hạn về transcript video, FILE ĐỀ online Ngày 16 và schema quiz đã nêu ở báo cáo. Không đưa audio/video gốc của giáo viên vào website khi chưa xác minh quyền sử dụng.
+Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chưa có tài khoản người học, chưa có waveform Web Audio API và chưa chấm phát âm thật qua dịch vụ bên thứ ba. Batch 4–5 đã cập nhật Ngày 16–25 nhưng còn các giới hạn về transcript video, audio Ngày 21, PDF đáp án Ngày 21 và schema quiz đã nêu ở các báo cáo. Không đưa audio/video gốc của giáo viên vào website khi chưa xác minh quyền sử dụng.
 
 ## 8. Tệp tham chiếu chính
 
@@ -97,3 +98,18 @@ Website chưa đồng bộ điểm hoặc tiến trình lên Google Sheets, chư
 Các trường `listeningItems`, `shadowingSentences`, `writingPrompts` và `quiz` của Batch 4 vẫn để mảng rỗng khi chưa có dữ liệu phù hợp hoặc schema đã được xác nhận. Video BÀI HỌC chưa có transcript nên không được tải hoặc nhúng. Các format quiz mới được thống kê trong `quiz-schema-gaps.md`, chưa tự chuyển đổi thành MCQ.
 
 Hồ sơ truy vết chi tiết nằm tại `batch-4-report.md` và `source-extracts/batch-4/`. `node scripts/test-days.mjs`, `pnpm check` và `pnpm build` đã đạt; build chỉ còn các cảnh báo không chặn về cấu hình pnpm cũ, chunk lớn và texture runtime.
+
+
+## Phụ lục B — Cập nhật Batch 5: Ngày 21–25
+
+**Ngày cập nhật:** 24/08/2026. Batch 5 đã nạp dữ liệu lý thuyết và 5 SRS cards/ngày vào cả hai bản `days.json` bằng `merge_source_fields`.
+
+| Ngày | Chủ đề | Trạng thái dữ liệu |
+|---:|---|---|
+| 21 | Luyện nghe số và tên | Đã nạp số lớn, số điện thoại, bảng chữ cái và tên; các bài nghe/viết phụ thuộc audio chưa ánh xạ; PDF đáp án không đủ text để xác minh |
+| 22 | Động từ khuyết thiếu | Đã nạp quy tắc modal và ví dụ; đề online 20 câu/2 lựa chọn chưa đưa vào quiz chính thức |
+| 23 | Liên từ and, but, or, so và because | Đã nạp lý thuyết; đề online gồm 5 câu điền từ và 15 MCQ/2 lựa chọn, chưa đưa vào quiz |
+| 24 | Liên từ chỉ thời gian | Đã nạp lý thuyết; đề online gồm 5 câu điền từ và 15 MCQ/2 lựa chọn, chưa đưa vào quiz |
+| 25 | Liên từ chỉ sự đối lập | Đã nạp lý thuyết; đề online 20 câu/2 lựa chọn chưa đưa vào quiz chính thức |
+
+Bằng chứng nằm tại `batch-5-report.md`, `source-extracts/batch-5/ngay-21.md` đến `ngay-25.md`, `source-extracts/batch-5/online-answer-extracts.md` và `quiz-schema-gaps.md`. Không tải hoặc nhúng video/audio gốc; không suy đoán đáp án Ngày 21.

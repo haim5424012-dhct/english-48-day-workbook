@@ -32,3 +32,16 @@ Các số lượng trên được đếm từ các file text bài thi online đ�
 Ngày 11–20 có các dạng mới cần cân nhắc khi thiết kế schema sau này: bảng biến đổi động từ, điền/chia động từ, trả lời ngắn theo hình, câu hỏi âm vị, xác định vị trí trọng âm, chọn từ theo vị trí trọng âm, điền từ để hỏi và viết câu hỏi từ từ gợi ý. Ngày 13 có câu trả lời theo quy ước `Did – break`; Ngày 15, 16 và 17 có dạng điền hai vị trí hoặc nhiều thành phần như `have – made`, `Will – tell`, `Will – have arrived`. Không mở rộng schema trong Batch 4.
 
 Nguồn Batch 4 được lưu trong `source-extracts/batch-4/ngay-16.md` đến `ngay-20.md`; các số lượng trên dựa trên PDF đề online đã tải hoặc trang đáp án công khai khi FILE ĐỀ Drive không truy cập được. Riêng FILE ĐỀ online Ngày 16 trả 404 qua Drive API nên chỉ ghi nhận format từ trang đáp án công khai và giữ trạng thái pending-source cho file Drive.
+
+
+## Batch 5 — Ngày 21–25
+
+| Ngày | Dạng không phải MCQ / cần schema mới | Số câu hoặc mục | MCQ và số lựa chọn gốc |
+|---|---|---:|---|
+| 21 | Viết số nghe được; viết số điện thoại; viết chữ cái; viết tên — đều phụ thuộc audio mp3 | 6 + 5 + 5 + 5 | 5 câu chọn số 2 lựa chọn + 5 câu chọn chữ cái 2 lựa chọn |
+| 22 | Không có dạng ngoài MCQ trong đề online | — | 20 câu 2 lựa chọn |
+| 23 | Điền một liên từ duy nhất từ hộp cho mỗi chỗ trống | 5 câu | 15 câu 2 lựa chọn |
+| 24 | Điền một liên từ chỉ thời gian duy nhất từ hộp cho mỗi chỗ trống | 5 câu | 15 câu 2 lựa chọn |
+| 25 | Không có dạng ngoài MCQ trong đề online | — | 20 câu 2 lựa chọn |
+
+Đối với Ngày 21, PDF ĐÁP ÁN Drive đã tải được nhưng lớp text chỉ còn watermark/metadata, nên không dùng để suy đoán đáp án. Các bài viết số, số điện thoại, chữ cái và tên cần audio gốc hoặc đáp án xác minh trước khi đưa vào dữ liệu tương tác. Batch 5 không chuyển các câu trên thành MCQ 3 lựa chọn.

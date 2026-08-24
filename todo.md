@@ -195,3 +195,15 @@
 - [x] Cập nhật `batch-4-report.md`, `website-profile.md` và README.
 - [x] Chạy `test-days`, `pnpm check`, `pnpm build`, QA preview và tạo lại gói Comet.
 - [ ] Chờ người dùng xác nhận nguồn FILE ĐỀ online Ngày 16 hoặc quyết định mở rộng schema quiz.
+
+
+## Nạp nội dung thật Ngày 21–25 — Batch 5
+
+- [x] Kiểm kê nguồn Sheet và bốn loại nguồn cho Ngày 21–25.
+- [x] Tải/trích xuất các artifact truy cập được, lưu source-extracts Batch 5.
+- [x] Ghi rõ nguồn bị chặn, thiếu transcript hoặc không thể xác minh.
+- [x] Cập nhật `quiz-schema-gaps.md` cho các dạng bài mới nếu có.
+- [x] Nạp dữ liệu nguồn bằng `merge_source_fields`; không bịa và không ép quiz sai schema.
+- [x] Đồng bộ root/client days.json, rebuild days-index và cập nhật báo cáo/hồ sơ.
+- [x] Chạy test-days, `pnpm check`, `pnpm build`, QA preview và tạo checkpoint.
+- [ ] Chờ xác nhận người dùng nếu có nguồn thiếu hoặc cần mở rộng schema quiz.
