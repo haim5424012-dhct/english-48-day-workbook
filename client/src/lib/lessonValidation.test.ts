@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { canCompleteDay, canCompleteStep, hasLessonBlocks, type CompletionEvidence, type LessonLike } from "./lessonValidation";
+import { isListeningAnswerCorrect } from "../pages/Home";
 
 const day: LessonLike = {
   day: 1,
@@ -20,6 +21,21 @@ const evidence: CompletionEvidence = {
   quizScore: 4,
   reviewedCards: 5,
 };
+
+describe("dictation answer grading", () => {
+  const item = { audioText: "I am ready.", blankSentence: "I ___ ready.", answer: "am" };
+
+  it("counts the blank answer and full-sentence transcription as correct", () => {
+    expect(isListeningAnswerCorrect(item, "am")).toBe(true);
+    expect(isListeningAnswerCorrect(item, "I am ready.")).toBe(true);
+    expect(isListeningAnswerCorrect(item, "I am ready")).toBe(true);
+  });
+
+  it("rejects an incorrect transcription", () => {
+    expect(isListeningAnswerCorrect(item, "is")).toBe(false);
+    expect(isListeningAnswerCorrect(item, "I is ready.")).toBe(false);
+  });
+});
 
 describe("lesson completion rules", () => {
   it("requires all six content blocks", () => {

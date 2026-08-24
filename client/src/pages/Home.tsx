@@ -89,6 +89,16 @@ function normalize(value: string) {
     .trim();
 }
 
+export function isListeningAnswerCorrect(item: { audioText: string; blankSentence: string; answer: string }, value: string) {
+  const actual = normalize(value);
+  const accepted = new Set([
+    normalize(item.answer),
+    normalize(item.audioText),
+    normalize(item.blankSentence.replace("___", item.answer)),
+  ]);
+  return accepted.has(actual);
+}
+
 function loadProgress(): ProgressState {
   const fallback: ProgressState = {
     completed: [false, false, false, false, false, false],
@@ -128,6 +138,7 @@ export default function Home() {
   const [showWarmupText, setShowWarmupText] = useState(false);
   const [listenAnswers, setListenAnswers] = useState<Record<number, string>>({});
   const [listenFeedback, setListenFeedback] = useState<Record<number, "correct" | "try-again"> >({});
+  const listenInputRefs = useRef<Record<number, HTMLInputElement | null>>({});
   const [shadowIndex, setShadowIndex] = useState(0);
   const [shadowTranscript, setShadowTranscript] = useState("");
   const [shadowPassed, setShadowPassed] = useState<boolean[]>(() => Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => false));
@@ -228,9 +239,21 @@ export default function Home() {
   }
 
   function checkListening(index: number) {
-    const expected = normalize(day.listeningItems?.[index]?.answer ?? "");
-    const actual = normalize(listenAnswers[index] ?? "");
-    setListenFeedback((current) => ({ ...current, [index]: actual === expected ? "correct" : "try-again" }));
+    const item = day.listeningItems?.[index];
+    if (!item) return;
+    const correct = isListeningAnswerCorrect(item, listenAnswers[index] ?? "");
+    setListenFeedback((current) => ({ ...current, [index]: correct ? "correct" : "try-again" }));
+    announce(correct ? `Câu ${index + 1} đúng, đã tính điểm.` : `Câu ${index + 1} chưa đúng. Bạn có thể sửa hoặc bấm Thử lại.`);
+  }
+
+  function retryListening(index: number) {
+    setListenAnswers((current) => ({ ...current, [index]: "" }));
+    setListenFeedback((current) => {
+      const next = { ...current };
+      delete next[index];
+      return next;
+    });
+    window.setTimeout(() => listenInputRefs.current[index]?.focus(), 0);
   }
 
   async function startAudioRecording() {
@@ -411,9 +434,9 @@ export default function Home() {
             {(day.listeningItems ?? []).map((item, index) => (
               <div className={`listening-item ${listenFeedback[index] === "correct" ? "is-correct" : ""}`} key={item.blankSentence}>
                 <span className="item-index">0{index + 1}</span>
-                <div className="listening-body"><button className="icon-action" aria-label={`Nghe câu ${index + 1}`} onClick={() => speak(item.audioText)}><Volume2 size={18} /></button><span>{item.blankSentence.replace("___", "")}</span><input aria-label={`Đáp án câu ${index + 1}`} value={listenAnswers[index] ?? ""} onChange={(event) => setListenAnswers((current) => ({ ...current, [index]: event.target.value }))} onKeyDown={(event) => event.key === "Enter" && checkListening(index)} placeholder="..." /></div>
-                <div className="item-feedback">{listenFeedback[index] === "correct" ? <><Check size={15} /> Chuẩn</> : listenFeedback[index] === "try-again" ? "Thử lại" : ""}</div>
-                <button className="text-action" onClick={() => checkListening(index)}>Kiểm tra</button>
+                <div className="listening-body"><button className="icon-action" aria-label={`Nghe câu ${index + 1}`} onClick={() => speak(item.audioText)}><Volume2 size={18} /></button><span>{item.blankSentence.replace("___", "")}</span><input ref={(element) => { listenInputRefs.current[index] = element; }} aria-label={`Đáp án câu ${index + 1}`} value={listenAnswers[index] ?? ""} onChange={(event) => { setListenAnswers((current) => ({ ...current, [index]: event.target.value })); setListenFeedback((current) => { const next = { ...current }; delete next[index]; return next; }); }} onKeyDown={(event) => event.key === "Enter" && checkListening(index)} placeholder="Từ còn thiếu hoặc cả câu..." /></div>
+                <div className="item-feedback" aria-live="polite">{listenFeedback[index] === "correct" ? <><Check size={15} /> Đúng +1</> : listenFeedback[index] === "try-again" ? <button className="text-action retry-action" type="button" onClick={() => retryListening(index)}>Thử lại</button> : ""}</div>
+                <button className="text-action" type="button" onClick={() => checkListening(index)}>Kiểm tra</button>
               </div>
             ))}
           </div>

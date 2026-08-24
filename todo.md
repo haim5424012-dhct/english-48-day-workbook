@@ -332,3 +332,21 @@
 - [ ] Theo dõi build và deploy đến trạng thái thành công.
 - [ ] Kiểm tra deployment URL, HTTP status và asset chính.
 - [ ] Kiểm tra deep links đại diện và route fallback 404.
+
+
+## Sửa lỗi Dictation Bước 03
+- [x] Truy vết state/handler chấm Dictation và trạng thái từng câu.
+- [x] Sửa ghi nhận số câu đúng, trạng thái phản hồi và điều kiện completion.
+- [x] Sửa nút “Thử lại” để reset đúng ô nhập, feedback và điểm câu.
+- [x] Bổ sung hoặc cập nhật unit test cho chấm điểm và reset.
+- [x] Chạy test content, test logic, `pnpm check`, `pnpm build`.
+- [x] QA trực tiếp Bước 03 trên Ngày 1 và lưu checkpoint.
+
+
+## Điều tra lại lỗi nút Dictation trên GitHub Pages
+
+- [ ] Đối chiếu commit/bundle đang phục vụ với mã nguồn sau checkpoint 780aab23.
+- [ ] Kiểm tra runtime console/network và khả năng bản Pages đang dùng bundle cũ.
+- [ ] Tạo test tương tác cho Kiểm tra/Thử lại và bộ đếm điểm.
+- [ ] Sửa lỗi phát hiện được, chạy `pnpm test:content`, `pnpm test:logic`, `pnpm check`, `pnpm build`.
+- [ ] Push bản sửa, theo dõi GitHub Actions và xác nhận nút hoạt động trên URL Pages.
