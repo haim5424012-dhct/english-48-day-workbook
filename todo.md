@@ -141,3 +141,12 @@
 - [x] Kiểm tra trực tiếp trên trình duyệt sandbox, file size và runtime.
 - [x] Đóng gói ZIP thay thế với hướng dẫn rõ ràng.
 
+
+## Điều tra lỗi Comet vẫn không mở được
+
+- [x] Đọc lại toàn bộ báo cáo/QA/generator và kiểm tra giả định khác biệt giữa sandbox và Comet Windows.
+- [x] Kiểm tra CSP, module script, dynamic import, URL API và chính sách thực thi JavaScript trên `file://`.
+- [x] Tạo một smoke test tối giản và kiểm tra bằng Chromium/file URL với console/network.
+- [x] Chọn phương án tương thích thực tế, sửa generator và cập nhật hướng dẫn mở file.
+- [x] Kiểm thử lại gói mới bằng nhiều entry point, đóng ZIP và ghi rõ giới hạn nếu Comet vẫn chặn file local.
+
