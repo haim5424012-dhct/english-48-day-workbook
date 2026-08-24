@@ -32,15 +32,15 @@ const stageTitles = {
   7: "Liên từ",
   8: "Câu điều kiện",
   9: "Luyện nghe chuyên đề",
-  10: "Sắp cập nhật",
+  10: "Nghe chuyên đề & dự án kết khóa",
 };
 
 const index = source.days.map((entry) => ({
   day: entry.day,
-  title: entry.day >= 34 ? (manifestTitles[entry.day] ?? entry.title) : entry.title,
+  title: entry.title || manifestTitles[entry.day] || `Ngày ${entry.day}`,
   stage: stageForDay(entry.day),
   stageTitle: stageTitles[stageForDay(entry.day)],
-  status: entry.day === 1 ? "ready" : entry.day >= 34 ? "pending-source" : "coming-soon",
+  status: "ready",
 }));
 
 await writeFile(new URL("../data/days-index.json", import.meta.url), `${JSON.stringify(index, null, 2)}\n`);

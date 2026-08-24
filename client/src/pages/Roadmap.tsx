@@ -28,13 +28,20 @@ const stages: Stage[] = [
   { id: 7, range: "23—25", title: "Liên từ", note: "Nối những mảnh ý thành câu." },
   { id: 8, range: "26—28", title: "Câu điều kiện", note: "Nói về khả năng và giả định." },
   { id: 9, range: "29—33", title: "Luyện nghe chuyên đề", note: "Điền từ, chính tả, giờ, ngày và nơi chốn." },
-  { id: 10, range: "34—48", title: "Sắp cập nhật", note: "Các trạm tiếp theo đang chờ dữ liệu gốc." },
+  { id: 10, range: "34—48", title: "Nghe chuyên đề & dự án kết khóa", note: "Từ nghe hiểu đến ghi chú, diễn đạt lại và thuyết trình." },
 ];
 
 const dayIndex = indexData as DayIndex[];
 
 function statusForDay(day: number, progress: RoadmapProgress) {
   if (progress.completedDays.includes(day)) return "completed" as const;
+  if (typeof window !== "undefined") {
+    try {
+      const saved = window.localStorage.getItem(`english48-day${day}-progress`);
+      const parsed = saved ? JSON.parse(saved) as { completed?: boolean[] } : null;
+      if (Array.isArray(parsed?.completed) && parsed.completed.some(Boolean)) return "in-progress" as const;
+    } catch { /* invalid local progress is treated as untouched */ }
+  }
   if (isDayReady(day, progress.completedDays)) return "ready" as const;
   return "locked" as const;
 }
@@ -108,8 +115,7 @@ export default function Roadmap() {
       setNotice(`Hoàn thành Ngày ${String(entry.day - 1).padStart(2, "0")} để mở trạm này.`);
       return;
     }
-    if (entry.day === 1) navigatePreview("/ngay/01.html", setLocation);
-    else setNotice("Nội dung ngày này đang chờ được bổ sung vào workbook.");
+    navigatePreview(`/ngay/${String(entry.day).padStart(2, "0")}.html`, setLocation);
   }
 
   return (
@@ -121,7 +127,7 @@ export default function Roadmap() {
             <div className="eyebrow"><span className="eyebrow-dot" /> YOUR 48-DAY ROUTE</div>
             <h1>Mỗi ngày một<br /><em>việc nhỏ.</em> Một<br />đường đi rõ.</h1>
             <p>Không cần tự hỏi hôm nay học gì. Chọn một trạm, làm đủ sáu bước, rồi để dấu XONG dẫn bạn đi tiếp.</p><div className="roadmap-loop" aria-label="Vòng lặp sáu bước"><span className="is-current">01 Input</span><i>→</i><span>02 Grammar</span><i>→</i><span>03 Listen</span><i>→</i><span>04 Speak</span><i>→</i><span>05 Write</span><i>→</i><span>06 Review</span></div>
-            <div className="roadmap-actions"><a className="primary-action" href="#current-stage">Tiếp tục Ngày {String(currentDay).padStart(2, "0")} <ArrowRight size={17} /></a><a className="secondary-action" href="/on-tap">Mở kho ôn tập <RotateCcw size={15} /></a></div>
+            <div className="roadmap-actions"><button className="primary-action" onClick={() => { const entry = dayIndex.find((item) => item.day === currentDay); if (entry) handleDay(entry); }}>Tiếp tục Ngày {String(currentDay).padStart(2, "0")} <ArrowRight size={17} /></button><a className="secondary-action" href="/on-tap">Mở kho ôn tập <RotateCcw size={15} /></a></div>
           </div>
           <div className="roadmap-stat-card">
             <div className="roadmap-stat-top"><span className="tiny-label">FIELD NOTE / 48 DAYS</span><Flame size={19} /></div>
@@ -144,7 +150,7 @@ export default function Roadmap() {
               const stageDays = dayIndex.filter((entry) => entry.stage === stage.id);
               const done = stageProgress(stage, progress);
               const active = stage.id === currentStage;
-              return <section className={`stage-block ${active ? "is-current" : ""} ${stage.id === 10 ? "is-pending" : ""}`} key={stage.id}>
+              return <section className={`stage-block ${active ? "is-current" : ""}`} key={stage.id}>
                 <div className="stage-marker"><span>{String(stage.id).padStart(2, "0")}</span><i /></div>
                 <div className="stage-content">
                   <div className="stage-heading"><div><span className="stage-range">DAYS {stage.range}</span><h3>{stage.title}</h3><p>{stage.note}</p></div><div className="stage-count">{done}<span>/{stageDays.length}</span></div></div>
@@ -154,7 +160,7 @@ export default function Roadmap() {
                       <span className="node-meta">LESSON / {String(entry.day).padStart(2, "0")}</span>
                       <span className="node-day">{String(entry.day).padStart(2, "0")}</span>
                       <span className="node-title">{entry.title}</span>
-                      <span className="node-status">{status === "completed" ? <><Check size={13} /> XONG</> : status === "ready" ? "ĐANG MỞ" : <><Lock size={12} /> CHƯA MỞ</>}</span>
+                      <span className="node-status">{status === "completed" ? <><Check size={13} /> XONG</> : status === "in-progress" ? "ĐANG HỌC" : status === "ready" ? "ĐANG MỞ" : <><Lock size={12} /> CHƯA MỞ</>}</span>
                       {status === "locked" && <Lock className="node-lock" size={15} />}
                       {status === "completed" && <span className="node-stamp">XONG</span>}
                     </button>;

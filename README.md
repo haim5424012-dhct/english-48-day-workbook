@@ -1,6 +1,6 @@
 # 48 Ngày Lấy Gốc Tiếng Anh
 
-Website workbook tương tác dành cho học sinh Việt Nam muốn xây lại nền tảng tiếng Anh trong 48 ngày. Luồng tương tác đầy đủ đã được xây cho **Ngày 1 — Thể khẳng định và phủ định của động từ to be**; dữ liệu nguồn đã được xử lý theo các batch đến **Ngày 48**.
+Website workbook tương tác dành cho học sinh Việt Nam muốn xây lại nền tảng tiếng Anh trong 48 ngày. Luồng tương tác đã được chuẩn hóa cho **toàn bộ 48 ngày**, với Ngày 1 là luồng mẫu giàu tương tác và các ngày còn lại có metadata, sáu khối học, grammar/SRS hoặc trạng thái nguồn tương ứng.
 
 > **Định hướng thiết kế:** Editorial Lab Notebook — mực xanh đậm trên giấy xanh-trắng, Signal Coral cho hành động và trạng thái, sáu bước học tuần tự, đường perforation và dấu XONG.
 
@@ -8,7 +8,7 @@ Website workbook tương tác dành cho học sinh Việt Nam muốn xây lại 
 
 Ngày học gồm đủ sáu bước theo thứ tự Input trước Output: Khởi động nghe thụ động; Học đọc và ngữ pháp; Nghe chủ động kèm dictation; Nói theo shadowing; Viết câu mới có phản hồi heuristic tức thì; Kiểm tra trắc nghiệm và flashcard SRS. Bài nghe dùng `SpeechSynthesis`, shadowing dùng `SpeechRecognition` nếu trình duyệt hỗ trợ, còn tiến trình, điểm quiz và khoảng ôn flashcard được lưu bằng `localStorage` trên thiết bị hiện tại.
 
-Nội dung tương tác của Ngày 1 có các ví dụ tương đương theo đúng chủ đề; các phần nguồn và giới hạn truy cập được ghi trong audit. Nội dung của Ngày 2–15 chỉ được giữ ở những trường đã có artifact/nguồn tương ứng; phần thiếu không được tự bịa hoặc chuyển thành quiz trắc nghiệm.
+Nội dung được phân biệt bằng metadata `contentOrigin` và `sourceNote`: phần có nguồn được truy vết trong `source-extracts/`, phần do workbook biên soạn được ghi rõ, còn trường chưa đủ bằng chứng được giữ rỗng hoặc hiển thị `SOURCE STATUS`. Không dùng fixture của QuizLab để lấp dữ liệu bài thi thật.
 
 ## Cấu trúc tệp chính
 
@@ -29,9 +29,11 @@ pnpm install
 pnpm dev
 ```
 
-Kiểm tra TypeScript và build production:
+Kiểm tra nội dung, logic completion, TypeScript và build production:
 
 ```bash
+pnpm test:content
+pnpm test:logic
 pnpm check
 pnpm build
 ```
@@ -40,7 +42,7 @@ Bản xem trước hiện chạy trong Manus WebDev. Khi muốn xuất bản tr�
 
 ## Thêm Ngày 2
 
-Mở `data/days.json`, tìm mảng `days[]` và thay object khung Ngày 2 bằng object đầy đủ theo đúng schema Ngày 1. Chỉ cần thêm dữ liệu: `day`, `title`, `warmupScript`, `grammarContent`, `listeningItems`, `shadowingSentences`, `writingPrompts`, `quiz` và `srsCards`. Không sửa component giao diện hoặc logic tương tác.
+Mở `data/days.json`, tìm object ngày cần cập nhật và bổ sung dữ liệu theo schema. Mỗi ngày phải có metadata `learningObjectives`, `prerequisites`, `bridgeFromPreviousDay`, `commonMistakes`, `masteryCriteria`, `estimatedMinutes`, `contentOrigin` cùng sáu khối `warmupScript`, `grammarContent`, `listeningItems`, `shadowingSentences`, `writingPrompts`, `quiz`, và `srsCards`. Nếu nguồn chưa đủ hoặc quiz không tương thích, giữ trường rỗng và ghi `sourceNote`; không tự bịa dữ liệu nguồn.
 
 Sau khi cập nhật dữ liệu nguồn, đồng bộ bản frontend rồi chạy kiểm tra:
 
@@ -82,11 +84,11 @@ Website không tự nhận là nội dung giảng dạy gốc của giáo viên 
 
 ## Trang lộ trình 48 ngày
 
-Trang chủ `/` và `/lo-trinh` hiện là bản đồ toàn khóa. Dữ liệu hiển thị nhẹ nằm ở `data/days-index.json`, gồm đúng 48 trạm và 10 giai đoạn: nền tảng TO BE; động từ thường và hiện tại; quá khứ; hiện tại hoàn thành và tương lai; ngữ âm; nghe số/tên và động từ khuyết thiếu; liên từ; câu điều kiện; nghe chuyên đề; và chặng 34–48 `Sắp cập nhật`.
+Trang chủ `/` và `/lo-trinh` hiện là bản đồ toàn khóa. Dữ liệu hiển thị nhẹ nằm ở `data/days-index.json`, gồm đúng 48 trạm và 10 giai đoạn theo lộ trình từ TO BE đến nghe chuyên đề và dự án cuối khóa. Ngày 46–48 được đánh dấu theo chuỗi `NOTE-TAKE → PARAPHRASE → PRESENT`; Ngày 48 có rubric tự đánh giá trình bày.
 
 Mỗi trạm có một trong ba trạng thái: `completed` khi ngày đó nằm trong `completedDays`; `ready` khi ngày 1 hoặc ngày trước đó đã hoàn thành; và `locked` cho các trạm chưa đủ điều kiện. Trạm khóa không điều hướng mà hiển thị thông báo cần hoàn thành ngày liền trước. Trạm Ngày 1 mở `/ngay/01.html`; trang `/on-tap` gom flashcard SRS của những ngày đã được ghi nhận hoàn thành.
 
-Trang Ngày 1 gọi `markDayComplete(1)` sau khi đủ sáu bước, ghi schema `{ completedDays, lastCompletedAt, streak }` vào `localStorage` với khóa `english48-roadmap-progress`. Vì vậy khi quay lại `/`, roadmap tự cập nhật số ngày, streak và trạm tiếp theo; dữ liệu vẫn chỉ lưu trên thiết bị hiện tại.
+Trang học gọi `markDayComplete(day)` chỉ sau khi validator xác nhận đủ sáu khối và bằng chứng tối thiểu: dictation đúng, shadowing đủ lượt, writing có câu trả lời và quiz đạt ngưỡng. Schema `{ completedDays, lastCompletedAt, streak }` được lưu vào `localStorage` với khóa `english48-roadmap-progress`; truy cập URL trực tiếp vẫn đi qua roadmap gate.
 
 
 ## Hồ sơ cập nhật — 24/08/2026
@@ -98,13 +100,13 @@ Website hiện có **48 trạm học và 10 giai đoạn** trên lộ trình. N�
 | Lộ trình | Đã có 48 ngày, 10 giai đoạn | `data/days-index.json`, `Roadmap.tsx` |
 | Nội dung nguồn | Đã xử lý Ngày 1–48 theo các batch đã ghi nhận | `source-extracts/`, `batch-10-report.md` |
 | Ngày 1 | Có luồng học sáu bước và nội dung tương tác | `data/days.json`, `Home.tsx` |
-| Ngày 2–48 | Có dữ liệu lý thuyết/SRS ở mức đã trích xuất; trường thiếu nguồn được giữ rỗng | Không dùng nội dung giả để lấp chỗ trống; xem các báo cáo batch |
+| Ngày 2–48 | Có metadata đầy đủ, sáu khối hợp lệ; grammar/SRS theo mức nguồn hoặc authored được gắn nhãn | Trường thiếu nguồn giữ rỗng và hiển thị `SOURCE STATUS`; xem báo cáo batch |
 | QuizLab | Có fixture minh họa cho MCQ, fill-blank, transformation, matching, short-answer | Không ghi fixture vào quiz chính thức |
 | Quiz chính thức | Chưa ánh xạ các dạng không tương thích vào `days.json` | Theo quyết định hoãn mở rộng schema |
 | Ôn tập SRS | Lưu cục bộ theo ngày, có interval/easeFactor/lastReviewedAt và lọc thẻ đến hạn | Khóa localStorage, chưa đồng bộ đám mây |
 | Shadowing | SpeechSynthesis, SpeechRecognition fallback và MediaRecorder ghi âm tạm | Cần quyền microphone để ghi thật |
 | Gói Comet | `index.html` trung tâm tự chứa JS/CSS/ảnh bằng data URI; route phụ chuyển về index | Có `README-COMET.md`, `start-comet-preview.bat` |
-| Kiểm thử mã nguồn | `pnpm check` và `pnpm build` đạt ở lần cập nhật gần nhất | Build còn cảnh báo chunk lớn/texture runtime, không phải lỗi biên dịch |
+| Kiểm thử mã nguồn | `test:content`, `test:logic`, `pnpm check` và `pnpm build` đạt | Có 3 unit tests completion; build còn cảnh báo chunk lớn/texture runtime, không phải lỗi biên dịch |
 
 ### Quy tắc xác nhận nội dung
 

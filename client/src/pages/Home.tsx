@@ -29,7 +29,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import daysData from "../data/days.json";
-import { markDayComplete } from "../lib/progress";
+import { isDayReady, markDayComplete, readRoadmapProgress } from "../lib/progress";
+import { canCompleteStep, hasLessonBlocks, type CompletionEvidence } from "../lib/lessonValidation";
 import { initialSRSState, rateSRS, todayKey, type SRSCardState } from "../lib/srs";
 import QuizRenderer from "../components/QuizRenderer";
 import type { QuizItem } from "../lib/quizSchema";
@@ -47,6 +48,13 @@ type DayContent = {
   writingPrompts?: string[];
   quiz?: (QuizItem | { question: string; options: string[]; correctIndex: number })[];
   srsCards?: { front: string; back: string }[];
+  learningObjectives?: string[];
+  prerequisites?: string;
+  bridgeFromPreviousDay?: string;
+  commonMistakes?: string[];
+  masteryCriteria?: string;
+  estimatedMinutes?: number;
+  contentOrigin?: string;
 };
 
 type ProgressState = {
@@ -111,6 +119,7 @@ export default function Home() {
   const [listenFeedback, setListenFeedback] = useState<Record<number, "correct" | "try-again"> >({});
   const [shadowIndex, setShadowIndex] = useState(0);
   const [shadowTranscript, setShadowTranscript] = useState("");
+  const [shadowPassed, setShadowPassed] = useState<boolean[]>(() => Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => false));
   const [shadowFeedback, setShadowFeedback] = useState<"idle" | "recording" | "close" | "correct" | "unsupported" | "error">("idle");
   const [audioRecording, setAudioRecording] = useState<"idle" | "recording" | "ready" | "denied" | "unsupported" | "error">("idle");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -128,6 +137,13 @@ export default function Home() {
   const discardRecordingRef = useRef(false);
 
   const completedCount = completed.filter(Boolean).length;
+  const evidence: CompletionEvidence = {
+    listeningCorrect: Object.values(listenFeedback).filter((value) => value === "correct").length,
+    shadowingPassed: shadowPassed,
+    writingGood: Object.values(writingFeedback).filter((value) => value === "good").length,
+    quizScore,
+    reviewedCards: cardStates.filter((state) => Boolean(state.lastReviewedAt)).length,
+  };
 
   useEffect(() => {
     audioUrlRef.current = audioUrl;
@@ -170,14 +186,23 @@ export default function Home() {
   }
 
   function completeStep(index: number) {
-    setCompleted((current) => current.map((done, stepIndex) => stepIndex === index ? true : done));
+    if (index !== activeStep || (index > 0 && !completed[index - 1])) {
+      announce("Hãy hoàn thành bước trước để giữ đúng thứ tự Input trước Output.");
+      return;
+    }
+    if (!canCompleteStep(index, day, evidence)) {
+      const messages = ["Hãy nghe đoạn mẫu trước khi đánh dấu.", "Hãy đọc phần lý thuyết trước khi đánh dấu.", "Cần đúng đủ 3 câu dictation.", "Cần nói khớp đủ 3 câu shadowing.", "Cần đạt đủ 2 câu viết.", "Cần đạt ít nhất 4/5 quiz và đánh giá đủ 5 thẻ SRS."];
+      announce(messages[index] ?? "Chưa đủ bằng chứng để đánh dấu bước này.");
+      return;
+    }
+    const nextCompleted = completed.map((done, stepIndex) => stepIndex === index ? true : done);
+    setCompleted(nextCompleted);
     if (index < stepLabels.length - 1) {
       setActiveStep(index + 1);
       announce(`Bước ${index + 1} đã XONG. Bước tiếp theo đã mở.`);
     } else {
       markDayComplete(day.day);
-      setCardStates((current) => current.map((state) => state.lastReviewedAt ? state : { ...state, lastReviewedAt: todayKey() }));
-      announce("Ngày 1 đã XONG. Hãy quay lại ôn các thẻ có khoảng cách ngắn.");
+      announce(`Ngày ${day.day} đã XONG. Hãy quay lại ôn các thẻ theo lịch.`);
     }
   }
 
@@ -258,6 +283,7 @@ export default function Home() {
     setAudioRecording("idle");
     setShadowFeedback("idle");
     setShadowTranscript("");
+    setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? false : value));
     setShadowIndex(nextIndex);
   }
   function startShadowing() {
@@ -278,7 +304,9 @@ export default function Home() {
       const spokenWords = normalize(transcript).split(" ");
       const matched = targetWords.filter((word) => spokenWords.includes(word)).length / Math.max(targetWords.length, 1);
       setShadowTranscript(transcript);
-      setShadowFeedback(matched >= 0.8 ? "correct" : "close");
+      const passed = matched >= 0.8;
+      setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? passed : value));
+      setShadowFeedback(passed ? "correct" : "close");
     };
     recognition.onerror = () => {
       setShadowFeedback("error");
@@ -290,10 +318,9 @@ export default function Home() {
   }
 
   function checkWriting(index: number) {
-    // TODO: thay bằng nội dung gốc khi có link; checkWriting() có thể nối API AI ở giai đoạn nâng cấp.
     const answer = normalize(writingAnswers[index] ?? "");
-    const hasToBe = /\b(am|is|are|isn't|aren't|am not|is not|are not)\b/.test(answer);
-    setWritingFeedback((current) => ({ ...current, [index]: answer.length > 5 && hasToBe ? "good" : "revise" }));
+    const wordCount = answer ? answer.split(" ").filter(Boolean).length : 0;
+    setWritingFeedback((current) => ({ ...current, [index]: wordCount >= 4 && answer.length > 12 ? "good" : "revise" }));
   }
 
   function rateCard(remembered: boolean) {
@@ -404,10 +431,10 @@ export default function Home() {
       return (
         <div className="step-content">
           <div className="section-kicker">05 / MAKE IT YOURS</div>
-          <div className="content-heading-row"><div><h3>Viết câu mới, không chép lại.</h3><p>Bản demo dùng heuristic để phản hồi tức thì: câu cần có chủ ngữ, nội dung và một dạng <strong>to be</strong>.</p></div><span className="page-number">2 prompts</span></div>
+          <div className="content-heading-row"><div><h3>Viết câu mới, không chép lại.</h3><p>Phản hồi nhanh dựa trên độ dài tối thiểu và số từ; hãy đối chiếu thêm với mục tiêu, lỗi thường gặp và mẫu nguồn của ngày này.</p></div><span className="page-number">2 prompts</span></div>
           <div className="writing-list">
             {(day.writingPrompts ?? []).map((prompt, index) => (
-              <div className="writing-item" key={prompt}><div className="writing-prompt"><span className="item-index">0{index + 1}</span><span>{prompt}</span></div><textarea aria-label={prompt} value={writingAnswers[index] ?? ""} onChange={(event) => { setWritingAnswers((current) => ({ ...current, [index]: event.target.value })); setWritingFeedback((current) => ({ ...current, [index]: "ready" })); }} placeholder="Write your sentence here…" rows={2} /><div className="writing-footer"><span className={`writing-hint hint-${writingFeedback[index] ?? "ready"}`}>{writingFeedback[index] === "good" ? <><Check size={15} /> Câu có to be — tốt lắm.</> : writingFeedback[index] === "revise" ? "Hãy thêm am / is / are và viết câu dài hơn một chút." : "Phản hồi sẽ xuất hiện ngay tại đây."}</span><button className="text-action" onClick={() => checkWriting(index)}>Kiểm tra câu</button></div></div>
+              <div className="writing-item" key={prompt}><div className="writing-prompt"><span className="item-index">0{index + 1}</span><span>{prompt}</span></div><textarea aria-label={prompt} value={writingAnswers[index] ?? ""} onChange={(event) => { setWritingAnswers((current) => ({ ...current, [index]: event.target.value })); setWritingFeedback((current) => ({ ...current, [index]: "ready" })); }} placeholder="Write your sentence here…" rows={2} /><div className="writing-footer"><span className={`writing-hint hint-${writingFeedback[index] ?? "ready"}`}>{writingFeedback[index] === "good" ? <><Check size={15} /> Câu đủ ý — tốt lắm.</> : writingFeedback[index] === "revise" ? "Hãy viết lại thành một câu rõ ý, tối thiểu bốn từ." : "Phản hồi sẽ xuất hiện ngay tại đây."}</span><button className="text-action" onClick={() => checkWriting(index)}>Kiểm tra câu</button></div></div>
             ))}
           </div>
           <CompleteButton index={4} done={completed[4]} onComplete={completeStep} />
@@ -425,6 +452,15 @@ export default function Home() {
         <CompleteButton index={5} done={completed[5]} onComplete={completeStep} />
       </div>
     );
+  }
+
+  const roadmapProgress = readRoadmapProgress();
+  const isBlockedRoute = !roadmapProgress.completedDays.includes(day.day) && !isDayReady(day.day, roadmapProgress.completedDays);
+  if (isBlockedRoute) {
+    return <LockedLesson day={day.day} title={day.title} previousDay={Math.max(day.day - 1, 1)} />;
+  }
+  if (!hasLessonBlocks(day)) {
+    return <IncompleteLesson day={day.day} title={day.title} sourceNote={day.sourceNote} />;
   }
 
   return (
@@ -446,7 +482,7 @@ export default function Home() {
 
         <section className="study-shell" id="lesson">
           <aside className="step-rail" aria-label={`Các bước trong Ngày ${day.day}`}><div className="rail-title"><span className="tiny-label">TODAY'S SEQUENCE</span><strong>06 bước<br />một mạch.</strong></div><div className="rail-steps">{stepLabels.map((label, index) => { const Icon = stepIcons[index]; const locked = index > 0 && !completed[index - 1]; return <button className={`rail-step ${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""} ${locked ? "locked" : ""}`} key={label} onClick={() => activateStep(index)} aria-current={activeStep === index ? "step" : undefined}><span className="rail-step-number">{completed[index] ? <Check size={14} /> : locked ? <Lock size={13} /> : `0${index + 1}`}</span><span className="rail-step-copy"><strong>{label}</strong><small>{stepSkills[index]}</small></span>{completed[index] && <span className="done-stamp">XONG</span>}</button>; })}</div><div className="rail-note"><Pencil size={16} /><span>Input trước.<br />Output sau.</span></div></aside>
-          <div className="study-canvas" id="lesson-canvas"><div className="canvas-header"><div><div className="eyebrow"><span className="eyebrow-dot" /> BÀI HỌC TƯƠNG TÁC</div><h2>{day.title}</h2><p>Hôm nay bạn không học thuộc một công thức. Bạn sẽ nghe nó, nhìn nó, nói nó và tự viết một câu của mình.</p></div><div className="canvas-meta"><span className="day-label">DAY<br /><strong>{String(day.day).padStart(2, "0")}</strong></span><span className="source-code">CORE<br />GRAMMAR</span></div></div><div className="perforation" /><div className="canvas-margin-note"><span className="margin-note-index">MARGIN NOTE / {String(day.day).padStart(2, "0")}</span><strong>{day.title}</strong><span className="margin-note-rule" /><span className="margin-note-status">SOURCE-CHECKED LESSON</span></div><div className="mobile-step-strip">{stepLabels.map((label, index) => <button className={`${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""}`} key={label} onClick={() => activateStep(index)}>{completed[index] ? <Check size={14} /> : `0${index + 1}`}<span>{label}</span></button>)}</div><div className="step-panel">{renderStepContent()}</div><div className="source-strip"><span className="source-dot" /><span>{day.sourceNote}</span><a href={daysData.sourceUrl} target="_blank" rel="noreferrer">Mở nguồn gốc <ArrowRight size={14} /></a></div></div>
+          <div className="study-canvas" id="lesson-canvas"><div className="canvas-header"><div><div className="eyebrow"><span className="eyebrow-dot" /> BÀI HỌC TƯƠNG TÁC</div><h2>{day.title}</h2><p>Hôm nay bạn không học thuộc một công thức. Bạn sẽ nghe nó, nhìn nó, nói nó và tự viết một câu của mình.</p></div><div className="canvas-meta"><span className="day-label">DAY<br /><strong>{String(day.day).padStart(2, "0")}</strong></span><span className="source-code">CORE<br />GRAMMAR</span></div></div><div className="perforation" /><div className="canvas-margin-note"><span className="margin-note-index">MARGIN NOTE / {String(day.day).padStart(2, "0")}</span><strong>{day.title}</strong><span className="margin-note-rule" /><span className="margin-note-status">SOURCE-CHECKED LESSON</span></div><section className="lesson-brief" aria-label="Hồ sơ bài học"><div><span className="tiny-label">OBJECTIVES / {day.estimatedMinutes ?? 25} PHÚT</span><ul>{(day.learningObjectives ?? []).map((objective) => <li key={objective}>{objective}</li>)}</ul></div><div><span className="tiny-label">BRIDGE FROM DAY {String(Math.max(day.day - 1, 1)).padStart(2, "0")}</span><p>{day.bridgeFromPreviousDay}</p><p><strong>Cần có:</strong> {day.prerequisites}</p></div><div><span className="tiny-label">MASTERY NOTE</span><p>{day.masteryCriteria}</p><p><strong>Lỗi cần tránh:</strong> {(day.commonMistakes ?? []).join(" · ")}</p></div></section><div className="mobile-step-strip">{stepLabels.map((label, index) => <button className={`${activeStep === index ? "active" : ""} ${completed[index] ? "done" : ""}`} key={label} onClick={() => activateStep(index)}>{completed[index] ? <Check size={14} /> : `0${index + 1}`}<span>{label}</span></button>)}</div><div className="step-panel">{renderStepContent()}</div><div className="source-strip"><span className="source-dot" /><span><strong>{day.contentOrigin === "workbook-authored" ? "WORKBOOK-AUTHORED" : day.contentOrigin === "mixed" ? "MIXED SOURCE" : "SOURCE-EXTRACTED"}</strong> · {day.sourceNote}</span><a href={daysData.sourceUrl} target="_blank" rel="noreferrer">Mở nguồn gốc <ArrowRight size={14} /></a></div></div>
         </section>
 
         <section className="lesson-context" aria-label="Ngữ cảnh workbook"><div><span className="section-kicker">INPUT → OUTPUT → RETURN</span><strong>Học theo đúng nhịp của ngày {String(day.day).padStart(2, "0")}.</strong></div><div className="context-rule" /><a className="secondary-action" href="/lo-trinh">Mở bản đồ 48 ngày <ArrowRight size={16} /></a><a className="secondary-action" href="/lo-trinh#principles">Xem phương pháp <CircleHelp size={16} /></a></section>
@@ -456,6 +492,15 @@ export default function Home() {
       {notice && <div className="toast-notice" role="status"><Sparkles size={16} /> {notice}</div>}
     </div>
   );
+}
+
+function LockedLesson({ day, title, previousDay }: { day: number; title: string; previousDay: number }) {
+  const steps = ["Nghe", "Học", "Nghe", "Nói", "Viết", "Ôn"];
+  return <div className="app-shell lesson-gate"><header className="topbar"><a className="brand" href="/"><span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></a><span className="gate-header-note">WORKBOOK / ROUTE {String(day).padStart(2, "0")}—48</span></header><main className="gate-main"><div className="gate-route-strip"><span>ROUTE MARKER</span><i />{Array.from({ length: 6 }, (_, index) => <b key={index} className={index === 0 ? "is-current" : ""}>{String(index + 1).padStart(2, "0")}</b>)}</div><span className="eyebrow"><span className="eyebrow-dot" /> DAY {String(day).padStart(2, "0")} / LOCKED</span><h1>Để lại dấu ở<br /><em>Ngày {String(previousDay).padStart(2, "0")}</em> trước.</h1><p>“{title}” đã có trong sổ tay, nhưng trạm này chỉ mở khi ngày liền trước được hoàn thành đủ sáu bước.</p><div className="gate-dependency"><span className="tiny-label">DEPENDENCY / PREVIOUS PAGE</span><strong>Ngày {String(previousDay).padStart(2, "0")} → đủ 06 bước → mở Ngày {String(day).padStart(2, "0")}</strong><div className="gate-steps">{steps.map((step, index) => <span key={step}><b>{String(index + 1).padStart(2, "0")}</b>{step}</span>)}</div></div><div className="gate-perforation" /><a className="primary-action" href="/lo-trinh">Về lộ trình <ArrowLeft size={17} /></a></main></div>;
+}
+
+function IncompleteLesson({ day, title, sourceNote }: { day: number; title: string; sourceNote?: string }) {
+  return <div className="app-shell lesson-gate"><header className="topbar"><a className="brand" href="/"><span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></a></header><main className="gate-main"><span className="eyebrow"><span className="eyebrow-dot" /> DAY {String(day).padStart(2, "0")} / SOURCE STATUS</span><h1>Trang này đang<br /><em>được hoàn thiện.</em></h1><p>{title} chưa đủ sáu khối học để mở theo tiến trình. Nội dung được giữ nguyên trạng để không làm sai dữ liệu nguồn.</p>{sourceNote && <blockquote>{sourceNote}</blockquote>}<a className="secondary-action" href="/lo-trinh">Về lộ trình <ArrowLeft size={17} /></a></main></div>;
 }
 
 function CompleteButton({ index, done, onComplete }: { index: number; done: boolean; onComplete: (index: number) => void }) {

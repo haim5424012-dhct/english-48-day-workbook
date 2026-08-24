@@ -94,3 +94,16 @@ Generator `scripts/prepare-comet-preview.mjs` tạo một `index.html` trung tâ
 ### Giới hạn chưa được kết luận
 
 Chưa thể kết luận website đã đồng bộ tiến trình hoặc điểm lên Google Sheets; dữ liệu người học vẫn nằm cục bộ trên thiết bị. Chưa thể gọi các ngày chưa có nguồn là bài học hoàn chỉnh. Chưa có waveform Web Audio API, chấm phát âm qua dịch vụ bên thứ ba, hoặc kiểm thử microphone thành công trên thiết bị thật trong hồ sơ hiện tại.
+
+
+## Cập nhật nghiệm thu toàn khóa — 25/08/2026
+
+Bản hoàn thiện hiện có **48/48 ngày hợp lệ theo schema workbook**. Mỗi ngày có đủ metadata `learningObjectives`, `prerequisites`, `bridgeFromPreviousDay`, `commonMistakes`, `masteryCriteria`, `estimatedMinutes`, `contentOrigin` và sáu block học tập. Validator `scripts/test-days.mjs` kiểm tra tính liên tục, metadata, nội dung tối thiểu và không cho mảng rỗng vượt qua.
+
+Phân loại bằng chứng được giữ tách biệt. Nội dung đọc từ PDF/nguồn đã lưu trong `source-extracts/` tiếp tục được nhận diện theo batch; nội dung thực hành bổ sung để hoàn thiện workbook được đánh dấu `workbook-authored` hoặc `mixed` và không được mô tả là nguyên văn giáo viên. Những phần không đủ nguồn hoặc không tương thích quiz schema vẫn giữ `SOURCE STATUS`; QuizLab không được tính là dữ liệu bài thi chính thức.
+
+Về sư phạm, các cầu nối quan trọng đã được ghi rõ cho Ngày 13 (did/didn't), Ngày 15 (past simple–present perfect), Ngày 28 (third conditional), Ngày 36 (mệnh đề thời gian), và chuỗi dự án cuối khóa Ngày 45–48. Ngày 48 có rubric bốn tiêu chí: mở đầu rõ, phát triển ít nhất hai ý có ví dụ, kết thúc/mời câu hỏi và thời lượng 1–2 phút.
+
+Kiểm thử ngày 25/08/2026: `pnpm test:content` đạt 48/48; `pnpm test:logic` đạt 3/3; `pnpm check` đạt; `pnpm build` đạt. QA trực quan đã bao phủ roadmap, bài học mở, bài học bị khóa và dashboard. Cảnh báo build về chunk lớn và texture runtime không phải lỗi biên dịch.
+
+Giới hạn cần công khai: nội dung authored không thay thế tài liệu nguồn; audio mẫu dùng SpeechSynthesis/TTS hoặc khả năng trình duyệt, không phải audio gốc; tiến trình, SRS và ghi âm lưu trong localStorage; việc ghi âm thành công cần kiểm tra thêm trên trình duyệt/thiết bị có quyền microphone thật.

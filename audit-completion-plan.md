@@ -31,3 +31,12 @@ Roadmap sẽ được chuyển sang trạng thái theo dữ liệu thực: ngày
 ## 5. Tiêu chí nghiệm thu
 
 `pnpm test:content`, `pnpm check` và `pnpm build` phải đạt. Validator phải xác nhận đúng 48 ngày liên tục, đủ metadata và đủ sáu block ở mọi ngày. Kiểm thử giao diện phải xác nhận ngày rỗng không thể hoàn thành, ngày hợp lệ không thể bypass thứ tự, quiz chưa nộp không thể hoàn thành bước 6, và route trực tiếp tuân thủ trạng thái roadmap. Bản báo cáo cuối phải phân biệt rõ nội dung trích xuất từ source extracts, nội dung workbook-authored và giới hạn còn lại.
+
+## 6. Trạng thái triển khai — 25/08/2026
+
+Kế hoạch đã được triển khai. `data/days.json` và `client/src/data/days.json` có đủ 48 ngày, metadata pedagogical và sáu block hợp lệ theo validator. `lessonValidation.ts` được dùng làm cổng hoàn thành; roadmap và route trực tiếp tôn trọng trạng thái khóa. Các cầu nối đặc thù cho Ngày 13, 15, 28, 36 và chuỗi dự án Ngày 45–48 đã được ghi vào dữ liệu; Ngày 48 có rubric tự đánh giá.
+
+Bằng chứng kiểm thử cuối: `pnpm test:content` đạt 48/48; `pnpm test:logic` đạt 3/3 unit tests; `pnpm check` đạt; `pnpm build` đạt. Build còn cảnh báo chunk JavaScript lớn và texture `/manus-storage` được giữ để resolve runtime, nhưng không có lỗi compile. QA trực quan đã kiểm tra `/lo-trinh`, `/ngay/01.html`, `/ngay/48.html` và `/tong-ket`; locked state đã được nâng cấp với route marker, dependency card, sáu bước và perforation.
+
+Giới hạn còn lại: các trường quiz/listening/writing/shadowing authored được tạo để bảo đảm tính hoàn chỉnh và phải được hiểu theo `contentOrigin`/`sourceNote`, không phải bản sao tài liệu giáo viên; QuizLab vẫn chỉ là fixture; tiến trình và ghi âm vẫn lưu cục bộ trên thiết bị.
+

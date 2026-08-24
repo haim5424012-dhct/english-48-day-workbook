@@ -10,6 +10,7 @@
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "test:content": "node scripts/test-days.mjs",
+    "test:logic": "vitest run client/src/lib/lessonValidation.test.ts",
     "format": "prettier --write ."
   },
   "dependencies": {

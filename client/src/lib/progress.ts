@@ -21,7 +21,7 @@ export function readRoadmapProgress(): RoadmapProgress {
     if (!saved) return fallback;
     const parsed = JSON.parse(saved) as Partial<RoadmapProgress>;
     return {
-      completedDays: Array.isArray(parsed.completedDays) ? parsed.completedDays.filter((day): day is number => Number.isInteger(day)) : [],
+      completedDays: Array.isArray(parsed.completedDays) ? Array.from(new Set(parsed.completedDays.filter((day): day is number => Number.isInteger(day) && day >= 1 && day <= 48))).sort((a, b) => a - b) : [],
       lastCompletedAt: typeof parsed.lastCompletedAt === "string" ? parsed.lastCompletedAt : null,
       streak: Number.isInteger(parsed.streak) ? Math.max(0, Number(parsed.streak)) : 0,
     };
@@ -38,6 +38,7 @@ function dayDifference(from: string | null, to: string) {
 }
 
 export function markDayComplete(day: number): RoadmapProgress {
+  if (!Number.isInteger(day) || day < 1 || day > 48) return readRoadmapProgress();
   const current = readRoadmapProgress();
   const today = new Date().toISOString().slice(0, 10);
   const completedDays = Array.from(new Set([...current.completedDays, day])).sort((a, b) => a - b);

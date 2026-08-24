@@ -919,3 +919,46 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
   .dashboard-route-mark i { width: 30px; }
   .dashboard-hero-copy .eyebrow { margin-top: 0; }
 }
+
+/* STYLE REMINDER — Editorial Lab Notebook: lesson brief is a ruled field record, not a SaaS card. */
+.lesson-brief{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:1px;background:var(--ink-navy);margin:0 1.75rem 1.5rem;border:1px solid var(--ink-navy);}
+.lesson-brief>div{background:var(--paper);padding:1rem 1.1rem;min-height:9rem;background-image:linear-gradient(to bottom,transparent 95%,rgba(30,47,73,.09) 96%);background-size:100% 1.5rem;}
+.lesson-brief .tiny-label{display:block;color:var(--signal-coral);margin-bottom:.65rem;}
+.lesson-brief ul{margin:0;padding-left:1.15rem;color:var(--ink-navy);}
+.lesson-brief li{margin:.35rem 0;font-size:.86rem;line-height:1.35;}
+.lesson-brief p{margin:.35rem 0;font-size:.82rem;line-height:1.45;color:var(--ink-muted);}
+.lesson-brief p strong{color:var(--ink-navy);}
+.lesson-gate .gate-main{max-width:52rem;margin:0 auto;padding:8rem 1.5rem;}
+.lesson-gate .gate-main h1{font-size:clamp(3rem,8vw,6.5rem);line-height:.94;color:var(--ink-navy);margin:1rem 0;}
+.lesson-gate .gate-main h1 em{color:var(--signal-coral);font-style:normal;}
+.lesson-gate .gate-main>p{font-size:1.1rem;line-height:1.6;color:var(--ink-muted);max-width:42rem;margin-bottom:2rem;}
+.lesson-gate blockquote{margin:1.5rem 0;padding:1rem 1.25rem;border-left:4px solid var(--signal-coral);background:var(--paper-blue);color:var(--ink-muted);line-height:1.5;}
+.roadmap-actions .primary-action{border:0;cursor:pointer;font:inherit;}
+@media (max-width:800px){.lesson-brief{grid-template-columns:1fr;margin:0 1rem 1rem}.lesson-brief>div{min-height:auto}.lesson-gate .gate-main{padding:5rem 1.1rem}.lesson-gate .gate-main h1{font-size:clamp(3rem,16vw,5rem)}}
+
+/* STYLE REMINDER — Locked and long-data states still belong to the workbook: route marks, stamps, perforation, and paper texture. */
+.gate-header-note{margin-left:auto;font:700 9px "Space Grotesk",sans-serif;letter-spacing:.12em;color:var(--ink-soft);}
+.gate-route-strip{display:flex;align-items:center;gap:8px;margin-bottom:2rem;font:700 9px "Space Grotesk",sans-serif;letter-spacing:.12em;color:var(--ink-soft);}
+.gate-route-strip i{width:72px;height:1px;background:repeating-linear-gradient(90deg,var(--coral) 0 6px,transparent 6px 10px);}
+.gate-route-strip b{display:grid;place-items:center;width:25px;height:25px;border:1px solid var(--line);background:var(--white);font-size:8px;color:var(--ink-soft);}
+.gate-route-strip b.is-current{background:var(--coral);color:#fff;border-color:var(--coral);transform:rotate(-5deg);}
+.gate-dependency{margin:2rem 0;padding:1.25rem 1.35rem;background:var(--white);border:1px solid var(--line);border-left:4px solid var(--coral);box-shadow:7px 7px 0 var(--mint);}
+.gate-dependency .tiny-label{display:block;color:var(--coral-deep);margin-bottom:.55rem;}
+.gate-dependency>strong{display:block;color:var(--ink-navy);font-size:1rem;}
+.gate-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:1.25rem;border-top:1px dashed var(--line);padding-top:.8rem;}
+.gate-steps span{display:flex;flex-direction:column;gap:.4rem;color:var(--ink-soft);font:700 9px "Space Grotesk",sans-serif;text-transform:uppercase;letter-spacing:.08em;}
+.gate-steps b{color:var(--coral);font-size:10px;}
+.gate-perforation{height:8px;margin:1.5rem 0 2rem;background:repeating-linear-gradient(90deg,var(--line) 0 2px,transparent 2px 10px);}
+.day-node{position:relative;background-image:linear-gradient(to bottom,transparent 86%,rgba(30,47,73,.10) 87%,transparent 88%);background-size:100% 1.35rem;box-shadow:inset 3px 0 0 transparent;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}
+.day-node::after{content:"FIELD PAGE";position:absolute;right:10px;top:10px;color:var(--ink-faint);font:700 7px "Space Grotesk",sans-serif;letter-spacing:.12em;transform:rotate(-90deg);transform-origin:top right;}
+.day-node.ready{box-shadow:inset 3px 0 0 var(--coral);}
+.day-node.in-progress{box-shadow:inset 3px 0 0 var(--yellow);background-color:#fffdf2;}
+.day-node.completed{box-shadow:inset 3px 0 0 var(--mint-deep);background-color:#f3fbf7;}
+.day-node:hover{transform:translateY(-3px);}
+.day-node .node-status{font-family:"Space Grotesk",sans-serif;letter-spacing:.08em;}
+.dashboard-day-section{position:relative;}
+.dashboard-day-section::after{content:"48 PAGES / SOURCE LEDGER";position:absolute;right:0;top:9rem;color:var(--ink-faint);font:700 8px "Space Grotesk",sans-serif;letter-spacing:.16em;transform:rotate(90deg);transform-origin:top right;}
+.day-ledger-row{position:relative;border-bottom:1px dashed var(--line);}
+.day-ledger-row::before{content:"";position:absolute;left:-1rem;top:0;bottom:0;border-left:1px dotted rgba(30,47,73,.16);}
+.day-ledger-number{font-family:"Space Grotesk",sans-serif;font-weight:800;}
+@media (max-width:800px){.gate-header-note{display:none}.gate-route-strip{flex-wrap:wrap}.gate-route-strip i{width:35px}.gate-steps{grid-template-columns:repeat(3,1fr);row-gap:.8rem}.dashboard-day-section::after{display:none}.day-node::after{display:none}}
