@@ -54,7 +54,7 @@ function RoadmapHeader({ progress }: { progress: RoadmapProgress }) {
         <span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span>
       </button>
       <nav className="topnav roadmap-nav" aria-label="Điều hướng chính">
-        <a href="#roadmap">Lộ trình</a><a href="/#lesson">Bài học</a><a href="/#principles">Phương pháp</a>
+        <a href="#roadmap">Lộ trình</a><a href="/#lesson">Bài học</a><a href="/#principles">Phương pháp</a><a href="/quiz-lab">Phòng quiz</a>
       </nav>
       <div className="topbar-actions">
         <span className="streak"><Sparkles size={15} /> {progress.streak || 0} ngày liên tiếp</span>

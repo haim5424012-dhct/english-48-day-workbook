@@ -77,3 +77,6 @@ Mọi trang, component và file CSS mới phải giữ hệ mực–giấy, rail
 - Các vùng nền ink navy phải vẫn giống trang phương pháp trong workbook nhờ đường kẻ, annotation, số thứ tự và margin notes.
 - Nhịp sáu bước `input → grammar → active listening → speaking → writing → review` được lặp lại ở hero, method band, route map và index.
 - Signal Coral ưu tiên cho action, active state và achievement; cấu trúc phân cấp thường ngày dùng ink navy, ink-soft và màu giấy.
+- Mọi bề mặt quiz phải dùng ngôn ngữ workbook-native: số thứ tự ở lề, vùng trả lời có đường kẻ, đường perforation, nhãn nguồn và phản hồi dạng con dấu.
+- Mọi route nhìn thấy bởi học sinh phải có ít nhất một dấu hiệu của lộ trình 48 ngày; Phòng quiz dùng rail sáu bước và nhãn nhiệm vụ để không tách rời phương pháp học.
+- Thuật ngữ nội bộ như “schema/lab” chỉ giữ ở annotation nhỏ; tiêu đề và CTA chính phải nói trực tiếp, rõ ràng với người học.

@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import Roadmap from "@/pages/Roadmap";
 import Review from "@/pages/Review";
+import QuizLab from "@/pages/QuizLab";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/lo-trinh" component={Roadmap} />
       <Route path="/ngay/:day.html" component={Home} />
       <Route path="/on-tap" component={Review} />
+      <Route path="/quiz-lab" component={QuizLab} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

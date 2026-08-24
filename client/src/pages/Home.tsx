@@ -31,6 +31,8 @@ import { Button } from "@/components/ui/button";
 import daysData from "../data/days.json";
 import { markDayComplete } from "../lib/progress";
 import { initialSRSState, rateSRS, todayKey, type SRSCardState } from "../lib/srs";
+import QuizRenderer from "../components/QuizRenderer";
+import type { QuizItem } from "../lib/quizSchema";
 
 type DayContent = {
   day: number;
@@ -43,7 +45,7 @@ type DayContent = {
   listeningItems?: { audioText: string; blankSentence: string; answer: string }[];
   shadowingSentences?: string[];
   writingPrompts?: string[];
-  quiz?: { question: string; options: string[]; correctIndex: number }[];
+  quiz?: (QuizItem | { question: string; options: string[]; correctIndex: number })[];
   srsCards?: { front: string; back: string }[];
 };
 
@@ -115,8 +117,6 @@ export default function Home() {
   const [bestAudioUrls, setBestAudioUrls] = useState<(string | null)[]>(() => Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => null));
   const [writingAnswers, setWritingAnswers] = useState<Record<number, string>>({});
   const [writingFeedback, setWritingFeedback] = useState<Record<number, "ready" | "good" | "revise"> >({});
-  const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [notice, setNotice] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const recognitionRef = useRef<any>(null);
@@ -296,12 +296,6 @@ export default function Home() {
     setWritingFeedback((current) => ({ ...current, [index]: answer.length > 5 && hasToBe ? "good" : "revise" }));
   }
 
-  function submitQuiz() {
-    const score = (day.quiz ?? []).reduce((total, question, index) => total + (quizAnswers[index] === question.correctIndex ? 1 : 0), 0);
-    setQuizScore(score);
-    setQuizSubmitted(true);
-  }
-
   function rateCard(remembered: boolean) {
     setCardStates((current) => current.map((state, index) => {
       if (index !== cardIndex) return state;
@@ -425,10 +419,7 @@ export default function Home() {
       <div className="step-content">
         <div className="section-kicker">06 / TEST + SPACE IT OUT</div>
         <div className="content-heading-row"><div><h3>Kiểm tra để nhớ lâu hơn.</h3><p>Làm quiz trước, sau đó lật thẻ và tự đánh dấu mức độ nhớ. Kết quả được lưu trên thiết bị này.</p></div><span className="page-number">{quizScore === null ? "not scored" : `${quizScore}/${day.quiz?.length ?? 0}`}</span></div>
-        {day.quiz?.length ? <div className="quiz-block">
-          {(day.quiz ?? []).map((question, index) => <div className="quiz-question" key={question.question}><div className="quiz-number">0{index + 1}</div><div className="quiz-main"><strong>{question.question}</strong><div className="option-row">{question.options.map((option, optionIndex) => <button className={quizAnswers[index] === optionIndex ? "selected" : ""} key={option} onClick={() => { setQuizAnswers((current) => ({ ...current, [index]: optionIndex })); setQuizSubmitted(false); }}>{String.fromCharCode(65 + optionIndex)}. {option}</button>)}</div>{quizSubmitted && <span className={quizAnswers[index] === question.correctIndex ? "quiz-feedback good" : "quiz-feedback revise"}>{quizAnswers[index] === question.correctIndex ? "Đúng" : `Đáp án: ${question.options[question.correctIndex]}`}</span>}</div></div>)}
-          <button className="primary-action quiz-submit" onClick={submitQuiz}>Chấm bài kiểm tra <ArrowRight size={17} /></button>
-        </div> : <div className="source-gap"><h3>Chưa có quiz tương thích trong nguồn đã trích xuất.</h3><p>Đáp án gốc đang ở dạng bài điền/viết hoặc chưa có link tương ứng; không tự chuyển thành câu hỏi trắc nghiệm.</p></div>}
+        {day.quiz?.length ? <QuizRenderer items={day.quiz} onSubmit={({ score, total }) => { setQuizScore(score); announce(`Đã chấm: ${score}/${total} câu đúng.`); }} /> : <div className="source-gap"><h3>Chưa có quiz tương thích trong nguồn đã trích xuất.</h3><p>Đáp án gốc đang ở dạng bài điền/viết hoặc chưa có link tương ứng; không tự chuyển thành câu hỏi trắc nghiệm.</p></div>}
         <div className="flashcard-block"><div className="flashcard-heading"><div><div className="section-kicker">SRS / FLASHCARD {cardIndex + 1}/{day.srsCards?.length ?? 0}</div><h4>Một thẻ, một lần nhớ có chủ đích.</h4></div><span className="interval-label">Ôn sau {cardStates[cardIndex]?.interval ?? 1} ngày</span></div>{currentCard && <button className={`flashcard ${cardFlipped ? "is-flipped" : ""}`} onClick={() => setCardFlipped((flipped) => !flipped)} aria-label="Lật flashcard"><span className="flashcard-face flashcard-front"><span className="tiny-label">MẶT TRƯỚC</span><strong>{currentCard.front}</strong><span className="flip-hint">Chạm để lật thẻ</span></span><span className="flashcard-face flashcard-back"><span className="tiny-label">MẶT SAU</span><strong>{currentCard.back}</strong><span className="flip-hint">Chạm để xem mặt trước</span></span></button>}{cardFlipped && <div className="flashcard-actions"><button className="remember-action" onClick={() => rateCard(false)}>Chưa nhớ</button><button className="primary-action" onClick={() => rateCard(true)}><Check size={16} /> Nhớ</button></div>}</div>
         <CompleteButton index={5} done={completed[5]} onComplete={completeStep} />
       </div>
@@ -439,7 +430,7 @@ export default function Home() {
     <div className="app-shell">
       <header className="topbar">
         <a className="brand" href="#top" aria-label="48 Ngày Lấy Gốc Tiếng Anh"><span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></a>
-        <nav className={`topnav ${mobileMenuOpen ? "is-open" : ""}`} aria-label="Điều hướng chính"><a href="#lesson" onClick={() => setMobileMenuOpen(false)}>Bài học</a><a href="#plan" onClick={() => setMobileMenuOpen(false)}>Lịch 48 ngày</a><a href="#principles" onClick={() => setMobileMenuOpen(false)}>Phương pháp</a></nav>
+        <nav className={`topnav ${mobileMenuOpen ? "is-open" : ""}`} aria-label="Điều hướng chính"><a href="#lesson" onClick={() => setMobileMenuOpen(false)}>Bài học</a><a href="#plan" onClick={() => setMobileMenuOpen(false)}>Lịch 48 ngày</a><a href="#principles" onClick={() => setMobileMenuOpen(false)}>Phương pháp</a><a href="/quiz-lab" onClick={() => setMobileMenuOpen(false)}>Phòng quiz</a></nav>
         <div className="topbar-actions"><span className="streak"><Sparkles size={15} /> 01 ngày liên tiếp</span><button className="menu-toggle" aria-label={mobileMenuOpen ? "Đóng menu" : "Mở menu"} onClick={() => setMobileMenuOpen((open) => !open)}>{mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
       </header>
 

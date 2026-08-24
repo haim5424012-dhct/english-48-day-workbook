@@ -88,3 +88,12 @@
 - [x] Nạp grammar/SRS và trường có nguồn thật bằng merge an toàn; đồng bộ root/client JSON.
 - [x] Chạy test nội dung, `pnpm check`, `pnpm build`, kiểm tra preview đại diện và lập báo cáo batch 3.
 - [x] Đóng gói ZIP đầy đủ và dừng trước Ngày 16.
+
+
+## Mở rộng frontend cho các dạng quiz mới
+
+- [x] Rà soát schema dữ liệu quiz hiện tại và renderer trong Home.tsx.
+- [x] Chốt kiểu dữ liệu tương thích ngược cho MCQ, điền/chia, biến đổi câu, nối cặp và trả lời ngắn.
+- [x] Tách component renderer quiz dùng chung, có trạng thái chấm, phản hồi và reset rõ ràng.
+- [x] Tích hợp dữ liệu kiểm thử minh họa có nguồn, không thay đổi nội dung học thật ngoài phạm vi.
+- [x] Chạy `pnpm check`, `pnpm build`, kiểm tra preview desktop/mobile và lưu checkpoint.
