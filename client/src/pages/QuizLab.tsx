@@ -7,6 +7,7 @@ import { ArrowLeft, FlaskConical, Link2 } from "lucide-react";
 import { useState } from "react";
 import QuizRenderer from "@/components/QuizRenderer";
 import type { QuizItem } from "@/lib/quizSchema";
+import { assetPath, routePath } from "../lib/routes";
 
 type Result = { score: number; total: number; answered: number };
 
@@ -58,8 +59,8 @@ export default function QuizLab() {
 
   return <div className="quiz-lab-page">
     <header className="topbar quiz-lab-topbar">
-      <a className="brand" href="/" aria-label="Về lịch 48 ngày"><span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></a>
-      <a className="back-link" href="/"><ArrowLeft size={16} /> Về lộ trình</a>
+      <a className="brand" href={routePath("/")} aria-label="Về lịch 48 ngày"><span className="brand-mark"><img src={assetPath("/assets/english-workbook-mark.png")} alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></a>
+      <a className="back-link" href={routePath("/")}><ArrowLeft size={16} /> Về lộ trình</a>
     </header>
     <main className="quiz-lab-main">
       <div className="quiz-lab-intro">

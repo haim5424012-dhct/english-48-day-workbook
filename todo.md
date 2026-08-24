@@ -310,3 +310,17 @@
 - [x] Chạy test content, logic, check, build và QA trực quan.
 - [x] Cập nhật README, scientific-audit, finalization-report.
 - [x] Tạo ZIP Comet/source và báo cáo giới hạn còn lại.
+
+
+## Triển khai GitHub Pages
+
+- [ ] Đọc skill triển khai website học tập/static và kiểm tra hướng dẫn repository.
+- [ ] Kiểm kê README, package.json, vite.config, source data, routes và workflow GitHub hiện có.
+- [ ] Xác nhận trạng thái đăng nhập GitHub và repository đích; không force-push hoặc thay thế repo không liên quan.
+- [ ] Cấu hình base path, asset paths, fallback routes và GitHub Actions Pages nếu cần.
+- [ ] Chạy `pnpm install --frozen-lockfile`, `pnpm test:content`, `pnpm test:logic`, `pnpm check`, `pnpm build`.
+- [ ] Kiểm tra package sạch: không secrets, `.env`, node_modules, localStorage, file tạm hoặc ZIP lớn.
+- [ ] Tạo/xác nhận repository public `english-48-day-workbook` nếu phù hợp.
+- [ ] Commit và push an toàn, không force-push.
+- [ ] Theo dõi GitHub Actions, kiểm tra deployment và mở URL GitHub Pages thực tế.
+- [ ] Cập nhật README/hướng dẫn URL và báo cáo bàn giao.

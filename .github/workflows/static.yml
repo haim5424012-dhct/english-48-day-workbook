@@ -33,10 +33,14 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check content schema
         run: pnpm test:content
+      - name: Check completion logic
+        run: pnpm test:logic
       - name: Type check
         run: pnpm check
       - name: Build
         run: pnpm build
+      - name: Prepare GitHub Pages artifact
+        run: node scripts/prepare-github-pages.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

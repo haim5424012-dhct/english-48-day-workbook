@@ -14,6 +14,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import { stripRouteBase } from "./lib/routes";
 
 declare global {
   interface Window {
@@ -24,9 +25,10 @@ declare global {
 function Router() {
   const [location] = useLocation();
   const previewLocation = typeof window !== "undefined" ? window.__COMET_PREVIEW_PATH__ : undefined;
+  const normalizedLocation = stripRouteBase(location);
 
   return (
-    <Switch location={previewLocation ?? location}>
+    <Switch location={previewLocation ?? normalizedLocation}>
       <Route path="/" component={Roadmap} />
       <Route path="/lo-trinh" component={Roadmap} />
       <Route path="/ngay/:day.html" component={Home} />

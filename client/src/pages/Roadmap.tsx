@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import indexData from "../data/days-index.json";
 import { isDayReady, readRoadmapProgress, type RoadmapProgress } from "../lib/progress";
+import { assetPath, routePath } from "../lib/routes";
 
 type DayIndex = (typeof indexData)[number];
 
@@ -53,7 +54,7 @@ function stageProgress(stage: Stage, progress: RoadmapProgress) {
 
 function navigatePreview(path: string, setLocation: (path: string) => void) {
   if (window.location.protocol !== "file:") {
-    setLocation(path);
+    setLocation(routePath(path));
     return;
   }
   const pathname = decodeURIComponent(window.location.pathname).replace(/\\\\/g, "/");
@@ -68,16 +69,16 @@ function RoadmapHeader({ progress }: { progress: RoadmapProgress }) {
   return (
     <header className="topbar roadmap-topbar">
       <button className="brand brand-button" onClick={() => navigatePreview("/", setLocation)} aria-label="Về trang Ngày 1">
-        <span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span>
+        <span className="brand-mark"><img src={assetPath("/assets/english-workbook-mark.png")} alt="" /></span>
         <span className="brand-label-badge">48</span>
         <span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span>
       </button>
       <nav className="topnav roadmap-nav" aria-label="Điều hướng chính">
-        <a href="#roadmap">Lộ trình</a><a href="/#lesson">Bài học</a><a href="/#principles">Phương pháp</a><a href="/tong-ket">Tổng kết</a><a href="/quiz-lab">Phòng quiz</a>
+        <a href="#roadmap">Lộ trình</a><a href={routePath("/#lesson")}>Bài học</a><a href={routePath("/#principles")}>Phương pháp</a><a href={routePath("/tong-ket")}>Tổng kết</a><a href={routePath("/quiz-lab")}>Phòng quiz</a>
       </nav>
       <div className="topbar-actions">
         <span className="streak"><Sparkles size={15} /> {progress.streak || 0} ngày liên tiếp</span>
-        <a className="top-review-link" href="/on-tap">Ôn tập <RotateCcw size={14} /></a>
+        <a className="top-review-link" href={routePath("/on-tap")}>Ôn tập <RotateCcw size={14} /></a>
       </div>
     </header>
   );
@@ -127,7 +128,7 @@ export default function Roadmap() {
             <div className="eyebrow"><span className="eyebrow-dot" /> YOUR 48-DAY ROUTE</div>
             <h1>Mỗi ngày một<br /><em>việc nhỏ.</em> Một<br />đường đi rõ.</h1>
             <p>Không cần tự hỏi hôm nay học gì. Chọn một trạm, làm đủ sáu bước, rồi để dấu XONG dẫn bạn đi tiếp.</p><div className="roadmap-loop" aria-label="Vòng lặp sáu bước"><span className="is-current">01 Input</span><i>→</i><span>02 Grammar</span><i>→</i><span>03 Listen</span><i>→</i><span>04 Speak</span><i>→</i><span>05 Write</span><i>→</i><span>06 Review</span></div>
-            <div className="roadmap-actions"><button className="primary-action" onClick={() => { const entry = dayIndex.find((item) => item.day === currentDay); if (entry) handleDay(entry); }}>Tiếp tục Ngày {String(currentDay).padStart(2, "0")} <ArrowRight size={17} /></button><a className="secondary-action" href="/on-tap">Mở kho ôn tập <RotateCcw size={15} /></a></div>
+            <div className="roadmap-actions"><button className="primary-action" onClick={() => { const entry = dayIndex.find((item) => item.day === currentDay); if (entry) handleDay(entry); }}>Tiếp tục Ngày {String(currentDay).padStart(2, "0")} <ArrowRight size={17} /></button><a className="secondary-action" href={routePath("/on-tap")}>Mở kho ôn tập <RotateCcw size={15} /></a></div>
           </div>
           <div className="roadmap-stat-card">
             <div className="roadmap-stat-top"><span className="tiny-label">FIELD NOTE / 48 DAYS</span><Flame size={19} /></div>
@@ -171,9 +172,9 @@ export default function Roadmap() {
           </div>
         </section>
 
-        <section className="roadmap-review-band"><div><span className="section-kicker">RETURN LATER</span><h2>Ôn lại những gì<br /><em>đã đi qua.</em></h2></div><p>Flashcard của các ngày đã hoàn thành được gom vào một chỗ. Không để công sức hôm qua biến mất khi bạn bước sang ngày mới.</p><a className="primary-action" href="/on-tap">Mở kho ôn tập <ArrowRight size={17} /></a></section>
+        <section className="roadmap-review-band"><div><span className="section-kicker">RETURN LATER</span><h2>Ôn lại những gì<br /><em>đã đi qua.</em></h2></div><p>Flashcard của các ngày đã hoàn thành được gom vào một chỗ. Không để công sức hôm qua biến mất khi bạn bước sang ngày mới.</p><a className="primary-action" href={routePath("/on-tap")}>Mở kho ôn tập <ArrowRight size={17} /></a></section>
       </main>
-      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></div><p>Build the habit. Keep the mark.</p><span className="footer-note">{completedDays}/48 ngày đã ghi dấu</span></footer>
+      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><img src={assetPath("/assets/english-workbook-mark.png")} alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></div><p>Build the habit. Keep the mark.</p><span className="footer-note">{completedDays}/48 ngày đã ghi dấu</span></footer>
       {notice && <div className="toast-notice roadmap-toast" role="status"><Lock size={15} /> {notice}</div>}
     </div>
   );

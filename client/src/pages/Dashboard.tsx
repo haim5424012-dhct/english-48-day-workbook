@@ -7,6 +7,7 @@ import { ArrowUpRight, BarChart3, BookOpen, Check, ChevronRight, Filter, Hash, L
 import { useMemo, useState } from "react";
 import daysData from "../data/days.json";
 import dayIndexData from "../data/days-index.json";
+import { assetPath, routePath } from "../lib/routes";
 
 type Day = (typeof daysData.days)[number];
 type DayIndex = (typeof dayIndexData)[number];
@@ -68,16 +69,16 @@ function formatNumber(value: number) {
 function DashboardHeader() {
   return (
     <header className="topbar dashboard-topbar">
-      <a className="brand" href="/" aria-label="Về lộ trình 48 ngày">
-        <span className="brand-mark"><img src="/manus-storage/english-workbook-mark_c4f80e77.png" alt="" /></span>
+      <a className="brand" href={routePath("/")} aria-label="Về lộ trình 48 ngày">
+        <span className="brand-mark"><img src={assetPath("/assets/english-workbook-mark.png")} alt="" /></span>
         <span className="brand-label-badge">48</span>
         <span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span>
       </a>
       <nav className="topnav dashboard-nav" aria-label="Điều hướng chính">
-        <a href="/lo-trinh">Lộ trình</a>
-        <a href="/#lesson">Bài học</a>
-        <a href="/tong-ket" className="is-active">Tổng kết</a>
-        <a href="/quiz-lab">Phòng quiz</a>
+        <a href={routePath("/lo-trinh")}>Lộ trình</a>
+        <a href={routePath("/#lesson")}>Bài học</a>
+        <a href={routePath("/tong-ket")} className="is-active">Tổng kết</a>
+        <a href={routePath("/quiz-lab")}>Phòng quiz</a>
       </nav>
       <div className="topbar-actions"><span className="streak"><Sparkles size={15} /> FIELD RECORD</span></div>
     </header>
@@ -144,7 +145,7 @@ export default function Dashboard() {
         <section className="dashboard-section dashboard-day-section">
           <div className="dashboard-section-heading day-heading"><div><span className="section-kicker">TỪNG NGÀY / DẤU GHI NGUỒN</span><h2>Đi vào từng<br /><em>ngày học.</em></h2></div><div className="dashboard-filters"><label><Filter size={15} /> <select value={selectedStage} onChange={(event) => setSelectedStage(event.target.value)} aria-label="Lọc theo giai đoạn"><option value="all">Tất cả giai đoạn</option>{stageStats.map((stage) => <option key={stage.stage} value={stage.stage}>Giai đoạn {stage.stage} · {stage.title}</option>)}</select></label><button className={`filter-toggle ${onlyWithGrammar ? "is-on" : ""}`} onClick={() => setOnlyWithGrammar((value) => !value)}><Check size={14} /> Chỉ ngày có grammar</button></div></div>
           <div className="day-ledger" aria-live="polite">
-            {filteredStats.map((item) => <a className="day-ledger-row" href={`/ngay/${String(item.day).padStart(2, "0")}.html`} key={item.day}>
+            {filteredStats.map((item) => <a className="day-ledger-row" href={routePath(`/ngay/${String(item.day).padStart(2, "0")}.html`)} key={item.day}>
               <span className="day-ledger-number">{String(item.day).padStart(2, "0")}</span>
               <span className="day-ledger-title"><strong>{item.title}</strong><small>GIAI ĐOẠN {item.stage} · {item.stageTitle}</small></span>
               <span className="day-ledger-metric"><b>{formatNumber(item.termGroups)}</b><small>terms</small></span>
@@ -156,7 +157,7 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <section className="dashboard-footer-note"><span className="tiny-label">ĐỌC NHỮNG DẤU ĐÃ GHI</span><p>Trang này đọc trực tiếp dữ liệu `days.json`. Khi nguồn mới được xác minh, các con số sẽ thay đổi theo nội dung thật; các ví dụ trong QuizLab không được dùng làm số liệu tổng kết.</p><a className="secondary-action" href="/lo-trinh">Quay về lộ trình <ChevronRight size={15} /></a></section>
+        <section className="dashboard-footer-note"><span className="tiny-label">ĐỌC NHỮNG DẤU ĐÃ GHI</span><p>Trang này đọc trực tiếp dữ liệu `days.json`. Khi nguồn mới được xác minh, các con số sẽ thay đổi theo nội dung thật; các ví dụ trong QuizLab không được dùng làm số liệu tổng kết.</p><a className="secondary-action" href={routePath("/lo-trinh")}>Quay về lộ trình <ChevronRight size={15} /></a></section>
       </main>
     </div>
   );

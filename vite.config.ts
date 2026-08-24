@@ -206,7 +206,7 @@ function vitePluginStorageProxy(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
-  base: "./",
+  base: process.env.GITHUB_ACTIONS === "true" ? "/english-48-day-workbook/" : "./",
   plugins,
   resolve: {
     alias: {

@@ -116,7 +116,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   opacity: 0.18;
-  background: url("/manus-storage/english-workbook-paper-texture_e34801e7.png") center / 480px auto repeat;
+  background: var(--paper);
   mix-blend-mode: multiply;
 }
 button, a, input, textarea { font: inherit; }
