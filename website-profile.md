@@ -23,9 +23,10 @@ Website tổ chức hành trình học thành 48 ngày và 10 giai đoạn. Mỗ
 | Ngày 21–25 | Đã nạp lý thuyết/SRS; quiz, audio và phần viết chưa ánh xạ | `batch-5-report.md`, `source-extracts/batch-5/` |
 | Ngày 26–30 | Đã nạp lý thuyết/SRS; quiz và media chưa ánh xạ | `batch-6-report.md`, `source-extracts/batch-6/` |
 | Ngày 31–35 | Đã nạp lý thuyết/SRS; bài nghe/quiz chưa ánh xạ; Ngày 35 có file đề online lệch chủ đề | `batch-7-report.md`, `source-extracts/batch-7/` |
-| Ngày 36–48 | Giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
+| Ngày 36–40 | Đã nạp lý thuyết/SRS; quiz và media chưa ánh xạ; Ngày 39 thiếu PDF FILE ĐỀ lý thuyết trong artifact | `batch-8-report.md`, `source-extracts/batch-8/` |
+| Ngày 41–48 | Giữ trạng thái khung/chờ nguồn | `data/days.json`, `days-index.json` |
 
-Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 34 ngày và `srsCards` có ở 35 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức vẫn chưa có nội dung được ánh xạ trong các batch mới khi dạng bài cần audio/viết hoặc chưa khớp schema; không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
+Theo kiểm kê dữ liệu hiện hành, `grammarContent` có ở 38 ngày và `srsCards` có ở 40 ngày. `listeningItems`, `writingPrompts` và `quiz` chính thức vẫn chưa có nội dung được ánh xạ trong các batch mới khi dạng bài cần audio/viết hoặc chưa khớp schema; Ngày 39 không có PDF FILE ĐỀ lý thuyết trong artifact hiện có nên giữ `grammarContent` rỗng. Không dùng fixture giao diện hoặc nội dung suy đoán để lấp chỗ trống.
 
 ## 3. Tính năng hiện có
 

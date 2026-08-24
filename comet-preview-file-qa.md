@@ -34,3 +34,7 @@ Ngày 21 và Ngày 25 đã được mở bằng route trung tâm `index.html?com
 - Các route ngày hợp lệ trong gói dùng hậu tố `.html`; route phụ chuyển về central index qua `cometRoute`.
 - Không tải hoặc nhúng audio/video gốc; các phần thiếu vẫn hiển thị trạng thái nguồn.
 - `pnpm check`, `pnpm build` và `node scripts/test-days.mjs` đạt trước khi đóng gói.
+
+## QA Batch 8 — Ngày 36–40 — 24/08/2026
+
+Đã kiểm tra các route web hợp lệ `/ngay/36.html`, `/ngay/38.html`, `/ngay/39.html` và `/ngay/40.html`. Tiêu đề ngày, chủ đề, bố cục Editorial Lab Notebook và nút bắt đầu bài học hiển thị đúng; Ngày 39 hiển thị trạng thái nguồn phù hợp vì thiếu PDF FILE ĐỀ lý thuyết. Đường dẫn không có hậu tố như `/ngay/36` là 404 theo khai báo route hiện tại, không phải định dạng hợp lệ của ứng dụng/gói Comet. Không tải hoặc nhúng audio/video gốc.

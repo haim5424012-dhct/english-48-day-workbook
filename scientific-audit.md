@@ -68,13 +68,14 @@ Waveform trực quan bằng Web Audio API và chấm phát âm thật qua API b�
 | Phạm vi | Kết quả kiểm kê | Mức xác nhận |
 |---|---|---|
 | Toàn khóa | 48 ngày, gồm 10 giai đoạn lộ trình | `[S]` từ `days-index.json` và giao diện Roadmap |
-| Nội dung đã xử lý | Ngày 1–35 qua các batch đã lưu trong `source-extracts/` và báo cáo tương ứng | `[S]` trong phạm vi artifact đã lưu |
-| `grammarContent` | Có dữ liệu ở 34 ngày | `[S]` từ kiểm kê `data/days.json` |
-| `srsCards` | Có dữ liệu ở 35 ngày | `[S]` từ kiểm kê `data/days.json` |
+| Nội dung đã xử lý | Ngày 1–40 qua các batch đã lưu trong `source-extracts/` và báo cáo tương ứng | `[S]` trong phạm vi artifact đã lưu |
+| `grammarContent` | Có dữ liệu ở 38 ngày | `[S]` từ kiểm kê `data/days.json` |
+| `srsCards` | Có dữ liệu ở 40 ngày | `[S]` từ kiểm kê `data/days.json` |
 | `listeningItems`, `writingPrompts`, `quiz` chính thức | Chưa có trường có nội dung trong bản kiểm kê hiện tại | `[S]`; không tự suy ra nội dung còn thiếu |
 | Ngày 26–30 | Đã nạp lý thuyết/SRS; quiz, audio và phần viết chưa ánh xạ | `[S]`/`[U]`; xem `batch-6-report.md` |
 | Ngày 31–35 | Đã nạp lý thuyết/SRS; quiz và media chưa ánh xạ; Ngày 35 có file thi lệch chủ đề | `[S]`/`[U]`; xem `batch-7-report.md` |
-| Ngày 36–48 | Giữ khung/trạng thái chờ nguồn theo từng object | `[S]`/`[U]` tùy trường nguồn |
+| Ngày 36–40 | Đã nạp lý thuyết/SRS khi có bằng chứng; quiz và media chưa ánh xạ; Ngày 39 thiếu PDF FILE ĐỀ lý thuyết trong artifact | `[S]`/`[U]`; xem `batch-8-report.md` |
+| Ngày 41–48 | Giữ khung/trạng thái chờ nguồn theo từng object | `[S]`/`[U]` tùy trường nguồn |
 
 ### Phân biệt QuizLab và dữ liệu bài thi
 

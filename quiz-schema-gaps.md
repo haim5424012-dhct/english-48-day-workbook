@@ -71,3 +71,16 @@ Batch 6 tiếp tục cho thấy hai nhóm cần schema riêng: **điền/chia đ
 | 35 | FILE ĐỀ online và ĐÁP ÁN Drive liên kết ở Sheet mang chủ đề “Sự hoà hợp về thì”, không khớp “Đại từ phản thân”; cần xác minh nguồn đúng trước khi định lượng bài thi | Chưa xác định | PDF bài học có các bài chọn đáp án 2 lựa chọn, nhưng chưa coi là đề online chính thức |
 
 Batch 7 bổ sung hai nhóm cần schema riêng: **nghe viết/điền không có options** và **bài nghe phụ thuộc audio**. Ngày 35 không được ánh xạ câu hỏi từ file lệch chủ đề; không dùng dữ liệu “Sự hoà hợp về thì” để lấp bài Đại từ phản thân. Không mở rộng schema quiz trong batch này.
+
+
+## Batch 8 — Ngày 36–40
+
+| Ngày | Dạng không phải MCQ / cần schema mới | Số câu hoặc mục | MCQ và số lựa chọn gốc |
+|---:|---|---:|---|
+| 36 | Không có dạng ngoài MCQ trong đề online đã đọc | — | 20 câu, mỗi câu 2 lựa chọn |
+| 37 | Nghe điền lời chào, tuổi, thời tiết, địa điểm và hướng đi | 11 chỗ trống | 2 câu nghe chọn đáp án, mỗi câu 2 lựa chọn |
+| 38 | Không có dạng ngoài MCQ trong đề online đã đọc | — | 20 câu, mỗi câu 2 lựa chọn |
+| 39 | Nghe điền thông tin tên, tuổi, quốc tịch và nghề nghiệp | 7 chỗ trống | 12 câu 2 lựa chọn + 2 câu 3 lựa chọn |
+| 40 | Nghe điền từ về sở thích; đánh dấu/ghép sở thích theo người nói | 4 chỗ trống + 3 mục ghép/đánh dấu | 5 câu 2 lựa chọn + 3 câu 2 lựa chọn |
+
+Batch 8 tiếp tục cho thấy cần schema riêng cho **nghe điền thông tin**, **đánh dấu/ghép theo người nói** và nội dung nghe phụ thuộc mp3. Ngày 39 có PDF đề online/đáp án nhưng thiếu PDF FILE ĐỀ lý thuyết trong kho artifact hiện tại; không suy đoán Grammar/Vocabulary. Không mở rộng schema quiz và không ánh xạ các câu trên vào `days.json` trong batch này.
