@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canCompleteDay, canCompleteStep, hasLessonBlocks, type CompletionEvidence, type LessonLike } from "./lessonValidation";
+import { canCompleteDay, canCompleteStep, hasLessonBlocks, isShadowingTranscriptCorrect, setShadowingSentenceResult, type CompletionEvidence, type LessonLike } from "./lessonValidation";
 import { isListeningAnswerCorrect } from "../pages/Home";
 
 const day: LessonLike = {
@@ -34,6 +34,28 @@ describe("dictation answer grading", () => {
   it("rejects an incorrect transcription", () => {
     expect(isListeningAnswerCorrect(item, "is")).toBe(false);
     expect(isListeningAnswerCorrect(item, "I is ready.")).toBe(false);
+  });
+});
+
+describe("shadowing transcript grading", () => {
+  const sentences = ["I am ready.", "She is at home.", "They are not late."];
+
+  it("accepts all three exact sentences with natural casing and punctuation differences", () => {
+    expect(isShadowingTranscriptCorrect(sentences[0], "i am ready")).toBe(true);
+    expect(isShadowingTranscriptCorrect(sentences[1], "She is at home.")).toBe(true);
+    expect(isShadowingTranscriptCorrect(sentences[2], "they are not late")).toBe(true);
+  });
+
+  it("rejects a materially different sentence", () => {
+    expect(isShadowingTranscriptCorrect(sentences[2], "I are not late")).toBe(false);
+  });
+
+  it("preserves passed results when moving between sentence cards", () => {
+    let passed = [false, false, false];
+    passed = setShadowingSentenceResult(passed, 0, true);
+    passed = setShadowingSentenceResult(passed, 1, true);
+    passed = setShadowingSentenceResult(passed, 2, true);
+    expect(passed).toEqual([true, true, true]);
   });
 });
 

@@ -30,7 +30,7 @@ import {
 import { Button } from "@/components/ui/button";
 import daysData from "../data/days.json";
 import { isDayReady, markDayComplete, readRoadmapProgress } from "../lib/progress";
-import { canCompleteStep, hasLessonBlocks, type CompletionEvidence } from "../lib/lessonValidation";
+import { canCompleteStep, hasLessonBlocks, isShadowingTranscriptCorrect, setShadowingSentenceResult, type CompletionEvidence } from "../lib/lessonValidation";
 import { initialSRSState, rateSRS, todayKey, type SRSCardState } from "../lib/srs";
 import QuizRenderer from "../components/QuizRenderer";
 import type { QuizItem } from "../lib/quizSchema";
@@ -318,11 +318,11 @@ export default function Home() {
     setAudioRecording("idle");
     setShadowFeedback("idle");
     setShadowTranscript("");
-    setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? false : value));
+    // Keep completed results for the other sentences; only the current sentence is re-evaluated when spoken again.
     setShadowIndex(nextIndex);
   }
   function confirmShadowFallback() {
-    setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? true : value));
+    setShadowPassed((current) => setShadowingSentenceResult(current, shadowIndex, true));
     setShadowFeedback("correct");
     setShadowTranscript("Tự xác nhận đã luyện nghe mẫu và nói lại.");
     announce("Đã lưu fallback tự xác nhận cho câu này; đây không phải điểm chấm phát âm.");
@@ -342,12 +342,9 @@ export default function Home() {
     recognition.onstart = () => setShadowFeedback("recording");
     recognition.onresult = (event: any) => {
       const transcript = String(event.results?.[0]?.[0]?.transcript ?? "");
-      const targetWords = normalize(currentSentence).split(" ");
-      const spokenWords = normalize(transcript).split(" ");
-      const matched = targetWords.filter((word) => spokenWords.includes(word)).length / Math.max(targetWords.length, 1);
+      const passed = isShadowingTranscriptCorrect(currentSentence, transcript);
       setShadowTranscript(transcript);
-      const passed = matched >= 0.8;
-      setShadowPassed((current) => current.map((value, index) => index === shadowIndex ? passed : value));
+      setShadowPassed((current) => setShadowingSentenceResult(current, shadowIndex, passed));
       setShadowFeedback(passed ? "correct" : "close");
     };
     recognition.onerror = () => {

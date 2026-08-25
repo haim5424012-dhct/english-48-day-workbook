@@ -15,6 +15,27 @@ export type LessonLike = {
   srsCards?: unknown[];
 };
 
+export function normalizeSpeechText(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[.,!?;:'"“”‘’]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function isShadowingTranscriptCorrect(target: string, transcript: string, threshold = 0.8) {
+  const targetWords = normalizeSpeechText(target).split(" ").filter(Boolean);
+  const spokenWords = normalizeSpeechText(transcript).split(" ").filter(Boolean);
+  if (!targetWords.length || !spokenWords.length) return false;
+  if (targetWords.join(" ") === spokenWords.join(" ")) return true;
+  const matched = targetWords.filter((word, index) => spokenWords[index] === word).length;
+  return matched / targetWords.length >= threshold;
+}
+
+export function setShadowingSentenceResult(current: boolean[], index: number, passed: boolean) {
+  return current.map((value, currentIndex) => currentIndex === index ? passed : value);
+}
+
 export type CompletionEvidence = {
   listeningCorrect: number;
   shadowingPassed: boolean[];
