@@ -1,0 +1,500 @@
+{
+  "sourceFolderId": "1k7jjsRrZDa-eExOX5YR6ldy7_QT05ZLO",
+  "sourceFolderName": "AI TRONG GIÁO DỤC",
+  "syncedAt": "2026-08-25",
+  "count": 49,
+  "totalBytes": 150046550,
+  "note": "Catalog metadata được đồng bộ từ Google Drive. Tệp gốc vẫn lưu trên Drive; website mở liên kết Drive thay vì nhúng tệp lớn vào bundle.",
+  "items": [
+    {
+      "id": "1u6zhml3Yx7hILeWoN58wO8Tc3r43dWgb",
+      "name": "300 Prompt AI cho Giáo Viên.pdf",
+      "mimeType": "application/pdf",
+      "size": 1732780,
+      "modifiedTime": "2026-08-24T21:45:44.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1u6zhml3Yx7hILeWoN58wO8Tc3r43dWgb/view?usp=drivesdk",
+      "category": "Prompt & trợ giảng",
+      "format": "PDF"
+    },
+    {
+      "id": "1NwnjseRE4CWAeIDkhhQ9055yPoEiEJ3m",
+      "name": "79 Prompt Marketing cho Claude AI (bản tiếng Việt) - Phan Đông Giang.pdf",
+      "mimeType": "application/pdf",
+      "size": 243713,
+      "modifiedTime": "2026-08-24T21:45:26.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1NwnjseRE4CWAeIDkhhQ9055yPoEiEJ3m/view?usp=drivesdk",
+      "category": "Prompt & trợ giảng",
+      "format": "PDF"
+    },
+    {
+      "id": "1j0KuicfsALchLmLMzDXLi5-Oc3BMLcAc",
+      "name": "Ai - Giáo Trình Áp Dụng Ai Trong Dạy Học.pdf",
+      "mimeType": "application/pdf",
+      "size": 20962623,
+      "modifiedTime": "2026-08-24T21:46:43.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1j0KuicfsALchLmLMzDXLi5-Oc3BMLcAc/view?usp=drivesdk",
+      "category": "AI trong dạy học",
+      "format": "PDF"
+    },
+    {
+      "id": "1SibEEkOcJQhUyBWRky-wfkjGODrQ7c3a",
+      "name": "CÁC BƯỚC VIẾT SÁNG KIẾN KINH NGHIỆ BẰNG AI.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 793081,
+      "modifiedTime": "2026-08-24T21:47:00.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1SibEEkOcJQhUyBWRky-wfkjGODrQ7c3a/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Sáng kiến kinh nghiệm",
+      "format": "DOCX"
+    },
+    {
+      "id": "1Bc6jAr7NDpz6Q13af-LbZtno67cV-Uny",
+      "name": "Ebook 1 - Full kĩ thuật khai thác ChatGPT tạo kết quả khác biệt rõ rệt 2026.pdf",
+      "mimeType": "application/pdf",
+      "size": 813370,
+      "modifiedTime": "2026-08-24T21:45:31.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1Bc6jAr7NDpz6Q13af-LbZtno67cV-Uny/view?usp=drivesdk",
+      "category": "Ebook & ứng dụng",
+      "format": "PDF"
+    },
+    {
+      "id": "1AFMskN0t3f0eRFshmrau3h10H8EH6ZXA",
+      "name": "Ebook 2 - Kho prompts kiếm tiền trên các lĩnh vực.pdf",
+      "mimeType": "application/pdf",
+      "size": 96293,
+      "modifiedTime": "2026-08-24T21:45:34.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1AFMskN0t3f0eRFshmrau3h10H8EH6ZXA/view?usp=drivesdk",
+      "category": "Prompt & trợ giảng",
+      "format": "PDF"
+    },
+    {
+      "id": "114zkxZdFmDdx3RhK5YA-MQMB9Wf3Lifs",
+      "name": "Ebook 3 -  Sử dụng ChatGPT để tạo thu nhập phụ 2026.pdf",
+      "mimeType": "application/pdf",
+      "size": 121394,
+      "modifiedTime": "2026-08-24T21:45:30.000Z",
+      "webViewLink": "https://drive.google.com/file/d/114zkxZdFmDdx3RhK5YA-MQMB9Wf3Lifs/view?usp=drivesdk",
+      "category": "Ebook & ứng dụng",
+      "format": "PDF"
+    },
+    {
+      "id": "1zqVFDzCJj8G0faVlWK5Ic2U7BiLh22jf",
+      "name": "Ebook 4 - Kiếm tiền trên Threads 2026 với AI.pdf",
+      "mimeType": "application/pdf",
+      "size": 231637,
+      "modifiedTime": "2026-08-24T21:45:33.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1zqVFDzCJj8G0faVlWK5Ic2U7BiLh22jf/view?usp=drivesdk",
+      "category": "Ebook & ứng dụng",
+      "format": "PDF"
+    },
+    {
+      "id": "16ti7vzGZ319QzMLjfjFEFgaf4Z7Ux6xW",
+      "name": "Ebook Ứng dụng ChatGPT trong công việc văn phòng.pdf",
+      "mimeType": "application/pdf",
+      "size": 2527712,
+      "modifiedTime": "2026-08-24T21:46:39.000Z",
+      "webViewLink": "https://drive.google.com/file/d/16ti7vzGZ319QzMLjfjFEFgaf4Z7Ux6xW/view?usp=drivesdk",
+      "category": "Ebook & ứng dụng",
+      "format": "PDF"
+    },
+    {
+      "id": "1n3yetSfemWZvbJWjSOtsROzUNpoAo7pv",
+      "name": "ebook-so-tay-su-dung-ai-hieu-qua-cho-giao-vien_compress.pdf",
+      "mimeType": "application/pdf",
+      "size": 120775,
+      "modifiedTime": "2026-08-24T21:45:48.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1n3yetSfemWZvbJWjSOtsROzUNpoAo7pv/view?usp=drivesdk",
+      "category": "Ebook & ứng dụng",
+      "format": "PDF"
+    },
+    {
+      "id": "1FtRLTHAD75cjLq-bOSI0ib4LWDBFcoGB",
+      "name": "Giáo trình tập huấn ứng dụng trí tuệ nhân tạo AI trong giáo dục.pdf",
+      "mimeType": "application/pdf",
+      "size": 1047887,
+      "modifiedTime": "2026-08-24T21:46:45.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1FtRLTHAD75cjLq-bOSI0ib4LWDBFcoGB/view?usp=drivesdk",
+      "category": "AI trong dạy học",
+      "format": "PDF"
+    },
+    {
+      "id": "1BXy0x_m0NajaruCjLXfEzw9_Fg18N9eH",
+      "name": "Huấn Luyện ChatGPT - Lương Minh Thanh.pdf",
+      "mimeType": "application/pdf",
+      "size": 47705651,
+      "modifiedTime": "2026-08-24T21:46:36.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1BXy0x_m0NajaruCjLXfEzw9_Fg18N9eH/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1UlGX668kv9gKfbp4RuwSTF51lwmsKF4o",
+      "name": "HƯỚNG DẪN TẠO SLIDE SIÊU TỐC BẰNG AI.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 1667088,
+      "modifiedTime": "2026-08-24T21:45:46.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1UlGX668kv9gKfbp4RuwSTF51lwmsKF4o/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Tài liệu tham khảo",
+      "format": "DOCX"
+    },
+    {
+      "id": "1kjcjQdDW_Rh7h1zFhyT8YRlYnM4PDkQL",
+      "name": "KHÁM PHÁ KỸ THUẬT VIẾT PROMPT ENGINEERING VỚI CHATGPT DÀNH CHO GIÁO VIÊN.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 21782,
+      "modifiedTime": "2026-08-24T21:47:03.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1kjcjQdDW_Rh7h1zFhyT8YRlYnM4PDkQL/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOCX"
+    },
+    {
+      "id": "1fGetjXAXmw-xmwaXB1x6I0vxQ3PR1yTb",
+      "name": "manifest.json",
+      "mimeType": "application/json",
+      "size": 14311,
+      "modifiedTime": "2026-08-24T21:47:03.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1fGetjXAXmw-xmwaXB1x6I0vxQ3PR1yTb/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "JSON"
+    },
+    {
+      "id": "13aHkPQQZ7JjgCF34z6ZOrz0lF6puAUFn",
+      "name": "Prompt Chat GPT giúp giáo viên Tiếng Anh nâng cao giảng dạy.pdf",
+      "mimeType": "application/pdf",
+      "size": 2364405,
+      "modifiedTime": "2026-08-24T21:46:20.000Z",
+      "webViewLink": "https://drive.google.com/file/d/13aHkPQQZ7JjgCF34z6ZOrz0lF6puAUFn/view?usp=drivesdk",
+      "category": "Prompt & trợ giảng",
+      "format": "PDF"
+    },
+    {
+      "id": "1_RqrynCXFqOgZ-79ma5uUEqq7WchAwDk",
+      "name": "Prompt Chat GPT giúp giáo viên viết nhận xét học sinh nhanh chóng.pdf",
+      "mimeType": "application/pdf",
+      "size": 414690,
+      "modifiedTime": "2026-08-24T21:46:22.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1_RqrynCXFqOgZ-79ma5uUEqq7WchAwDk/view?usp=drivesdk",
+      "category": "Prompt & trợ giảng",
+      "format": "PDF"
+    },
+    {
+      "id": "1e3RkIuFRR0nFqmM7U_rp4Sr0LuYlX-uJ",
+      "name": "PROMPT THIET KE MA TRAN 2.doc",
+      "mimeType": "application/msword",
+      "size": 26624,
+      "modifiedTime": "2026-08-24T21:46:59.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1e3RkIuFRR0nFqmM7U_rp4Sr0LuYlX-uJ/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOC"
+    },
+    {
+      "id": "1Es0EKQ0z0udH3EngWL8Q5W--OGwCTFnD",
+      "name": "PROMPT THIẾT KẾ BẢN ĐẶC TẢ ĐỀ KIỂM TRA ĐỊNH KÌ MÔN KHTN.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 29070,
+      "modifiedTime": "2026-08-24T21:47:01.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1Es0EKQ0z0udH3EngWL8Q5W--OGwCTFnD/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOCX"
+    },
+    {
+      "id": "1qdOL19bQpH4uTwPLlCzmDdwY3RqlE5dp",
+      "name": "PROMPT TK BAN DAC TA.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 24217,
+      "modifiedTime": "2026-08-24T21:46:56.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1qdOL19bQpH4uTwPLlCzmDdwY3RqlE5dp/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOCX"
+    },
+    {
+      "id": "1sjdzpdO4GTNFNv8rlCoxks_Wx_oOF3Sk",
+      "name": "PROMPT TK DE KT.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 26753,
+      "modifiedTime": "2026-08-24T21:46:57.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1sjdzpdO4GTNFNv8rlCoxks_Wx_oOF3Sk/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOCX"
+    },
+    {
+      "id": "1gZY1vU7ICz29KAqJAh6nxkd6T_h8iiUx",
+      "name": "PROMPT TK HUONG DAN CHAM.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 15636,
+      "modifiedTime": "2026-08-24T21:46:53.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1gZY1vU7ICz29KAqJAh6nxkd6T_h8iiUx/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOCX"
+    },
+    {
+      "id": "1i11lwF6GmT37nI98XCj-wK1m0v7eeOF5",
+      "name": "PROMPT TONG HOP DE TU A-Z.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 22384,
+      "modifiedTime": "2026-08-24T21:46:54.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1i11lwF6GmT37nI98XCj-wK1m0v7eeOF5/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Prompt & trợ giảng",
+      "format": "DOCX"
+    },
+    {
+      "id": "12DTWnlbspPHsxeEm9X3DGbRjC2ylUvUk",
+      "name": "So_tay_AI_trong_giao_duc_0_den_chuyen_gia.pdf",
+      "mimeType": "application/pdf",
+      "size": 751520,
+      "modifiedTime": "2026-08-24T21:45:36.000Z",
+      "webViewLink": "https://drive.google.com/file/d/12DTWnlbspPHsxeEm9X3DGbRjC2ylUvUk/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1U_kLbayaZhPChZt4j-aj2H-sv4wRzqie",
+      "name": "So_tay_AI_trong_giao_duc_0_den_chuyen_gia_v2.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 48896,
+      "modifiedTime": "2026-08-24T21:45:29.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1U_kLbayaZhPChZt4j-aj2H-sv4wRzqie/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Tài liệu tham khảo",
+      "format": "DOCX"
+    },
+    {
+      "id": "1NLA15MhnKqb2pTFFTIl-4H8d1-cGoT8D",
+      "name": "So_tay_AI_trong_giao_duc_0_den_chuyen_gia_v2.pdf",
+      "mimeType": "application/pdf",
+      "size": 281056,
+      "modifiedTime": "2026-08-24T21:46:16.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1NLA15MhnKqb2pTFFTIl-4H8d1-cGoT8D/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "19fXBXOTDf7z3oGf-g-BVfBWy_099DDD0",
+      "name": "So_tay_AI_viet_SKKN_2026.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 46685,
+      "modifiedTime": "2026-08-24T21:46:12.000Z",
+      "webViewLink": "https://docs.google.com/document/d/19fXBXOTDf7z3oGf-g-BVfBWy_099DDD0/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Sáng kiến kinh nghiệm",
+      "format": "DOCX"
+    },
+    {
+      "id": "1u93iXTF5wYPJ1LrfWeO5QgnotVWKIpLW",
+      "name": "Sổ Tay AI Cho Giáo Viên.pdf",
+      "mimeType": "application/pdf",
+      "size": 2153542,
+      "modifiedTime": "2026-08-24T21:45:42.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1u93iXTF5wYPJ1LrfWeO5QgnotVWKIpLW/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1HfhvaQ9IdaIyzLX7Xm29OnE7hOtWjLKY",
+      "name": "SỔ TAY AI TRONG DẠY HỌC.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 1376461,
+      "modifiedTime": "2026-08-24T21:46:14.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1HfhvaQ9IdaIyzLX7Xm29OnE7hOtWjLKY/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "AI trong dạy học",
+      "format": "DOCX"
+    },
+    {
+      "id": "1f4_06n99maYnR_1whehmftGM0R3M31-I",
+      "name": "SỔ TAY AI TRONG DẠY HỌC.pdf",
+      "mimeType": "application/pdf",
+      "size": 1086241,
+      "modifiedTime": "2026-08-24T21:46:15.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1f4_06n99maYnR_1whehmftGM0R3M31-I/view?usp=drivesdk",
+      "category": "AI trong dạy học",
+      "format": "PDF"
+    },
+    {
+      "id": "13JG16typ5xhz_4y987Bn09UkA6GmiHcN",
+      "name": "Sổ Tay Cẩm Nang 30 Tuyệt Chiêu Làm Chủ ChatGPT.pdf",
+      "mimeType": "application/pdf",
+      "size": 1647743,
+      "modifiedTime": "2026-08-24T21:45:41.000Z",
+      "webViewLink": "https://drive.google.com/file/d/13JG16typ5xhz_4y987Bn09UkA6GmiHcN/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1I5hvX58j62F_AdtqrW9AsNS5HYPnLmJO",
+      "name": "SỬ DỤNG NOTEBOOKLM TRONG HỌC TẬP VÀ TÌM HIỂU QUY CHẾ.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 125292,
+      "modifiedTime": "2026-08-24T21:46:27.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1I5hvX58j62F_AdtqrW9AsNS5HYPnLmJO/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "NotebookLM",
+      "format": "DOCX"
+    },
+    {
+      "id": "1bu-4vqKNWqtw7y_9Gs--_vHaX9LTfCCV",
+      "name": "SỬ DỤNG NOTEBOOKLM TRONG HỌC TẬP VÀ TÌM HIỂU QUY CHẾ.pdf",
+      "mimeType": "application/pdf",
+      "size": 343589,
+      "modifiedTime": "2026-08-24T21:46:28.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1bu-4vqKNWqtw7y_9Gs--_vHaX9LTfCCV/view?usp=drivesdk",
+      "category": "NotebookLM",
+      "format": "PDF"
+    },
+    {
+      "id": "1M9pg9h3KeU0O_FX7Gd-Jd51UQWyUKm49",
+      "name": "Tai_Lieu_Huong_Dan_Giao_Vien_ChatGPT_Remake.pdf",
+      "mimeType": "application/pdf",
+      "size": 827100,
+      "modifiedTime": "2026-08-24T21:45:39.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1M9pg9h3KeU0O_FX7Gd-Jd51UQWyUKm49/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "16_21tkOqIYP46dz19rpgP5kmVUGTn3Le",
+      "name": "TLTH trí tuệ nhân tạo THCS.pdf",
+      "mimeType": "application/pdf",
+      "size": 628698,
+      "modifiedTime": "2026-08-24T21:46:52.000Z",
+      "webViewLink": "https://drive.google.com/file/d/16_21tkOqIYP46dz19rpgP5kmVUGTn3Le/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1Pb40hHEY8zjGvM1WZKxfjW6UT0c-7b_8",
+      "name": "TLTH trí tuệ nhân tạo THPT.pdf",
+      "mimeType": "application/pdf",
+      "size": 688629,
+      "modifiedTime": "2026-08-24T21:46:48.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1Pb40hHEY8zjGvM1WZKxfjW6UT0c-7b_8/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1O5ApVgMu0ZQHd4W92HWWq5ZvRFebmNbQ",
+      "name": "TLTH trí tuệ nhân tạo TIỂU HỌC.pdf",
+      "mimeType": "application/pdf",
+      "size": 643996,
+      "modifiedTime": "2026-08-24T21:46:50.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1O5ApVgMu0ZQHd4W92HWWq5ZvRFebmNbQ/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1vTv3O6vvqghRwq59aWaSzcRx2yDBWk63",
+      "name": "Top 10 Prompt ChatGPT Dành Cho Giáo Viên Trong Việc Soạn Giáo Án Và Tài Liệu Giảng Dạy.pdf",
+      "mimeType": "application/pdf",
+      "size": 166603,
+      "modifiedTime": "2026-08-24T21:46:29.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1vTv3O6vvqghRwq59aWaSzcRx2yDBWk63/view?usp=drivesdk",
+      "category": "Prompt & trợ giảng",
+      "format": "PDF"
+    },
+    {
+      "id": "1NMnLdTzgDrrR5jk4sYraq20D5HXDTRYJ",
+      "name": "TÀI LIỆU HƯỚNG DẪN SỬ DỤNG TRÍ TUỆ NHÂN TẠO TRONG DẠY VÀ HỌC.pdf",
+      "mimeType": "application/pdf",
+      "size": 671347,
+      "modifiedTime": "2026-08-24T21:46:03.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1NMnLdTzgDrrR5jk4sYraq20D5HXDTRYJ/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1zKTytT8QKJ8PNYaKqflvG5GkoPbXLwoh",
+      "name": "Tài liệu hướng dẫn xây dựng bài dạy bằng công nghệ AI.pdf",
+      "mimeType": "application/pdf",
+      "size": 8551747,
+      "modifiedTime": "2026-08-24T21:46:25.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1zKTytT8QKJ8PNYaKqflvG5GkoPbXLwoh/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1JVMjBDCtiXCtg77xLrASs6su0Sl9ap0D",
+      "name": "Tài Liệu NoteBooklm cho giáo viên TH.pdf",
+      "mimeType": "application/pdf",
+      "size": 854938,
+      "modifiedTime": "2026-08-24T21:45:37.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1JVMjBDCtiXCtg77xLrASs6su0Sl9ap0D/view?usp=drivesdk",
+      "category": "NotebookLM",
+      "format": "PDF"
+    },
+    {
+      "id": "1hjH7S6cjBTdmVVWmll7b1TyoEamG-jf0",
+      "name": "TÀI LIỆU RÚT GỌN VỀ XÂY DỰNG TƯ LIỆU DẠY HỌC BẰNG AI.pdf",
+      "mimeType": "application/pdf",
+      "size": 9750481,
+      "modifiedTime": "2026-08-24T21:45:50.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1hjH7S6cjBTdmVVWmll7b1TyoEamG-jf0/view?usp=drivesdk",
+      "category": "AI trong dạy học",
+      "format": "PDF"
+    },
+    {
+      "id": "1NC9hyK3pmkjn9CpOPUxMGHo4PjgHCD-5",
+      "name": "Tài liệu tập huấn môn trí tuệ nhân tạo tiểu học.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 381360,
+      "modifiedTime": "2026-08-24T21:46:06.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1NC9hyK3pmkjn9CpOPUxMGHo4PjgHCD-5/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "AI trong dạy học",
+      "format": "DOCX"
+    },
+    {
+      "id": "1AqPGjIx6zSDb2010Wlqxbbw1B_rrkn4x",
+      "name": "Tài liệu tập huấn môn trí tuệ nhân tạo tiểu học.pdf",
+      "mimeType": "application/pdf",
+      "size": 426323,
+      "modifiedTime": "2026-08-24T21:46:05.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1AqPGjIx6zSDb2010Wlqxbbw1B_rrkn4x/view?usp=drivesdk",
+      "category": "AI trong dạy học",
+      "format": "PDF"
+    },
+    {
+      "id": "1-HHqqWMGGEz5q37hceWLb9n7YwgfLbVk",
+      "name": "TẠO SÁCH LẬT VỚI GEMINI.pdf",
+      "mimeType": "application/pdf",
+      "size": 10928205,
+      "modifiedTime": "2026-08-24T21:46:11.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1-HHqqWMGGEz5q37hceWLb9n7YwgfLbVk/view?usp=drivesdk",
+      "category": "Tài liệu tham khảo",
+      "format": "PDF"
+    },
+    {
+      "id": "1KAHgHDeWfu_M5HuupW-pbPunvktgCY_J",
+      "name": "TẬP HUẤN NANG CAO AI TRONG QL VÀ DẠY HỌC.pdf",
+      "mimeType": "application/pdf",
+      "size": 23874287,
+      "modifiedTime": "2026-08-24T21:46:02.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1KAHgHDeWfu_M5HuupW-pbPunvktgCY_J/view?usp=drivesdk",
+      "category": "AI trong dạy học",
+      "format": "PDF"
+    },
+    {
+      "id": "1O6MmVX7Jqe3QRk-JZmQPFse-QnFuRzY8",
+      "name": "VIẾT SKKN BẰNG AI BY THẦY HOÀNG.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size": 28101,
+      "modifiedTime": "2026-08-24T21:45:47.000Z",
+      "webViewLink": "https://docs.google.com/document/d/1O6MmVX7Jqe3QRk-JZmQPFse-QnFuRzY8/edit?usp=drivesdk&ouid=110933215129827673689&rtpof=true&sd=true",
+      "category": "Sáng kiến kinh nghiệm",
+      "format": "DOCX"
+    },
+    {
+      "id": "1D98C2u1rsHdpTWM1An1ISOBN76W_i5y-",
+      "name": "VIẾT SÁNG KIẾN KINH NGHIỆM VỚI AI.pdf",
+      "mimeType": "application/pdf",
+      "size": 265816,
+      "modifiedTime": "2026-08-24T21:46:47.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1D98C2u1rsHdpTWM1An1ISOBN76W_i5y-/view?usp=drivesdk",
+      "category": "Sáng kiến kinh nghiệm",
+      "format": "PDF"
+    },
+    {
+      "id": "1610ZNAQaV7aIwVmk5f_9NL0A4EAptNO2",
+      "name": "Xây kênh thiếu nhi kiếm tiền.pdf",
+      "mimeType": "application/pdf",
+      "size": 2474018,
+      "modifiedTime": "2026-08-24T21:45:28.000Z",
+      "webViewLink": "https://drive.google.com/file/d/1610ZNAQaV7aIwVmk5f_9NL0A4EAptNO2/view?usp=drivesdk",
+      "category": "Ebook & ứng dụng",
+      "format": "PDF"
+    }
+  ]
+}

@@ -973,3 +973,59 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
 .lesson-rubric{display:grid;gap:5px;margin:12px 0;padding:9px 10px;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);font-size:11px;color:var(--ink-soft);}
 .lesson-rubric strong{font:700 9px "Space Grotesk",sans-serif;letter-spacing:.11em;color:var(--coral-deep);}
 .lesson-rubric span{line-height:1.35;}
+
+
+/* STYLE REMINDER — Editorial Lab Notebook: the Drive shelf uses ruled paper, ink navy, coral marks, yellow labels, and tactile record cards. */
+.materials-page { min-height: 100vh; background: var(--paper, #f7f8fb); color: var(--ink, #14213d); }
+.materials-topbar { position: sticky; top: 0; z-index: 20; background: rgba(247,248,251,.94); backdrop-filter: blur(12px); }
+.materials-topbar .is-active { color: #ec5c55; }
+.materials-hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 5rem; max-width: 1120px; margin: 0 auto; padding: 8rem 2rem 5rem; align-items: end; }
+.materials-hero h1 { margin: 1rem 0 1.25rem; font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: .92; letter-spacing: -.07em; }
+.materials-hero h1 em { color: #ed6258; font-style: normal; }
+.materials-hero p { max-width: 650px; color: #5d6878; font-size: 1.06rem; line-height: 1.7; }
+.materials-stat-card { display: grid; gap: .45rem; padding: 1.5rem; background: #172440; color: #fff; box-shadow: 10px 10px 0 #d9f3ed; border-top: 4px solid #ed6258; }
+.materials-stat-card strong { font-size: 4.5rem; line-height: .9; letter-spacing: -.08em; color: #f4d86c; }
+.materials-stat-card span:not(.tiny-label) { color: #d8e1ef; }
+.materials-stat-card small { margin-top: 1rem; padding-top: .75rem; border-top: 1px solid rgba(255,255,255,.2); color: #b9c5d8; }
+.materials-toolbar { max-width: 1120px; margin: 0 auto; padding: 1.25rem 2rem 2rem; border-top: 1px solid #cbd2dc; border-bottom: 1px solid #cbd2dc; }
+.materials-search { display: flex; align-items: center; gap: .75rem; max-width: 560px; padding: .8rem 0; color: #ed6258; border-bottom: 2px solid #172440; }
+.materials-search input { width: 100%; border: 0; outline: 0; background: transparent; color: #172440; font: inherit; }
+.materials-filters { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.25rem; }
+.materials-filters button { display: inline-flex; gap: .5rem; align-items: center; border: 1px solid #cad2de; padding: .55rem .8rem; background: #fff; color: #566274; font-size: .78rem; cursor: pointer; transition: transform .16s ease, border-color .16s ease, background .16s ease; }
+.materials-filters button:hover { transform: translateY(-2px); border-color: #ed6258; }
+.materials-filters button.is-selected { background: #f4d86c; border-color: #172440; color: #172440; }
+.materials-filters small { color: #8993a2; }
+.materials-ledger { max-width: 1120px; margin: 0 auto; padding: 2.25rem 2rem 6rem; }
+.materials-ledger-head { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
+.materials-note { display: inline-flex; gap: .45rem; align-items: center; color: #6c7787; font-size: .82rem; }
+.materials-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.material-card { position: relative; display: flex; min-height: 225px; flex-direction: column; padding: 1.15rem; background: #fff; border: 1px solid #d5dbe3; box-shadow: 4px 4px 0 #edf0f3; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(35,58,89,.055) 32px); }
+.material-card:hover { border-color: #ed6258; transform: translateY(-3px); transition: transform .18s ease, border-color .18s ease; }
+.material-card-top, .material-meta { display: flex; justify-content: space-between; gap: .5rem; align-items: center; }
+.material-index { color: #ed6258; font-weight: 800; font-size: .82rem; }
+.material-format { display: inline-flex; align-items: center; gap: .35rem; color: #697588; font-size: .72rem; font-weight: 700; letter-spacing: .08em; }
+.material-card h2 { margin: 1.1rem 0 auto; font-size: 1.04rem; line-height: 1.35; letter-spacing: -.02em; }
+.material-meta { margin-top: 1.35rem; color: #6d7888; font-size: .73rem; }
+.material-meta span:first-child { color: #28796f; font-weight: 700; }
+.material-open { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1rem; color: #ed6258; font-size: .82rem; font-weight: 800; text-decoration: none; }
+.material-open:hover { text-decoration: underline; }
+.materials-empty { display: grid; gap: .55rem; justify-items: center; padding: 5rem 1rem; color: #687487; text-align: center; }
+.materials-empty svg { color: #ed6258; }
+.materials-empty strong { color: #172440; }
+@media (max-width: 900px) { .materials-topbar .roadmap-nav { display: none; } .materials-hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 5rem; } .materials-stat-card { max-width: 360px; } .materials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .materials-hero { padding: 4rem 1rem 3rem; } .materials-hero h1 { font-size: 3.4rem; } .materials-toolbar, .materials-ledger { padding-left: 1rem; padding-right: 1rem; } .materials-grid { grid-template-columns: 1fr; } .materials-ledger-head { align-items: flex-start; flex-direction: column; } }
+
+
+/* STYLE REMINDER — Materials record layer: structure the page like a ruled workbook shelf, connect every record to the six-step route, and keep English lab language secondary. */
+.materials-path { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; max-width: 1120px; margin: 0 auto; padding: 1.1rem 2rem; border-top: 1px dashed #b9c4d1; border-bottom: 1px dashed #b9c4d1; background: rgba(255,255,255,.52); color: #172440; }
+.materials-path-label { width: 100%; color: #ed6258; font-size: .7rem; font-weight: 800; letter-spacing: .15em; }
+.materials-path strong { padding: .38rem .6rem; background: #f4d86c; font-size: .77rem; }
+.materials-path i { color: #ed6258; font-style: normal; font-weight: 800; }
+.materials-path-note { margin-left: auto; color: #6b7686; font-size: .75rem; }
+.materials-ledger-caption { margin: .45rem 0 0; color: #718093; font-size: .82rem; }
+.material-card { overflow: hidden; }
+.material-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: repeating-linear-gradient(to bottom, #ed6258 0 8px, transparent 8px 15px); opacity: .78; }
+.material-card-foot { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin-top: 1rem; padding-top: .6rem; border-top: 1px dashed #c5ccd6; }
+.material-card-foot .material-open { margin-top: 0; }
+.material-source-stamp { color: #28796f; font-size: .64rem; font-weight: 800; letter-spacing: .11em; }
+@media (max-width: 700px) { .materials-path { gap: .5rem; padding-left: 1rem; padding-right: 1rem; } .materials-path-note { width: 100%; margin-left: 0; } }

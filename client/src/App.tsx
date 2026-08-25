@@ -14,6 +14,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Materials from "./pages/Materials";
 import { stripRouteBase } from "./lib/routes";
 
 declare global {
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/on-tap" component={Review} />
       <Route path="/quiz-lab" component={QuizLab} />
       <Route path="/tong-ket" component={Dashboard} />
+      <Route path="/tai-lieu" component={Materials} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
