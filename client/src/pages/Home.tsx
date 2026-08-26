@@ -155,6 +155,7 @@ export default function Home() {
   const [writingFeedback, setWritingFeedback] = useState<Record<number, "ready" | "good" | "revise"> >({});
   const [writingMessages, setWritingMessages] = useState<Record<number, string>>({});
   const [notice, setNotice] = useState("");
+  const [celebrationVisible, setCelebrationVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const recognitionRef = useRef<any>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
@@ -184,6 +185,12 @@ export default function Home() {
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify({ completed, quizScore, cardStates, shadowPassed } satisfies ProgressState));
   }, [completed, quizScore, cardStates, shadowPassed]);
+
+  useEffect(() => {
+    if (!celebrationVisible) return;
+    const timer = window.setTimeout(() => setCelebrationVisible(false), 6500);
+    return () => window.clearTimeout(timer);
+  }, [celebrationVisible]);
 
   useEffect(() => {
     return () => {
@@ -225,6 +232,7 @@ export default function Home() {
     }
     const nextCompleted = completed.map((done, stepIndex) => stepIndex === index ? true : done);
     setCompleted(nextCompleted);
+    if (index === 3) setCelebrationVisible(true);
     if (index < stepLabels.length - 1) {
       setActiveStep(index + 1);
       announce(`Bước ${index + 1} đã XONG. Bước tiếp theo đã mở.`);
@@ -544,6 +552,7 @@ export default function Home() {
       </main>
 
       <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><img src={assetPath("/assets/english-workbook-mark.png")} alt="" /></span><span className="brand-label-badge">48</span><span><strong>48 NGÀY</strong><small>LẤY GỐC TIẾNG ANH</small></span></div><p>Build the habit. Keep the mark.</p><span className="footer-note">Lưu tiến trình trên thiết bị này · {completedCount}/6 bước</span></footer>
+      {celebrationVisible && <div className="celebration" role="status" aria-live="polite"><div className="celebration-confetti" aria-hidden="true">{Array.from({ length: 12 }, (_, index) => <span key={index} style={{ "--i": index } as React.CSSProperties} />)}</div><div className="celebration-card"><div className="celebration-mark"><Sparkles size={24} /></div><span className="tiny-label">MILESTONE / 04 → 05</span><h2>Đủ 3/3 câu rồi.</h2><p>Bạn đã hoàn thành Shadowing. <strong>Bước 05 · Viết</strong> đã được mở khóa.</p><button className="primary-action" type="button" onClick={() => setCelebrationVisible(false)}>Tiếp tục Bước 05 <ArrowRight size={17} /></button></div></div>}
       {notice && <div className="toast-notice" role="status"><Sparkles size={16} /> {notice}</div>}
     </div>
   );
