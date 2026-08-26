@@ -57,6 +57,11 @@ describe("shadowing transcript grading", () => {
     passed = setShadowingSentenceResult(passed, 2, true);
     expect(passed).toEqual([true, true, true]);
   });
+
+  it("allows step completion only after all three sentence results pass", () => {
+    expect(canCompleteStep(3, day, { ...evidence, shadowingPassed: [true, true, false] })).toBe(false);
+    expect(canCompleteStep(3, day, { ...evidence, shadowingPassed: [true, true, true] })).toBe(true);
+  });
 });
 
 describe("lesson completion rules", () => {

@@ -72,6 +72,7 @@ type ProgressState = {
   completed: boolean[];
   quizScore: number | null;
   cardStates: SRSCardState[];
+  shadowPassed: boolean[];
 };
 
 const requestedDay = typeof window !== "undefined" ? Number((window.__COMET_PREVIEW_PATH__ ?? window.location.pathname).match(/ngay\/(\d+)/)?.[1] ?? 1) : 1;
@@ -104,6 +105,7 @@ function loadProgress(): ProgressState {
     completed: [false, false, false, false, false, false],
     quizScore: null,
     cardStates: (day.srsCards ?? []).map(initialSRSState),
+    shadowPassed: Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => false),
   };
 
   if (typeof window === "undefined") return fallback;
@@ -121,6 +123,9 @@ function loadProgress(): ProgressState {
             lastReviewedAt: typeof parsed.cardStates?.[index]?.lastReviewedAt === "string" ? parsed.cardStates[index]?.lastReviewedAt ?? null : null,
           }))
         : fallback.cardStates,
+      shadowPassed: Array.isArray(parsed.shadowPassed)
+        ? fallback.shadowPassed.map((_, index) => Boolean(parsed.shadowPassed?.[index]))
+        : fallback.shadowPassed,
     };
   } catch {
     return fallback;
@@ -141,7 +146,7 @@ export default function Home() {
   const listenInputRefs = useRef<Record<number, HTMLInputElement | null>>({});
   const [shadowIndex, setShadowIndex] = useState(0);
   const [shadowTranscript, setShadowTranscript] = useState("");
-  const [shadowPassed, setShadowPassed] = useState<boolean[]>(() => Array.from({ length: day.shadowingSentences?.length ?? 0 }, () => false));
+  const [shadowPassed, setShadowPassed] = useState<boolean[]>(() => initialProgress.shadowPassed);
   const [shadowFeedback, setShadowFeedback] = useState<"idle" | "recording" | "close" | "correct" | "unsupported" | "error">("idle");
   const [audioRecording, setAudioRecording] = useState<"idle" | "recording" | "ready" | "denied" | "unsupported" | "error">("idle");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -177,8 +182,8 @@ export default function Home() {
   const currentCard = day.srsCards?.[cardIndex];
 
   useEffect(() => {
-    window.localStorage.setItem(storageKey, JSON.stringify({ completed, quizScore, cardStates } satisfies ProgressState));
-  }, [completed, quizScore, cardStates]);
+    window.localStorage.setItem(storageKey, JSON.stringify({ completed, quizScore, cardStates, shadowPassed } satisfies ProgressState));
+  }, [completed, quizScore, cardStates, shadowPassed]);
 
   useEffect(() => {
     return () => {
@@ -302,8 +307,10 @@ export default function Home() {
     const currentBest = bestAudioUrls[shadowIndex];
     if (currentBest && currentBest !== audioUrl) URL.revokeObjectURL(currentBest);
     setBestAudioUrls((current) => current.map((url, index) => index === shadowIndex ? audioUrl : url));
+    setShadowPassed((current) => setShadowingSentenceResult(current, shadowIndex, true));
+    setShadowFeedback("correct");
     setAudioRecording("ready");
-    announce("Đã giữ bản ghi này là bản tốt nhất cho câu hiện tại.");
+    announce("Đã giữ bản ghi và tính câu này là một bằng chứng luyện Shadowing.");
   }
 
   function changeShadowSentence(nextIndex: number) {
@@ -467,7 +474,8 @@ export default function Home() {
             {shadowTranscript && <div className="transcript-line"><span>Máy nghe được:</span> “{shadowTranscript}”</div>}
             {audioUrl && <div className="recording-review"><span className="tiny-label">BẢN GHI TẠM / CÂU {shadowIndex + 1}</span><div className="recording-actions"><audio controls src={audioUrl} aria-label="Nghe lại giọng bạn" /><button className="text-action" onClick={() => speak(currentSentence)}>Nghe giọng mẫu</button><button className="text-action" onClick={keepBestRecording}>Giữ bản tốt nhất</button></div>{bestAudioUrls[shadowIndex] === audioUrl && <small>Đã giữ bản này cho câu hiện tại.</small>}</div>}
           </div>
-          <div className="sentence-switcher"><button className="circle-button" aria-label="Câu trước" onClick={() => changeShadowSentence((shadowIndex + Math.max((day.shadowingSentences?.length ?? 1) - 1, 0)) % Math.max(day.shadowingSentences?.length ?? 1, 1))}><ChevronLeft size={18} /></button><div className="dot-row">{(day.shadowingSentences ?? []).map((sentence, index) => <button aria-label={`Chọn câu ${index + 1}`} className={index === shadowIndex ? "active" : ""} key={sentence} onClick={() => changeShadowSentence(index)} />)}</div><button className="circle-button" aria-label="Câu tiếp" onClick={() => changeShadowSentence((shadowIndex + 1) % Math.max(day.shadowingSentences?.length ?? 1, 1))}><ChevronRight size={18} /></button></div>
+          <div className="sentence-switcher"><button className="circle-button" aria-label="Câu trước" onClick={() => changeShadowSentence((shadowIndex + Math.max((day.shadowingSentences?.length ?? 1) - 1, 0)) % Math.max(day.shadowingSentences?.length ?? 1, 1))}><ChevronLeft size={18} /></button><div className="dot-row">{(day.shadowingSentences ?? []).map((sentence, index) => <button aria-label={`Chọn câu ${index + 1}${shadowPassed[index] ? " — đã đạt" : ""}`} className={`${index === shadowIndex ? "active" : ""} ${shadowPassed[index] ? "passed" : ""}`} key={sentence} onClick={() => changeShadowSentence(index)} />)}</div><button className="circle-button" aria-label="Câu tiếp" onClick={() => changeShadowSentence((shadowIndex + 1) % Math.max(day.shadowingSentences?.length ?? 1, 1))}><ChevronRight size={18} /></button></div>
+          <div className="shadow-progress" aria-live="polite"><strong>{shadowPassed.slice(0, 3).filter(Boolean).length}/3 câu đã có bằng chứng</strong><span>{shadowPassed.slice(0, 3).every(Boolean) ? "Đủ điều kiện đánh dấu bước." : "Hãy so khớp giọng nói hoặc giữ bản ghi tốt nhất cho từng câu."}</span></div>
           <CompleteButton index={3} done={completed[3]} onComplete={completeStep} />
         </div>
       );

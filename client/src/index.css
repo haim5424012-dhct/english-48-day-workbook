@@ -291,6 +291,11 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
 .dot-row { display: flex; gap: 7px; }
 .dot-row button { width: 7px; height: 7px; padding: 0; background: #c4d2dd; border: 0; border-radius: 50%; }
 .dot-row button.active { background: var(--coral); transform: scale(1.4); }
+.dot-row button.passed { background: var(--mint-strong); box-shadow: 0 0 0 2px rgba(52, 150, 125, 0.16); }
+.shadow-progress { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 14px 0 4px; padding: 10px 12px; background: rgba(219, 242, 235, 0.72); color: var(--ink); font-size: 0.82rem; }
+.shadow-progress strong { color: var(--mint-strong); }
+.shadow-progress span { color: var(--muted); text-align: right; }
+@media (max-width: 640px) { .shadow-progress { align-items: flex-start; flex-direction: column; gap: 5px; } .shadow-progress span { text-align: left; } }
 .writing-list { display: flex; flex-direction: column; gap: 23px; }
 .writing-item { padding-bottom: 19px; border-bottom: 1px dashed #b8c8d4; }
 .writing-prompt { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 11px; font-weight: 600; }
