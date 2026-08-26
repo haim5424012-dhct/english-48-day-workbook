@@ -108,6 +108,9 @@ export default function Roadmap() {
     return 48;
   }, [progress.completedDays]);
   const currentStage = stages.find((stage) => currentDay >= Number(stage.range.slice(0, 2)) && currentDay <= Number(stage.range.slice(3)))?.id ?? 10;
+  const milestoneHistory = useMemo(() => [...progress.milestones].sort((a, b) => b.day - a.day), [progress.milestones]);
+  const dayTitle = (day: number) => dayIndex.find((entry) => entry.day === day)?.title ?? `Ngày ${String(day).padStart(2, "0")}`;
+  const formatMilestoneDate = (value: string | null) => value ? new Intl.DateTimeFormat("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(`${value}T00:00:00`)) : "Đã ghi dấu trước khi bật nhật ký";
 
   function handleDay(entry: DayIndex) {
     const status = statusForDay(entry.day, progress);
@@ -142,6 +145,8 @@ export default function Roadmap() {
           <div><span className="tiny-label">CURRENT POSITION</span><strong>Ngày {String(currentDay).padStart(2, "0")} · Giai đoạn {currentStage}</strong></div>
           <div className="overview-rule" /><div><span className="tiny-label">SEQUENCE</span><span>48 trạm · 10 chặng · 1 thói quen</span></div>
         </section>
+
+        <section className="milestone-history" aria-labelledby="milestone-history-title"><div className="history-heading"><div><div className="section-kicker">FIELD RECORD / MILESTONES</div><h2 id="milestone-history-title">Những dấu đã<br /><em>đi qua.</em></h2></div><span className="history-count">{milestoneHistory.length}<small>/48 mốc</small></span></div>{milestoneHistory.length ? <div className="history-list">{milestoneHistory.map((milestone) => <button className="history-item" key={milestone.day} onClick={() => { const entry = dayIndex.find((item) => item.day === milestone.day); if (entry) handleDay(entry); }}><span className="history-day">{String(milestone.day).padStart(2, "0")}</span><span className="history-copy"><strong>Ngày {String(milestone.day).padStart(2, "0")} · {dayTitle(milestone.day)}</strong><small>{formatMilestoneDate(milestone.completedAt)}</small></span><Check size={17} /></button>)}</div> : <div className="history-empty"><Sparkles size={18} /><p>Chưa có mốc nào. Hoàn thành đủ sáu bước của Ngày 01 để ghi dấu đầu tiên.</p></div>}</section>
 
         <section className="route-section" id="current-stage">
           <div className="route-intro"><div><div className="section-kicker">THE ROUTE / 10 STAGES</div><h2>Không phải<br /><em>một danh sách.</em></h2></div><p>Mỗi khối là một chặng kiến thức. Mỗi ô là một lần ngồi xuống. Giai đoạn hiện tại luôn có viền coral để bạn biết mình đang ở đâu.</p></div>

@@ -703,6 +703,24 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
 .day-node.ready .node-status { color: var(--coral-deep); }
 .node-lock { position: absolute; right: 13px; top: 17px; color: #9aabb8; }
 .node-stamp { position: absolute; right: 10px; top: 14px; padding: 4px; color: var(--mint-ink); border: 1px solid var(--mint-ink); font: 700 8px "Space Grotesk", sans-serif; letter-spacing: .1em; transform: rotate(-7deg); }
+.milestone-history { margin: 0 auto 92px; width: min(1080px, calc(100% - 48px)); padding: 34px 0 0; border-top: 1px solid var(--line); }
+.history-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.history-heading h2 { margin: 8px 0 0; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 0.95; letter-spacing: -0.05em; }
+.history-count { color: var(--coral); font: 700 clamp(2.4rem, 5vw, 4.6rem)/0.9 "Space Grotesk", sans-serif; }
+.history-count small { display: block; margin-top: 7px; color: var(--muted); font: 600 11px/1.2 "Space Grotesk", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+.history-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; }
+.history-item { display: flex; align-items: center; gap: 15px; width: 100%; padding: 15px 4px; color: var(--ink); text-align: left; background: transparent; border: 0; border-bottom: 1px dashed #b8c8d4; cursor: pointer; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), color 180ms ease; }
+.history-item:hover, .history-item:focus-visible { color: var(--coral); transform: translateX(5px); outline: none; }
+.history-item > svg { margin-left: auto; color: var(--mint-strong); }
+.history-day { display: grid; place-items: center; flex: 0 0 42px; height: 42px; color: var(--ink); background: var(--yellow); font: 700 14px "Space Grotesk", sans-serif; }
+.history-copy { display: flex; min-width: 0; flex-direction: column; gap: 4px; }
+.history-copy strong { overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.history-copy small { color: var(--muted); font-size: 12px; }
+.history-empty { display: flex; align-items: center; gap: 12px; padding: 20px; color: var(--muted); background: #eef4f8; border-left: 3px solid var(--yellow); }
+.history-empty p { margin: 0; }
+.celebration-actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; }
+.sound-toggle { padding: 8px 4px; color: var(--muted); background: transparent; border: 0; border-bottom: 1px solid currentColor; font: 600 12px "Space Grotesk", sans-serif; cursor: pointer; }
+.sound-toggle:hover, .sound-toggle:focus-visible { color: var(--coral); outline: none; }
 .roadmap-review-band { display: grid; grid-template-columns: .95fr 1fr auto; gap: 45px; align-items: end; padding: 85px clamp(20px, 11vw, 170px); background: var(--ink); color: #fff; }
 .roadmap-review-band h2 { margin: 18px 0 0; font: 700 clamp(33px, 4vw, 51px)/1.02 "Space Grotesk", sans-serif; letter-spacing: -.07em; }
 .roadmap-review-band h2 em { color: var(--yellow); }
@@ -728,6 +746,8 @@ h1 em, h2 em { color: var(--coral); font-style: normal; }
 .review-empty p { margin: 0 0 24px; color: var(--ink-soft); }
 
 @media (max-width: 900px) {
+  .milestone-history { width: min(100% - 32px, 1080px); }
+  .history-list { grid-template-columns: 1fr; }
   .roadmap-hero { grid-template-columns: 1fr; }
   .roadmap-stat-card { max-width: 430px; justify-self: end; width: 90%; }
   .roadmap-review-band { grid-template-columns: 1fr 1fr; }
